@@ -1,0 +1,562 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>package_id() &mdash; conan 2.0.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/conan-favicon.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+
+  
+    <link rel="stylesheet" href="../../../_static/css/signup.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../../_static/_static/graphviz.css" type="text/css" />
+  
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../../_static/css/search.css" type="text/css" />
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="conan 2.0.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Methods" href="../methods.html"/>
+        <link rel="next" title="package_info()" href="package_info.html"/>
+        <link rel="prev" title="package()" href="package.html"/>
+
+ <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WK44ZFM');</script>
+<!-- End Google Tag Manager -->
+ 
+
+
+
+</script>
+
+
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/logo_docs_v2.png" class="logo" />
+          
+          </a>
+
+            
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../whatsnew.html">What’s new in Conan 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../integrations.html">Integrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../commands.html">Commands</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../conanfile.html">conanfile.py</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../attributes.html">Attributes</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../methods.html">Methods</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build.html">build()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_id.html">build_id()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="build_requirements.html">build_requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="compatibility.html">compatibility()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configure.html">configure()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config_options.html">config_options()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="export.html">export()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="export_sources.html">export_sources()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate.html">generate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="init.html">init()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="layout.html">layout()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package.html">package()</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">package_id()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="package_info.html">package_info()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="requirements.html">requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_name.html">set_name()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="set_version.html">set_version()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="source.html">source()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="system_requirements.html">system_requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="test.html">test()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="validate.html">validate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="validate_build.html">validate_build()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../conanfile_txt.html">conanfile.txt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html">Recipe tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions.html">Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../knowledge.html">Knowledge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+          <div class="dark_newsletter-div">
+             <p><a href="https://conan.io/#signUp" target="_blank">Sign up for release updates</a></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">conan</a>
+        
+      </nav>
+
+
+      
+      <script>
+        var reldir = "../../../index.html".replace("index.html","").replace("#", "");
+      </script>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+                 
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation" id="breadcrumbs">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../reference.html">Reference</a> &raquo;</li>
+        
+          <li><a href="../../conanfile.html">conanfile.py</a> &raquo;</li>
+        
+          <li><a href="../methods.html">Methods</a> &raquo;</li>
+        
+      <li>package_id()</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/conan-io/docs/blob/develop2/reference/conanfile/methods/package_id.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <!--<select id="search" name="state" multiple="true" onchange="window.location = reldir + this.value;" style="width:90%"></select>
+          <hr/>-->
+          <!--<div class="admonition important">
+            <p class="admonition-title">Announcement</p>
+            <p>Recipe Hacking no. 2! Building on what we learnt during the first installment we will be working on more Conan 2.0 Migration! We'll start by reviewing some open pull requests and hopefully tackle a CMake example. <a
+            href=https://jfrog.zoom.us/webinar/register/WN_grFhqH0yRBeIfJmBvQoPJw> Register here to attend.</a></p>
+          </div>-->
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="package-id">
+<span id="reference-conanfile-methods-package-id"></span><h1>package_id()<a class="headerlink" href="#package-id" title="Permalink to this headline">¶</a></h1>
+<p>Conan computes a unique <code class="docutils literal notranslate"><span class="pre">package_id</span></code> reference for each configuration, including <code class="docutils literal notranslate"><span class="pre">settings</span></code>, <code class="docutils literal notranslate"><span class="pre">options</span></code> and <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> versions.
+This <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method allows some customizations and changes over the computed <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, in general with the goal to relax some of the global binary compatibility assumptions.</p>
+<p>The general rule is that every different value of <code class="docutils literal notranslate"><span class="pre">settings</span></code> and <code class="docutils literal notranslate"><span class="pre">options</span></code> creates a different <code class="docutils literal notranslate"><span class="pre">package_id</span></code>. This rule can be relaxed or expanded following different approaches:</p>
+<ul class="simple">
+<li>A given package recipe can decide in its <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> that the final binary is independent of some settings, for example if it is a header-only library, that uses input settings to build some tests, it might completely clear all configuration, so the resulting <code class="docutils literal notranslate"><span class="pre">package_id</span></code> is always the same irrespective of the inputs. Likewise a C library might want to remove the effect of <code class="docutils literal notranslate"><span class="pre">compiler.cppstd</span></code> and/or <code class="docutils literal notranslate"><span class="pre">compiler.libcxx</span></code> from its binary <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, because as a C library, its binary will be independent.</li>
+<li>A given package recipe can implement some partial erasure of information, for example to obtain the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code> for a range of compiler versions. This type of binary compatibility is in general better addressed with the global <code class="docutils literal notranslate"><span class="pre">compatibility</span></code> plugin, or with the <code class="docutils literal notranslate"><span class="pre">compatibility()</span></code> method if the global plugin is not enough.</li>
+<li>A package recipe can decide to inject extra variability in its computed <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, adding <code class="docutils literal notranslate"><span class="pre">conf</span></code> items or “target” settings.</li>
+</ul>
+<div class="section" id="information-erasure">
+<h2>Information erasure<a class="headerlink" href="#information-erasure" title="Permalink to this headline">¶</a></h2>
+<p>This is a <code class="docutils literal notranslate"><span class="pre">package_id</span></code> relaxing strategy. Let’s check the first case: a header-only library, that has input <code class="docutils literal notranslate"><span class="pre">settings</span></code>, because it still wants to use them for some unit-tests in its <code class="docutils literal notranslate"><span class="pre">build()</span></code> method. In order to have exactly one final binary for all configurations, because the final artifact should be identical in all cases (just the header files), it would be necessary to do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">cmake</span> <span class="o">=</span> <span class="n">CMake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># need specific settings to build</span>
+    <span class="o">...</span>
+    <span class="n">cmake</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>  <span class="c1"># running unit tests for the current configuration</span>
+
+<span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Completely clear all the settings from the ``package_id`` information (&quot;info&quot; object)</span>
+    <span class="c1"># All resulting ``package_id`` will be the same, irrespective of configuration</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The modifications of the information always happen over the <code class="docutils literal notranslate"><span class="pre">self.info</span></code> object, not on <code class="docutils literal notranslate"><span class="pre">self.settings</span></code> or <code class="docutils literal notranslate"><span class="pre">self.options</span></code></p>
+</div>
+<p>If a package is just a C library, but it couldn’t remove the <code class="docutils literal notranslate"><span class="pre">compiler.cppstd</span></code> and <code class="docutils literal notranslate"><span class="pre">compiler.libcxx</span></code> in the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method (the recommended approach for most cases, to guarantee those flags are not used in the build), because there are C++ unit tests to the C library, then as the tests are not packaged and the final binary will be independent of C++, those could be removed with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># building C++ tests for a C library</span>
+
+<span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">cppstd</span>
+    <span class="c1"># Some compilers might not declare libcxx subsetting</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;compiler.libcxx&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a package is building an executable to be used as a tool, and only 1 executable for each OS and architecture is desired to be more efficient, the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> could remove the other settings and options if existing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># this will be a &quot;tool_require&quot;</span>
+<span class="n">package_type</span> <span class="o">=</span> <span class="s2">&quot;application&quot;</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
+
+<span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span>
+    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span>
+</pre></div>
+</div>
+<p>Note that this doesn’t mean that the <code class="docutils literal notranslate"><span class="pre">compiler</span></code> and <code class="docutils literal notranslate"><span class="pre">build_type</span></code> should be removed for every application executable. For other things that are not tools, but final products to release, the most common situation is that maintaining the different builds for the different compilers, compiler versions, build types, etc. is the best approach.
+It also means that we are erasing some information. We will not have the information of the compiler and build type that was used for the binary that we are using (it will not be in the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span></code> output, and it will not be in the server metadata either). If we compile a new binary with a different compiler or build type, it will create a new package revision under the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code>.</p>
+</div>
+<div class="section" id="partial-information-erasure">
+<h2>Partial information erasure<a class="headerlink" href="#partial-information-erasure" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to partially erase information for given subsets of values. For example, if we want to have the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code> for all the binaries compiled with <code class="docutils literal notranslate"><span class="pre">gcc</span></code> between versions 4.5 and 5.0, we can do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span> <span class="o">==</span> <span class="s2">&quot;gcc&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="o">&gt;=</span> <span class="s2">&quot;4.5&quot;</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="s2">&quot;5.0&quot;</span><span class="p">):</span>
+        <span class="c1"># The assigned string can be arbitrary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;GCC 4 between 4.5 and 5.0&quot;</span>
+</pre></div>
+</div>
+<p>This will result in all other compilers rather than <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and other versions outside of that range to have a different <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, but there will be only 1 <code class="docutils literal notranslate"><span class="pre">package_id</span></code> binary for all <code class="docutils literal notranslate"><span class="pre">gcc</span></code> <code class="docutils literal notranslate"><span class="pre">4.5-5.0</span></code> versions. This also has the disadvantage mentioned above about losing the information that created this binary.</p>
+<p>This approach is not recommended in the general case, and it would be better approached with the global <code class="docutils literal notranslate"><span class="pre">compatibility</span></code> plugin or the recipe <code class="docutils literal notranslate"><span class="pre">compatibility()</span></code> method.</p>
+</div>
+<div class="section" id="adding-information">
+<h2>Adding information<a class="headerlink" href="#adding-information" title="Permalink to this headline">¶</a></h2>
+<p>There is some information not added by default to the <code class="docutils literal notranslate"><span class="pre">package_id</span></code>.
+If we are creating a package for a tool, to be used as a <code class="docutils literal notranslate"><span class="pre">tool_require</span></code>, and it happens that such package binary will be different for each “target” configuration, like it is the case for some cross-compilers, if the compiler itself might be different for the different architectures that it is targeting, it will be necessary to add the <code class="docutils literal notranslate"><span class="pre">settings_target</span></code> to the <code class="docutils literal notranslate"><span class="pre">package_id</span></code> with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings_target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_target</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conf</span></code> items do not affect the <code class="docutils literal notranslate"><span class="pre">package_id</span></code> by default. It is possible to explicitly make them part of it at the recipe level with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;user.myconf:myitem&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user.myconf:myitem&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Although this can be achieved for all recipes without the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method, using the <code class="docutils literal notranslate"><span class="pre">tools.info.package_id:confs</span> <span class="pre">=</span> <span class="pre">[&quot;user.myconf:myitem&quot;]</span></code> configuration.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See <a class="reference internal" href="../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.html#creating-packages-other-header-only"><span class="std std-ref">the tutorial about header-only packages</span></a> for explanations about the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="package_info.html" class="btn btn-neutral float-right" title="package_info()" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="package.html" class="btn btn-neutral" title="package()" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2023, JFrog.
+      Last updated on Feb 27, 2023.
+      <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <!--<span class="fa fa-pencil-square-o"> Other versions:</span> -->
+      Version: 2.0
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+            <dd><a href="/2.0/index.html">2.0</a></dd>
+        
+            <dd><a href="/en/1.59/index.html">1.59</a></dd>
+        
+            <dd><a href="/en/1.58/index.html">1.58</a></dd>
+        
+            <dd><a href="/en/1.57/index.html">1.57</a></dd>
+        
+            <dd><a href="/en/1.56/index.html">1.56</a></dd>
+        
+            <dd><a href="/en/1.55/index.html">1.55</a></dd>
+        
+            <dd><a href="/en/1.54/index.html">1.54</a></dd>
+        
+            <dd><a href="/en/1.53/index.html">1.53</a></dd>
+        
+            <dd><a href="/en/1.52/index.html">1.52</a></dd>
+        
+            <dd><a href="/en/1.51/index.html">1.51</a></dd>
+        
+            <dd><a href="/en/1.50/index.html">1.50</a></dd>
+        
+            <dd><a href="/en/1.49/index.html">1.49</a></dd>
+        
+            <dd><a href="/en/1.48/index.html">1.48</a></dd>
+        
+            <dd><a href="/en/1.47/index.html">1.47</a></dd>
+        
+            <dd><a href="/en/1.46/index.html">1.46</a></dd>
+        
+            <dd><a href="/en/1.45/index.html">1.45</a></dd>
+        
+            <dd><a href="/en/1.44/index.html">1.44</a></dd>
+        
+            <dd><a href="/en/1.43/index.html">1.43</a></dd>
+        
+            <dd><a href="/en/1.42/index.html">1.42</a></dd>
+        
+            <dd><a href="/en/1.41/index.html">1.41</a></dd>
+        
+            <dd><a href="/en/1.40/index.html">1.40</a></dd>
+        
+            <dd><a href="/en/1.39/index.html">1.39</a></dd>
+        
+            <dd><a href="/en/1.38/index.html">1.38</a></dd>
+        
+            <dd><a href="/en/1.37/index.html">1.37</a></dd>
+        
+            <dd><a href="/en/1.36/index.html">1.36</a></dd>
+        
+            <dd><a href="/en/1.35/index.html">1.35</a></dd>
+        
+            <dd><a href="/en/1.34/index.html">1.34</a></dd>
+        
+            <dd><a href="/en/1.33/index.html">1.33</a></dd>
+        
+            <dd><a href="/en/1.32/index.html">1.32</a></dd>
+        
+            <dd><a href="/en/1.31/index.html">1.31</a></dd>
+        
+            <dd><a href="/en/1.30/index.html">1.30</a></dd>
+        
+            <dd><a href="/en/1.29/index.html">1.29</a></dd>
+        
+            <dd><a href="/en/1.28/index.html">1.28</a></dd>
+        
+            <dd><a href="/en/1.27/index.html">1.27</a></dd>
+        
+            <dd><a href="/en/1.26/index.html">1.26</a></dd>
+        
+            <dd><a href="/en/1.25/index.html">1.25</a></dd>
+        
+            <dd><a href="/en/1.24/index.html">1.24</a></dd>
+        
+            <dd><a href="/en/1.23/index.html">1.23</a></dd>
+        
+            <dd><a href="/en/1.22/index.html">1.22</a></dd>
+        
+            <dd><a href="/en/1.21/index.html">1.21</a></dd>
+        
+            <dd><a href="/en/1.20/index.html">1.20</a></dd>
+        
+            <dd><a href="/en/1.19/index.html">1.19</a></dd>
+        
+            <dd><a href="/en/1.18/index.html">1.18</a></dd>
+        
+            <dd><a href="/en/1.17/index.html">1.17</a></dd>
+        
+            <dd><a href="/en/1.16/index.html">1.16</a></dd>
+        
+            <dd><a href="/en/1.15/index.html">1.15</a></dd>
+        
+            <dd><a href="/en/1.14/index.html">1.14</a></dd>
+        
+            <dd><a href="/en/1.13/index.html">1.13</a></dd>
+        
+            <dd><a href="/en/1.12/index.html">1.12</a></dd>
+        
+            <dd><a href="/en/1.11/index.html">1.11</a></dd>
+        
+            <dd><a href="/en/1.10/index.html">1.10</a></dd>
+        
+            <dd><a href="/en/1.9/index.html">1.9</a></dd>
+        
+            <dd><a href="/en/1.8/index.html">1.8</a></dd>
+        
+            <dd><a href="/en/1.7/index.html">1.7</a></dd>
+        
+            <dd><a href="/en/1.6/index.html">1.6</a></dd>
+        
+            <dd><a href="/en/1.5/index.html">1.5</a></dd>
+        
+            <dd><a href="/en/1.4/index.html">1.4</a></dd>
+        
+            <dd><a href="/en/1.3/index.html">1.3</a></dd>
+        
+            <dd><a href="/1/index.html">1</a></dd>
+        
+            <dd><a href="/2/index.html">2</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+            <dd><a href="/2.0/conan.pdf">PDF</a></dd> 
+               
+      </dl>
+    </div>
+  </div>
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="../../../_static/js/modernizr.min.js"></script>
+  <script src="../../../_static/js/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+-->
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+
+  <script>
+    // initSearch("2.0");
+  </script>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK44ZFM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+ 
+
+
+</body>
+</html>
