@@ -225,7 +225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">This server is mainly used for testing (though it might work fine for small teams). We
-recommend using <a class="reference internal" href="artifactory/artifactory_ce_cpp.html#artifactory-ce-cpp"><span class="std std-ref">Artifactory Community Edition for C/C++</span></a>
+recommend using the free <a class="reference internal" href="artifactory/artifactory_ce_cpp.html#artifactory-ce-cpp"><span class="std std-ref">Artifactory Community Edition for C/C++</span></a>
 for private development or <strong>Artifactory Pro</strong> as Enterprise solution.</p>
 </div>
 <p>The <strong>Conan Server</strong> is a free and open source server that implements Conan remote
@@ -234,6 +234,30 @@ and distributed as a separate pip package.</p>
 <p>Install the <strong>Conan Server</strong> using pip:</p>
 <div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install conan-server
 </pre></div>
+</div>
+<p>Then you can run the server:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>$ conan_server
+ ***********************
+ Using config: /Users/user/.conan_server/server.conf
+ Storage: /Users/user/.conan_server/data
+ Public URL: http://localhost:9300/v2
+ PORT: 9300
+ ***********************
+ Bottle v0.12.24 server starting up (using WSGIRefServer())...
+ Listening on http://0.0.0.0:9300/
+ Hit Ctrl-C to quit.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On Windows, you may experience problems with the server if you run it under bash/msys.
+It is better to launch it in a regular <code class="docutils literal notranslate"><span class="pre">cmd</span></code> window.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../../../reference/conan_server.html#reference-conan-server"><span class="std std-ref">Conan Server reference</span></a></li>
+</ul>
 </div>
 </div>
 
@@ -260,7 +284,7 @@ and distributed as a separate pip package.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 01, 2023.
+      Last updated on Mar 02, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
