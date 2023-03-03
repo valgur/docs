@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan config &mdash; conan 2.0.0 documentation</title>
+  <title>conan config &mdash; conan 2.0.1 documentation</title>
   
 
   
@@ -47,7 +47,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan graph" href="graph.html"/>
         <link rel="prev" title="conan cache" href="cache.html"/>
@@ -240,8 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="conan-config-home">
 <h2>conan config home<a class="headerlink" href="#conan-config-home" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan config home --help
-usage: conan config home [-h] [-v [V]] [--logger]
-
+usage: conan config home [-h] [-v [V]]
 Show the Conan home folder.
 
 optional arguments:
@@ -249,7 +248,6 @@ optional arguments:
   -v [V]      Level of detail of the output. Valid options from less verbose
               to more verbose: -vquiet, -verror, -vwarning, -vnotice,
               -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
-  --logger    Show the output with log format, with time, type and message.
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">home</span></code> command returns the path of the Conan home folder.</p>
@@ -260,8 +258,8 @@ optional arguments:
 <div class="section" id="conan-config-install">
 <span id="reference-commands-conan-config-install"></span><h2>conan config install<a class="headerlink" href="#conan-config-install" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan config install -h
-usage: conan config install [-h] [-v [V]] [--logger]
-                            [--verify-ssl [VERIFY_SSL]]
+usage: conan config install [-h] [-v [V]]
+                            [--verify-ssl [VERIFY_SSL] | --insecure]
                             [-t {git,dir,file,url}] [-a ARGS]
                             [-sf SOURCE_FOLDER] [-tf TARGET_FOLDER]
                             item
@@ -279,10 +277,10 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
   --verify-ssl [VERIFY_SSL]
                         Verify SSL connection when downloading file
+  --insecure            Allow insecure server connections when using SSL.
+                        Equivalent to --verify-ssl=False
   -t {git,dir,file,url}, --type {git,dir,file,url}
                         Type of remote config
   -a ARGS, --args ARGS  String with extra arguments for &quot;git clone&quot;
@@ -312,6 +310,11 @@ All the configuration files can be shared and installed this way:</p>
 <li>All the extensions, including plugins, hooks.</li>
 <li>Custom user commands.</li>
 </ul>
+<p>This command reads a <code class="docutils literal notranslate"><span class="pre">.conanignore</span></code> file which, if present, filters which files and folders
+are copied over to the user’s Conan home folder.
+This file uses <a class="reference external" href="https://docs.python.org/3/library/fnmatch.html">fnmatch</a> patterns
+to match over the folder contents, excluding those entries that match from the config installation.
+See <a class="reference external" href="https://github.com/conan-io/command-extensions/blob/main/.conanignore">conan-io/command-extensions’s .conanignore</a> for an example of such a file.</p>
 <p><strong>Examples</strong>:</p>
 <ul>
 <li><p class="first">Install the configuration from a URL:</p>
@@ -363,7 +366,7 @@ $ conan config install http://other/url/to/other.zip -sf=hooks -tf=hooks
 <div class="section" id="conan-config-list">
 <h2>conan config list<a class="headerlink" href="#conan-config-list" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan config list -h
-usage: conan config list [-h] [-f FORMAT] [-v [V]] [--logger]
+usage: conan config list [-h] [-f FORMAT] [-v [V]]
 
 Show all the Conan available configurations: core and tools.
 
@@ -375,8 +378,6 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
 </pre></div>
 </div>
 <p>Displays all the Conan built-in configurations. There are 2 groups:</p>
@@ -429,7 +430,6 @@ tools.build:sharedlinkflags: List of extra flags used by CMakeToolchain for CMAK
 tools.build:skip_test: Do not execute CMake.test() and Meson.test() when enabled
 tools.build:sysroot: Pass the --sysroot=&lt;tools.build:sysroot&gt; flag if available. (None by default)
 tools.cmake.cmake_layout:build_folder_vars: Settings and Options that will produce a different build folder and different CMake presets names
-tools.cmake.cmaketoolchain.presets:max_schema_version: Generate CMakeUserPreset.json compatible with the supplied schema version
 tools.cmake.cmaketoolchain:find_package_prefer_config: Argument for the CMAKE_FIND_PACKAGE_PREFER_CONFIG
 tools.cmake.cmaketoolchain:generator: User defined CMake generator to use instead of default
 tools.cmake.cmaketoolchain:system_name: Define CMAKE_SYSTEM_NAME in CMakeToolchain
@@ -500,7 +500,7 @@ tools.system.package_manager:tool: Default package manager tool: &#39;apt-get&#3
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 02, 2023.
+      Last updated on Mar 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -901,7 +901,7 @@ tools.system.package_manager:tool: Default package manager tool: &#39;apt-get&#3
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.0',
+            VERSION:'2.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

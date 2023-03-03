@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan cache &mdash; conan 2.0.0 documentation</title>
+  <title>conan cache &mdash; conan 2.0.1 documentation</title>
   
 
   
@@ -47,7 +47,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan config" href="config.html"/>
         <link rel="prev" title="Commands" href="../commands.html"/>
@@ -240,7 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="conan-cache-path">
 <h2>conan cache path<a class="headerlink" href="#conan-cache-path" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan cache path --help
-usage: conan cache path [-h] [-v [V]] [--logger] [--folder {export_source,source,build}] reference
+usage: conan cache path [-h] [-v [V]] [--folder {export_source,source,build}] reference
 
 Show the path to the Conan cache for a given reference.
 
@@ -253,8 +253,6 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-    --logger              Show the output with log format, with time, type and
-                        message.
     --folder {export_source,source,build}
                         Path to show. The &#39;build&#39; requires a package
                         reference. If not specified it shows &#39;exports&#39; path
@@ -361,7 +359,7 @@ instead. In the general case, extracting artifacts from the cache manually is di
 <div class="section" id="conan-cache-clean">
 <h2>conan cache clean<a class="headerlink" href="#conan-cache-clean" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan cache clean -h
-usage: conan cache clean [-h] [-v [V]] [--logger] [-s] [-b] [-d]
+usage: conan cache clean [-h] [-v [V]] [-s] [-b] [-d]
                          [-p PACKAGE_QUERY]
                          pattern
 
@@ -377,8 +375,7 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
+
   -s, --source          Clean source folders
   -b, --build           Clean build folders
   -d, --download        Clean download folders
@@ -413,7 +410,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 02, 2023.
+      Last updated on Mar 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -814,7 +811,7 @@ optional arguments:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.0',
+            VERSION:'2.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

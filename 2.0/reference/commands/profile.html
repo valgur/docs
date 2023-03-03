@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan profile &mdash; conan 2.0.0 documentation</title>
+  <title>conan profile &mdash; conan 2.0.1 documentation</title>
   
 
   
@@ -47,7 +47,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan remove" href="remove.html"/>
         <link rel="prev" title="conan lock merge" href="lock/merge.html"/>
@@ -240,7 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="conan-profile-detect">
 <h2>conan profile detect<a class="headerlink" href="#conan-profile-detect" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile detect -h
-usage: conan profile detect [-h] [-v [V]] [--logger] [--name NAME] [-f]
+usage: conan profile detect [-h] [-v [V]] [--name NAME] [-f]
 
 Generate a profile using auto-detected values.
 
@@ -249,7 +249,6 @@ optional arguments:
   -v [V]       Level of detail of the output. Valid options from less verbose
                to more verbose: -vquiet, -verror, -vwarning, -vnotice,
                -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
-  --logger     Show the output with log format, with time, type and message.
   --name NAME  Profile name, &#39;default&#39; if not specified
   -f, --force  Overwrite if exists
 </pre></div>
@@ -272,7 +271,7 @@ configuration like custom settings, custom remotes definition, etc.</p>
 <div class="section" id="conan-profile-list">
 <h2>conan profile list<a class="headerlink" href="#conan-profile-list" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile list -h
-usage: conan profile list [-h] [-f FORMAT] [-v [V]] [--logger]
+usage: conan profile list [-h] [-f FORMAT] [-v [V]]
 
 List all profiles in the cache.
 
@@ -284,15 +283,13 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-profile-path">
 <h2>conan profile path<a class="headerlink" href="#conan-profile-path" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile path -h
-usage: conan profile path [-h] [-v [V]] [--logger] [-o OPTIONS_HOST]
+usage: conan profile path [-h] [-v [V]] [-o OPTIONS_HOST]
                           [-o:b OPTIONS_BUILD] [-o:h OPTIONS_HOST]
                           [-pr PROFILE_HOST] [-pr:b PROFILE_BUILD]
                           [-pr:h PROFILE_HOST] [-s SETTINGS_HOST]
@@ -311,8 +308,6 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
   -o OPTIONS_HOST, --options OPTIONS_HOST
                         Define options values (host machine), e.g.: -o
                         Pkg:with_qt=true
@@ -355,7 +350,7 @@ optional arguments:
 <div class="section" id="conan-profile-show">
 <h2>conan profile show<a class="headerlink" href="#conan-profile-show" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile show -h
-usage: conan profile show [-h] [-v [V]] [--logger] [-o OPTIONS_HOST]
+usage: conan profile show [-h] [-v [V]] [-o OPTIONS_HOST]
                           [-o:b OPTIONS_BUILD] [-o:h OPTIONS_HOST]
                           [-pr PROFILE_HOST] [-pr:b PROFILE_BUILD]
                           [-pr:h PROFILE_HOST] [-s SETTINGS_HOST]
@@ -370,8 +365,6 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
   -o OPTIONS_HOST, --options OPTIONS_HOST
                         Define options values (host machine), e.g.: -o
                         Pkg:with_qt=true
@@ -436,7 +429,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 02, 2023.
+      Last updated on Mar 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -837,7 +830,7 @@ optional arguments:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.0',
+            VERSION:'2.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

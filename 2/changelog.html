@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; conan 2.0.0 documentation</title>
+  <title>Changelog &mdash; conan 2.0.1 documentation</title>
   
 
   
@@ -47,7 +47,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 2.0.0 documentation" href="index.html"/>
+    <link rel="top" title="conan 2.0.1 documentation" href="index.html"/>
         <link rel="prev" title="Videos" href="knowledge/videos.html"/>
 
  <!-- Google Tag Manager -->
@@ -198,6 +198,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
 <p>For a more detailed description of the major changes that Conan 2.0 brings, compared with Conan 1.X, please read <a class="reference internal" href="whatsnew.html#whatsnew"><span class="std std-ref">What’s new in Conan 2.0</span></a></p>
+<div class="section" id="mar-2023">
+<h2>2.0.1 (03-Mar-2023)<a class="headerlink" href="#mar-2023" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Feature: Add <cite>–insecure</cite> alias to <cite>–verify-ssl</cite> in config install. <a class="reference external" href="https://github.com/conan-io/conan/pull/13270">#13270</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3035">here</a></li>
+<li>Feature: Add <cite>.conanignore</cite> support to <cite>conan config install</cite>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13269">#13269</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3036">here</a></li>
+<li>Feature: Make verbose tracebacks on exception be shown for <code class="docutils literal notranslate"><span class="pre">-vv</span></code> and <code class="docutils literal notranslate"><span class="pre">-vvv</span></code>, instead of custom env-var used in 1.X. <a class="reference external" href="https://github.com/conan-io/conan/pull/13226">#13226</a></li>
+<li>Fix: Minor improvements to <strong class="command">conan install</strong> and 2.0-readiness error messages. <a class="reference external" href="https://github.com/conan-io/conan/pull/13299">#13299</a></li>
+<li>Fix: Remove <code class="docutils literal notranslate"><span class="pre">vcvars.bat</span></code> VS telemetry env-var, to avoid Conan hanging. <a class="reference external" href="https://github.com/conan-io/conan/pull/13293">#13293</a></li>
+<li>Fix: Remove legacy <code class="docutils literal notranslate"><span class="pre">CMakeToolchain</span></code> support for <code class="docutils literal notranslate"><span class="pre">CMakePresets</span></code> schema2 for <code class="docutils literal notranslate"><span class="pre">CMakeUserPresets.json</span></code>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13288">#13288</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3049">here</a></li>
+<li>Fix: Remove <code class="docutils literal notranslate"><span class="pre">--logger</span></code> json logging and legacy traces. <a class="reference external" href="https://github.com/conan-io/conan/pull/13287">#13287</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3050">here</a></li>
+<li>Fix: Fix typo in <cite>conan remote auth</cite> help. <a class="reference external" href="https://github.com/conan-io/conan/pull/13285">#13285</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3039">here</a></li>
+<li>Fix: Raise arg error if <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">list</span> <span class="pre">unexpected-arg</span></code>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13282">#13282</a></li>
+<li>Fix: Do not auto-detect <code class="docutils literal notranslate"><span class="pre">compiler.runtime_type</span></code> for <code class="docutils literal notranslate"><span class="pre">msvc</span></code>, rely on profile plugin. <a class="reference external" href="https://github.com/conan-io/conan/pull/13277">#13277</a></li>
+<li>Fix: Fix conanfile.txt options parsing error message. <a class="reference external" href="https://github.com/conan-io/conan/pull/13266">#13266</a></li>
+<li>Fix: Improve error message for unified patterns in options. <a class="reference external" href="https://github.com/conan-io/conan/pull/13264">#13264</a></li>
+<li>Fix: Allow <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">--force</span></code> to force re-definition of an existing remote name. <a class="reference external" href="https://github.com/conan-io/conan/pull/13249">#13249</a></li>
+<li>Fix: Restore printing of profiles for build command. <a class="reference external" href="https://github.com/conan-io/conan/pull/13214">#13214</a></li>
+<li>Fix: Change <strong class="command">conan build</strong> argument description for “path” to indicate it is only for conanfile.py and explicitly state that it does not work with conanfile.txt. <a class="reference external" href="https://github.com/conan-io/conan/pull/13211">#13211</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3046">here</a></li>
+<li>Fix: Better error message when dependencies <code class="docutils literal notranslate"><span class="pre">options</span></code> are defined in <code class="docutils literal notranslate"><span class="pre">requirements()</span></code> method. <a class="reference external" href="https://github.com/conan-io/conan/pull/13207">#13207</a></li>
+<li>Fix: Fix broken links to docs from error messages and readme. <a class="reference external" href="https://github.com/conan-io/conan/pull/13186">#13186</a></li>
+<li>Bugfix: Ensure that <cite>topics</cite> are always serialized as lists. <a class="reference external" href="https://github.com/conan-io/conan/pull/13298">#13298</a></li>
+<li>Bugfix: Ensure that <cite>provides</cite> are always serialized as lists. <a class="reference external" href="https://github.com/conan-io/conan/pull/13298">#13298</a></li>
+<li>Bugfix: Fixed the detection of certain visual c++ installations. <a class="reference external" href="https://github.com/conan-io/conan/pull/13284">#13284</a></li>
+<li>Bugfix: Fix supported <code class="docutils literal notranslate"><span class="pre">cppstd</span></code> values for <code class="docutils literal notranslate"><span class="pre">msvc</span></code> compiler. <a class="reference external" href="https://github.com/conan-io/conan/pull/13278">#13278</a></li>
+<li>Bugfix: CMakeDeps generate files for <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> with the same <code class="docutils literal notranslate"><span class="pre">build_type</span></code> as the “host” context. <a class="reference external" href="https://github.com/conan-io/conan/pull/13267">#13267</a></li>
+<li>Bugfix: Fix definition of patterns for dependencies options in configure(). <a class="reference external" href="https://github.com/conan-io/conan/pull/13263">#13263</a></li>
+<li>Bugfix: Fix CMakeToolchain error when output folder in different Win drive. <a class="reference external" href="https://github.com/conan-io/conan/pull/13248">#13248</a></li>
+<li>Bugfix: Do not raise errors if a <code class="docutils literal notranslate"><span class="pre">test_requires</span></code> is not used by components <code class="docutils literal notranslate"><span class="pre">.requires</span></code>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13191">#13191</a></li>
+</ul>
+</div>
 <div class="section" id="feb-2023">
 <h2>2.0.0 (22-Feb-2023)<a class="headerlink" href="#feb-2023" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -385,7 +415,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 02, 2023.
+      Last updated on Mar 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -786,7 +816,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0.0',
+            VERSION:'2.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

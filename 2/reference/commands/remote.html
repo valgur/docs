@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan remote &mdash; conan 2.0.0 documentation</title>
+  <title>conan remote &mdash; conan 2.0.1 documentation</title>
   
 
   
@@ -47,7 +47,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.0 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan search" href="search.html"/>
         <link rel="prev" title="conan remove" href="remove.html"/>
@@ -240,12 +240,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 registry and also manage authentication to those remotes. For more information on how to
 work with Conan repositories, please check the <a class="reference internal" href="../../tutorial/conan_repositories.html#conan-repositories"><span class="std std-ref">dedicated section</span></a>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote -h
-usage: conan remote [-h] [-v [V]] [--logger] {add,auth,disable,enable,list,list-users,login,logout,remove,rename,set-user,update} ...
+usage: conan remote [-h] [-v [V]] {add,auth,disable,enable,list,list-users,login,logout,remove,rename,set-user,update} ...
 
 Manage the remote list and the users authenticated on them.
 
 positional arguments:
-{add,auth,disable,enable,list,list-users,login,logout,remove,rename,set-user,update}
+  {add,auth,disable,enable,list,list-users,login,logout,remove,rename,set-user,update}
                         sub-command help
     add                 Add a remote.
     auth                Authenticate in the defined remotes
@@ -260,54 +260,59 @@ positional arguments:
     set-user            Associate a username with a remote matching a pattern without performing the authentication.
     update              Update a remote.
 
-optional arguments:
--h, --help            show this help message and exit
--v [V]                Level of detail of the output. Valid options from less verbose to more verbose: -vquiet, -verror, -vwarning,
+options:
+  -h, --help            show this help message and exit
+  -v [V]                Level of detail of the output. Valid options from less verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
---logger              Show the output with log format, with time, type and message.
 </pre></div>
 </div>
 <div class="section" id="conan-remote-add">
 <h2>conan remote add<a class="headerlink" href="#conan-remote-add" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote add -h
-usage: conan remote add [-h] [-i [INSERT]] [-f] remote url [verify_ssl]
+usage: conan remote add [-h] [-v [V]] [--insecure] [--index INDEX] [-f] name url
+
+Add a remote.
 
 positional arguments:
-  remote                Name of the remote
-  url                   URL of the remote
-  verify_ssl            Verify SSL certificate. Defaulted to True
+  name           Name of the remote to add
+  url            Url of the remote
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -i [INSERT], --insert [INSERT]
-                        insert remote at specific index
-  -f, --force           Force addition, will update if existing
+options:
+  -h, --help     show this help message and exit
+  -v [V]         Level of detail of the output. Valid options from less verbose to more verbose:
+                 -vquiet, -verror, -vwarning, -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug, -vvv
+                 or -vtrace
+  --insecure     Allow insecure server connections when using SSL
+  --index INDEX  Insert the remote at a specific position in the remote list
+  -f, --force    Force the definition of the remote even if duplicated
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-auth">
 <h2>conan remote auth<a class="headerlink" href="#conan-remote-auth" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote auth -h
-usage: conan remote auth [-h] [-v [V]] [--logger] [--with-user] remote
+usage: conan remote auth [-h] [-v [V]] [--with-user] remote
 
 Authenticate in the defined remotes
 
 positional arguments:
-remote       Pattern of the remote/s to disable. The pattern uses &#39;fnmatch&#39; style wildcards.
+  remote       Pattern or name of the remote/s to authenticate against. The
+               pattern uses &#39;fnmatch&#39; style wildcards.
 
 optional arguments:
--h, --help   show this help message and exit
--v [V]       Level of detail of the output. Valid options from less verbose to more verbose: -vquiet, -verror, -vwarning, -vnotice,
-            -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
---logger     Show the output with log format, with time, type and message.
---with-user  Only try to auth in those remotes that already have a username or a CONAN_LOGIN_ env-var defined
+  -h, --help   show this help message and exit
+  -v [V]       Level of detail of the output. Valid options from less verbose
+               to more verbose: -vquiet, -verror, -vwarning, -vnotice,
+               -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
+  --with-user  Only try to auth in those remotes that already have a username
+               or a CONAN_LOGIN_ env-var defined
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-disable">
 <h2>conan remote disable<a class="headerlink" href="#conan-remote-disable" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote disable -h
-usage: conan remote disable [-h] [-v [V]] [--logger] remote
+usage: conan remote disable [-h] [-v [V]] remote
 
 Disable all the remotes matching a pattern.
 
@@ -315,19 +320,18 @@ positional arguments:
   remote      Pattern of the remote/s to disable. The pattern uses &#39;fnmatch&#39;
               style wildcards.
 
-optional arguments:
+options:
   -h, --help  show this help message and exit
   -v [V]      Level of detail of the output. Valid options from less verbose
               to more verbose: -vquiet, -verror, -vwarning, -vnotice,
               -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
-  --logger    Show the output with log format, with time, type and message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-enable">
 <h2>conan remote enable<a class="headerlink" href="#conan-remote-enable" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote enable -h
-usage: conan remote enable [-h] [-v [V]] [--logger] remote
+usage: conan remote enable [-h] [-v [V]] remote
 
 Enable all the remotes matching a pattern.
 
@@ -335,23 +339,22 @@ positional arguments:
   remote      Pattern of the remote/s to enable. The pattern uses &#39;fnmatch&#39;
               style wildcards.
 
-optional arguments:
+options:
   -h, --help  show this help message and exit
   -v [V]      Level of detail of the output. Valid options from less verbose
               to more verbose: -vquiet, -verror, -vwarning, -vnotice,
               -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
-  --logger    Show the output with log format, with time, type and message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-list">
 <h2>conan remote list<a class="headerlink" href="#conan-remote-list" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote list -h
-usage: conan remote list [-h] [-f FORMAT] [-v [V]] [--logger]
+usage: conan remote list [-h] [-f FORMAT] [-v [V]]
 
 List current remotes.
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         Select the output format: json
@@ -359,19 +362,17 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-list-users">
 <h2>conan remote list-users<a class="headerlink" href="#conan-remote-list-users" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote list-users -h
-usage: conan remote list-users [-h] [-f FORMAT] [-v [V]] [--logger]
+usage: conan remote list-users [-h] [-f FORMAT] [-v [V]]
 
 List the users logged into all the remotes.
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         Select the output format: json
@@ -379,15 +380,13 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-login">
 <h2>conan remote login<a class="headerlink" href="#conan-remote-login" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote login -h
-usage: conan remote login [-h] [-f FORMAT] [-v [V]] [--logger] [-p [PASSWORD]]
+usage: conan remote login [-h] [-f FORMAT] [-v [V]] [-p [PASSWORD]]
                           remote username
 
 Login into the specified remotes matching a pattern.
@@ -397,7 +396,7 @@ positional arguments:
                         pattern uses &#39;fnmatch&#39; style wildcards.
   username              Username
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         Select the output format: json
@@ -405,8 +404,6 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
   -p [PASSWORD], --password [PASSWORD]
                         User password. Use double quotes if password with
                         spacing, and escape quotes if existing. If empty, the
@@ -417,7 +414,7 @@ optional arguments:
 <div class="section" id="conan-remote-logout">
 <h2>conan remote logout<a class="headerlink" href="#conan-remote-logout" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote logout -h
-usage: conan remote logout [-h] [-f FORMAT] [-v [V]] [--logger] remote
+usage: conan remote logout [-h] [-f FORMAT] [-v [V]] remote
 
 Clear the existing credentials for the specified remotes matching a pattern.
 
@@ -425,7 +422,7 @@ positional arguments:
   remote                Pattern or name of the remote to logout. The pattern
                         uses &#39;fnmatch&#39; style wildcards.
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         Select the output format: json
@@ -433,34 +430,31 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-remove">
 <h2>conan remote remove<a class="headerlink" href="#conan-remote-remove" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote remove -h
-usage: conan remote remove [-h] [-v [V]] [--logger] remote
+usage: conan remote remove [-h] [-v [V]] remote
 
 Remove a remote.
 
 positional arguments:
   remote      Name of the remote to remove. Accepts &#39;fnmatch&#39; style wildcards.
 
-optional arguments:
+options:
   -h, --help  show this help message and exit
   -v [V]      Level of detail of the output. Valid options from less verbose
               to more verbose: -vquiet, -verror, -vwarning, -vnotice,
               -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
-  --logger    Show the output with log format, with time, type and message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-rename">
 <h2>conan remote rename<a class="headerlink" href="#conan-remote-rename" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote rename -h
-usage: conan remote rename [-h] [-v [V]] [--logger] remote new_name
+usage: conan remote rename [-h] [-v [V]] remote new_name
 
 Rename a remote.
 
@@ -468,19 +462,18 @@ positional arguments:
   remote      Current name of the remote
   new_name    New name for the remote
 
-optional arguments:
+options:
   -h, --help  show this help message and exit
   -v [V]      Level of detail of the output. Valid options from less verbose
               to more verbose: -vquiet, -verror, -vwarning, -vnotice,
               -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
-  --logger    Show the output with log format, with time, type and message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-set-user">
 <h2>conan remote set-user<a class="headerlink" href="#conan-remote-set-user" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote set-user -h
-usage: conan remote set-user [-h] [-f FORMAT] [-v [V]] [--logger]
+usage: conan remote set-user [-h] [-f FORMAT] [-v [V]]
                              remote username
 
 Associate a username with a remote matching a pattern without performing the
@@ -491,7 +484,7 @@ positional arguments:
                         &#39;fnmatch&#39; style wildcards.
   username              Username
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         Select the output format: json
@@ -499,15 +492,13 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
-  --logger              Show the output with log format, with time, type and
-                        message.
 </pre></div>
 </div>
 </div>
 <div class="section" id="conan-remote-update">
 <h2>conan remote update<a class="headerlink" href="#conan-remote-update" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remote update -h
-usage: conan remote update [-h] [-v [V]] [--logger] [--url URL] [--secure]
+usage: conan remote update [-h] [-v [V]] [--url URL] [--secure]
                            [--insecure] [--index INDEX]
                            remote
 
@@ -516,13 +507,12 @@ Update a remote.
 positional arguments:
   remote         Name of the remote to update
 
-optional arguments:
+options:
   -h, --help     show this help message and exit
   -v [V]         Level of detail of the output. Valid options from less
                  verbose to more verbose: -vquiet, -verror, -vwarning,
                  -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or
                  -vtrace
-  --logger       Show the output with log format, with time, type and message.
   --url URL      New url for the remote
   --secure       Don&#39;t allow insecure server connections when using SSL
   --insecure     Allow insecure server connections when using SSL
@@ -563,7 +553,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 02, 2023.
+      Last updated on Mar 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -964,7 +954,7 @@ optional arguments:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.0',
+            VERSION:'2.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
