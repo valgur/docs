@@ -275,8 +275,8 @@ The information that is consumed in the build should be processed in <code class
 <span class="c1"># Properties</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;property_name&quot;</span><span class="p">,</span> <span class="s2">&quot;property_value&quot;</span><span class="p">)</span>
 <span class="c1"># Structure</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># Dictionary with the different components a package may have</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">requires</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># List of components from requirements</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span> <span class="c1"># Dictionary-like structure to define the different components a package may have</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">requires</span> <span class="c1"># List of components from requirements that need to be propagated downstream</span>
 </pre></div>
 </div>
 <p>Binaries to link:</p>
@@ -602,7 +602,7 @@ configuration as:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 03, 2023.
+      Last updated on Mar 05, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
