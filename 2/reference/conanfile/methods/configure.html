@@ -269,12 +269,13 @@ recipe to remove them so they are not used in the recipe:</p>
 <p>Likewise, for a package containing a library, the <code class="docutils literal notranslate"><span class="pre">fPIC</span></code> option really only applies when the
 library is compiled as a static library, but otherwise, the <code class="docutils literal notranslate"><span class="pre">fPIC</span></code> option doesn’t make sense,
 so it should be removed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
-<span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="s2">&quot;fPIC&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+<span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;fPIC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
 <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">shared</span><span class="p">:</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">fPIC</span>
+        <span class="c1"># fPIC might have been removed in config_options(), so we use rm_safe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;fPIC&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Recipes can suggest values for their dependencies options as <code class="docutils literal notranslate"><span class="pre">default_options</span> <span class="pre">=</span> <span class="pre">{&quot;*:shared&quot;:</span> <span class="pre">True}</span></code>, but
@@ -290,7 +291,7 @@ it is not possible to do that conditionally. For this purpose, it is also possib
 <p><strong>Best practices</strong></p>
 <ul class="last simple">
 <li>Recall that it is <strong>not</strong> possible to define <code class="docutils literal notranslate"><span class="pre">settings</span></code> or <code class="docutils literal notranslate"><span class="pre">conf</span></code> values in recipes, they are read only.</li>
-<li>The definition of <code class="docutils literal notranslate"><span class="pre">options</span></code> values is only a “suggestion”, depending on the graph computation, priorities, etc., the final value of <code class="docutils literal notranslate"><span class="pre">options</span></code> can be different than the one set by the recipe.</li>
+<li>The definition of <code class="docutils literal notranslate"><span class="pre">options</span></code> values is only a “suggestion”, depending on the graph computation, priorities, etc., the final value of <code class="docutils literal notranslate"><span class="pre">options</span></code> can be different from the one set by the recipe.</li>
 </ul>
 </div>
 <div class="admonition seealso">

@@ -257,8 +257,10 @@ Let’s check the relevant parts:</p>
 
     <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">shared</span><span class="p">:</span>
-<span class="hll">            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">fPIC</span>
-</span>    <span class="o">...</span>
+<span class="hll">            <span class="c1"># If os=Windows, fPIC will have been removed in config_options()</span>
+</span>            <span class="c1"># use rm_safe to avoid double delete errors</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;fPIC&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
 </pre></div>
 </div>
 <p>You can see that we added a <a class="reference internal" href="../../reference/conanfile/methods/configure.html#reference-conanfile-methods-configure"><span class="std std-ref">configure() method</span></a> to the recipe. Let’s explain what’s the
