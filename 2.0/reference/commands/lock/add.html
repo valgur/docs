@@ -271,6 +271,81 @@ optional arguments:
   --lockfile LOCKFILE   Filename of the input lockfile
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> command is able to add a package version to an existing or new lockfile <code class="docutils literal notranslate"><span class="pre">requires</span></code>, <code class="docutils literal notranslate"><span class="pre">build_requires</span></code> or <code class="docutils literal notranslate"><span class="pre">python_requires</span></code>.</p>
+<p>For example, the following is able to create a lockfile (by default, named <code class="docutils literal notranslate"><span class="pre">conan.lock</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>add<span class="w"> </span>--requires<span class="o">=</span>pkg/1.1<span class="w"> </span>--build-requires<span class="o">=</span>tool/2.2<span class="w"> </span>--python-requires<span class="o">=</span>mypytool/3.3
+Generated<span class="w"> </span>lockfile:<span class="w"> </span>...conan.lock
+
+<span class="nv">$cat</span><span class="w"> </span>conan.lock
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;pkg/1.1&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;build_requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;tool/2.2&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;python_requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;mypytool/3.3&quot;</span>
+<span class="w">    </span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> command also allows to provide an existing lockfile as an input,
+and it will add the arguments to the existing lockfile, maintaining the
+package versions sorted:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>add<span class="w"> </span>--build-requires<span class="o">=</span>tool/2.3<span class="w"> </span>--lockfile<span class="o">=</span>conan.lock
+Using<span class="w"> </span>lockfile:<span class="w"> </span><span class="s1">&#39;.../conan.lock&#39;</span>
+Generated<span class="w"> </span>lockfile:<span class="w"> </span>.../conan.lock
+
+$<span class="w"> </span>cat<span class="w"> </span>conan.lock
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;pkg/1.1&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;build_requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;tool/2.3&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;tool/2.2&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;python_requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;mypytool/3.3&quot;</span>
+<span class="w">    </span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> command does not perform any checking on the lockfile, the packages, the existence of packages,
+the existence of package versions, or the existence of those packages in a given dependency graph, it is a basic manipulation of the json information.
+When that lockfile is applied to resolve a dependency graph, it is possible that the added versions do not exist,
+or do not resolve for the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> recipes defined version ranges.</p>
+<p>Moreover, the list of versions is still sorted. Adding an older version like <code class="docutils literal notranslate"><span class="pre">tool/2.1</span></code> to the previous lockfile
+won’t make that version being used automatically if the recipes contain the version range <code class="docutils literal notranslate"><span class="pre">tool/[&gt;=2.0</span> <span class="pre">&lt;3]</span></code>, because
+the <code class="docutils literal notranslate"><span class="pre">tool/2.2</span></code> version is listed there and the range will resolve to it, not to the older <code class="docutils literal notranslate"><span class="pre">tool/2.1</span></code>.</p>
+<p>Note that a lockfile created with <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> can be incomplete and not contain all necessary locked versions
+that a full dependency graph would need. For those cases, recall that the <code class="docutils literal notranslate"><span class="pre">--lockfile-partial</span></code> argument can be applied.
+Note also that if a <code class="docutils literal notranslate"><span class="pre">conan.lock</span></code> file exist in the current folder, Conan commands like <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> will automatically use it.
+Please have a look to the <a class="reference internal" href="../../../tutorial/versioning/lockfiles.html#tutorial-versioning-lockfiles"><span class="std std-ref">lockfiles tutorial</span></a>.</p>
+<p>If explicitly adding revisions, please recall that the revisions are timestamp sorted. If more than one revision exists in the lockfile,
+it is mandatory to provide the timestamps of those revisions, so the sorting makes sense, which can be done with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>add<span class="w"> </span>--requires<span class="o">=</span>pkg/1.1#revision%timestamp
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<ul class="last simple">
+<li>It is forbidden to manually manipulate a Conan lockfile, changing the strict sorting of references, and that could result in
+any arbitrary undefined behavior.</li>
+<li>Recall that it is not possible to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> a version range. The version might be not fully complete (like not providing
+the revision), but it must be an exact version.</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Best practices</strong></p>
+<p class="last">This command will not be necessary in many situations. The existing <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span></code>, <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export</span></code>,
+<code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span></code> commands can directly update or produce new lockfiles with the new information of the packages they are creating, and
+those new or updated lockfiles can be used to continue with the processing.</p>
+</div>
 </div>
 
 
@@ -296,7 +371,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 06, 2023.
+      Last updated on Mar 07, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

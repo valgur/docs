@@ -251,6 +251,25 @@ In addition to these commands, most of the Conan commands that compute a graph, 
 <li><a class="reference internal" href="lock/create.html"><span class="doc">conan lock create</span></a>: Evaluates a dependency graph and save a lockfile</li>
 <li><a class="reference internal" href="lock/merge.html"><span class="doc">conan lock merge</span></a>: Merge several existing lockfiles into one.</li>
 </ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>-h
+usage:<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="w"> </span><span class="o">[</span>V<span class="o">]]</span><span class="w"> </span><span class="o">{</span>add,create,merge<span class="o">}</span><span class="w"> </span>...
+
+Create<span class="w"> </span>or<span class="w"> </span>manage<span class="w"> </span>lockfiles.
+
+positional<span class="w"> </span>arguments:
+<span class="o">{</span>add,create,merge<span class="o">}</span><span class="w">  </span>sub-command<span class="w"> </span><span class="nb">help</span>
+<span class="w">   </span>add<span class="w">               </span>Add<span class="w"> </span>requires,<span class="w"> </span>build-requires<span class="w"> </span>or<span class="w"> </span>python-requires<span class="w"> </span>to<span class="w"> </span>an<span class="w"> </span>existing<span class="w"> </span>or<span class="w"> </span>new<span class="w"> </span>lockfile.<span class="w"> </span>The<span class="w"> </span>resulting<span class="w"> </span>lockfile<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>ordered,<span class="w"> </span>newer
+<span class="w">                     </span>versions/revisions<span class="w"> </span>first.<span class="w"> </span>References<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>supplied<span class="w"> </span>with<span class="w"> </span>and<span class="w"> </span>without<span class="w"> </span>revisions<span class="w"> </span>like<span class="w"> </span><span class="s2">&quot;--requires=pkg/version&quot;</span>,<span class="w"> </span>but<span class="w"> </span>they<span class="w"> </span>must<span class="w"> </span>be
+<span class="w">                     </span>package<span class="w"> </span>references,<span class="w"> </span>including<span class="w"> </span>at<span class="w"> </span>least<span class="w"> </span>the<span class="w"> </span>version,<span class="w"> </span>and<span class="w"> </span>they<span class="w"> </span>cannot<span class="w"> </span>contain<span class="w"> </span>a<span class="w"> </span>version<span class="w"> </span>range.
+<span class="w">   </span>create<span class="w">            </span>Create<span class="w"> </span>a<span class="w"> </span>lockfile<span class="w"> </span>from<span class="w"> </span>a<span class="w"> </span>conanfile<span class="w"> </span>or<span class="w"> </span>a<span class="w"> </span>reference.
+<span class="w">   </span>merge<span class="w">             </span>Merge<span class="w"> </span><span class="m">2</span><span class="w"> </span>or<span class="w"> </span>more<span class="w"> </span>lockfiles.
+
+optional<span class="w"> </span>arguments:
+-h,<span class="w"> </span>--help<span class="w">          </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+-v<span class="w"> </span><span class="o">[</span>V<span class="o">]</span><span class="w">              </span>Level<span class="w"> </span>of<span class="w"> </span>detail<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>output.<span class="w"> </span>Valid<span class="w"> </span>options<span class="w"> </span>from<span class="w"> </span>less<span class="w"> </span>verbose<span class="w"> </span>to<span class="w"> </span>more<span class="w"> </span>verbose:<span class="w"> </span>-vquiet,<span class="w"> </span>-verror,<span class="w"> </span>-vwarning,<span class="w"> </span>-vnotice,<span class="w"> </span>-vstatus,<span class="w"> </span>-v<span class="w"> </span>or
+<span class="w">                     </span>-vverbose,<span class="w"> </span>-vv<span class="w"> </span>or<span class="w"> </span>-vdebug,<span class="w"> </span>-vvv<span class="w"> </span>or<span class="w"> </span>-vtrace
+</pre></div>
+</div>
 </div>
 
 
@@ -276,7 +295,7 @@ In addition to these commands, most of the Conan commands that compute a graph, 
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 06, 2023.
+      Last updated on Mar 07, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

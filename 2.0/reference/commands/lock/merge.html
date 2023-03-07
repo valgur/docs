@@ -260,6 +260,132 @@ optional arguments:
                         Filename of the created lockfile
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">merge</span></code> command takes 2 or more lockfiles and aggregate them, producing one final lockfile.
+For example, if we have 2 lockfiles <code class="docutils literal notranslate"><span class="pre">lock1.lock</span></code> and <code class="docutils literal notranslate"><span class="pre">lock2.lock</span></code>, we can merge both in a final <code class="docutils literal notranslate"><span class="pre">conan.lock</span></code> one:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># we have 2 lockfiles lock1.lock and lock2.lock</span>
+$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>add<span class="w"> </span>--requires<span class="o">=</span>pkg/1.1<span class="w"> </span>--lockfile-out<span class="o">=</span>lock1.lock
+$<span class="w"> </span>cat<span class="w"> </span>lock1.lock
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;pkg/1.1&quot;</span>,
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;build_requires&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">    </span><span class="s2">&quot;python_requires&quot;</span>:<span class="w"> </span><span class="o">[]</span>
+<span class="o">}</span>
+
+$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>add<span class="w"> </span>--requires<span class="o">=</span>other/2.1<span class="w"> </span>--build-requires<span class="o">=</span>tool/3.2<span class="w"> </span>--lockfile-out<span class="o">=</span>lock2.lock
+$<span class="w"> </span>cat<span class="w"> </span>lock2.lock
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;other/2.1&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;build_requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;tool/3.2&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;python_requires&quot;</span>:<span class="w"> </span><span class="o">[]</span>
+<span class="o">}</span>
+
+<span class="c1"># we can merge both</span>
+$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>merge<span class="w"> </span>--lockfile<span class="o">=</span>lock1.lock<span class="w"> </span>--lockfile<span class="o">=</span>lock2.lock
+$<span class="w"> </span>cat<span class="w"> </span>conan.lock
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;pkg/1.1&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;other/2.1&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;build_requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="s2">&quot;tool/3.2&quot;</span>
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;python_requires&quot;</span>:<span class="w"> </span><span class="o">[]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Similar to the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> command, the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">merge</span></code>:</p>
+<ul class="simple">
+<li>Does keep strict sorting of the lists of versions</li>
+<li>It does not perform any kind of validation if the packages or versions exist or not, or if they belong to a given dependency graph</li>
+<li>It is a basic processing of the json files, aggregating them.</li>
+<li>It doesn’t guarantee that the lockfile will be complete, might require <code class="docutils literal notranslate"><span class="pre">--lockfile-partial</span></code> if not</li>
+<li>Recipe revisions, if defined, must contain the timestamp to be sorted correctly.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<ul class="last simple">
+<li>It is forbidden to manually manipulate a Conan lockfile, changing the strict sorting of references, and that could result in
+any arbitrary undefined behavior.</li>
+<li>Recall that it is not possible to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">add</span></code> a version range. The version might be not fully complete (like not providing
+the revision), but it must be an exact version.</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">To better understand <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">merge</span></code>, it is recommended to first understand lockfiles in general,
+visit the <a class="reference internal" href="../../../tutorial/versioning/lockfiles.html#tutorial-versioning-lockfiles"><span class="std std-ref">lockfiles tutorial</span></a> for a practical introduction to lockfiles.</p>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">lock</span> <span class="pre">merge</span></code> command can be useful to consolidate in a single lockfile when for some reasons there are several lockfiles
+that have diverged. A use case would be to create a multi-configuration lockfile that contains all necessary locked versions for
+all OSs (Linux, Windows, etc), even if there are conditional dependencies in the graph for the different OSs. At some point when
+testing a new dependency version, for example, <code class="docutils literal notranslate"><span class="pre">pkg/3.4</span></code> new version, when previously <code class="docutils literal notranslate"><span class="pre">pkg/3.3</span></code> was already in the graph, we
+might want to have such a new lockfile cleaning the previous <code class="docutils literal notranslate"><span class="pre">pkg/3.3</span></code>. If we apply the <code class="docutils literal notranslate"><span class="pre">--lockfile-clean</span></code> argument that will
+remove the non-used versions in the lockfile, but that will also remove the OS-dependant dependencies. So something like this could be
+done: lets say that we have this lockfile (simplified, removed revisions for simplicity) as the result of testing a new <code class="docutils literal notranslate"><span class="pre">pkgb/0.2</span></code> version
+for our main product <code class="docutils literal notranslate"><span class="pre">app1/0.1</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">app.lock</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requires&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;pkgb/0.2&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;pkgb/0.1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;pkgawin/0.1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;pkganix/0.1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;app1/0.1&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pkgawin</span></code> and <code class="docutils literal notranslate"><span class="pre">pkganix</span></code> are dependencies that exist exclusively in Windows and Linux respectively. Everything looks good,
+<code class="docutils literal notranslate"><span class="pre">pkgb/0.2</span></code> new version works fine with our app, and we want to clean the unused things from the lockfile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>create<span class="w"> </span>--requires<span class="o">=</span>app1/0.1<span class="w"> </span>--lockfile<span class="o">=</span>app.lock<span class="w"> </span>--lockfile-out<span class="o">=</span>win.lock<span class="w"> </span>-s<span class="w"> </span><span class="nv">os</span><span class="o">=</span>Windows<span class="w"> </span>--lockfile-clean
+<span class="c1"># Note how both pkgb/0.1 and pkganix are gone</span>
+$<span class="w"> </span>cat<span class="w"> </span>win.lock
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">      </span><span class="s2">&quot;pkgb/0.2&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;pkgawin/0.1&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;app1/0.1&quot;</span>
+<span class="w">  </span><span class="o">]</span>
+<span class="o">}</span>
+$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>create<span class="w"> </span>--requires<span class="o">=</span>app1/0.1<span class="w"> </span>--lockfile<span class="o">=</span>app.lock<span class="w"> </span>--lockfile-out<span class="o">=</span>nix.lock<span class="w"> </span>-s<span class="w"> </span><span class="nv">os</span><span class="o">=</span>Linux<span class="w"> </span>--lockfile-clean
+<span class="c1"># Note how both pkgb/0.1 and pkgawin are gone</span>
+$<span class="w"> </span>cat<span class="w"> </span>win.lock
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">      </span><span class="s2">&quot;pkgb/0.2&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;pkganix/0.1&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;app1/0.1&quot;</span>
+<span class="w">  </span><span class="o">]</span>
+<span class="o">}</span>
+<span class="w">  </span><span class="c1"># Finally, merge the 2 clean lockfiles, for keeping just 1 for next iteration</span>
+$<span class="w"> </span>conan<span class="w"> </span>lock<span class="w"> </span>merge<span class="w"> </span>--lockfile<span class="o">=</span>win.lock<span class="w"> </span>--lockfile<span class="o">=</span>nix.lock<span class="w"> </span>--lockfile-out<span class="o">=</span>final.lock
+$<span class="w"> </span>cat<span class="w"> </span>final.lock
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;0.5&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;requires&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">      </span><span class="s2">&quot;pkgb/0.2&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;pkgawin/0.1&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;pkganix/0.1&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;app1/0.1&quot;</span>
+<span class="w">  </span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -285,7 +411,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 06, 2023.
+      Last updated on Mar 07, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
