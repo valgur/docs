@@ -259,7 +259,7 @@ usage: conan graph info [-h] [-f FORMAT] [-v [V]] [--name NAME]
                         [--package-filter PACKAGE_FILTER] [--deploy DEPLOY]
                         [path]
 
-Compute the dependency graph and shows information about it.
+Compute the dependency graph and show information about it.
 
 positional arguments:
   path                  Path to a folder containing a recipe (conanfile.py or
@@ -369,8 +369,243 @@ optional arguments:
 <p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span> <span class="pre">info</span></code> command shows information about the dependency graph for the recipe specified in <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
+<p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span> <span class="pre">info</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
 change.</p>
+</div>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>.
+$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>myproject_folder
+$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>myproject_folder/conanfile.py
+$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>--requires<span class="o">=</span>hello/1.0@user/channel
+</pre></div>
+</div>
+<p>The output will look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan graph info --require=binutils/2.38 -r=conancenter
+
+...
+
+======== Basic graph information ========
+conanfile:
+  ref: conanfile
+  id: 0
+  recipe: Cli
+  package_id: None
+  prev: None
+  build_id: None
+  binary: None
+  invalid_build: False
+  revision_mode: hash
+  package_type: unknown
+  settings:
+    os: Macos
+    arch: x86_64
+    compiler: apple-clang
+    compiler.cppstd: gnu17
+    compiler.libcxx: libc++
+    compiler.version: 14
+    build_type: Release
+  system_requires:
+  options:
+  recipe_folder: None
+  source_folder: None
+  build_folder: None
+  package_folder: None
+  cpp_info:
+    root:
+      includedirs: [&#39;include&#39;]
+      srcdirs: None
+      libdirs: [&#39;lib&#39;]
+      resdirs: None
+      bindirs: [&#39;bin&#39;]
+      builddirs: None
+      frameworkdirs: None
+      system_libs: None
+      frameworks: None
+      libs: None
+      defines: None
+      cflags: None
+      cxxflags: None
+      sharedlinkflags: None
+      exelinkflags: None
+      objects: None
+      sysroot: None
+      requires: None
+      properties: None
+  label: cli
+  context: host
+  test: False
+  requires:
+    1: binutils/2.38#0dc90586530d3e194d01d17cb70d9461
+binutils/2.38#0dc90586530d3e194d01d17cb70d9461:
+  ref: binutils/2.38#0dc90586530d3e194d01d17cb70d9461
+  id: 1
+  recipe: Cache
+  package_id: 477fd4770fc5cb8ad1e6274f5cf4ef9f9fb055b1
+  prev: None
+  build_id: None
+  binary: Invalid
+  invalid_build: False
+  url: https://github.com/conan-io/conan-center-index/
+  license: GPL-2.0-or-later
+  description: The GNU Binutils are a collection of binary tools.
+  topics: (&#39;gnu&#39;, &#39;ld&#39;, &#39;linker&#39;, &#39;as&#39;, &#39;assembler&#39;, &#39;objcopy&#39;, &#39;objdump&#39;)
+  homepage: https://www.gnu.org/software/binutils
+  revision_mode: hash
+  package_type: application
+  settings:
+    os: Macos
+    arch: x86_64
+    compiler: apple-clang
+    compiler.version: 14
+    build_type: Release
+  system_requires:
+  options:
+    multilib: True
+    prefix: x86_64-apple-darwin-
+    target_arch: x86_64
+    target_os: Macos
+    target_triplet: x86_64-apple-darwin
+    with_libquadmath: True
+  recipe_folder: /Users/barbarian/.conan2/p/binut53bd9b3ee9490/e
+  source_folder: None
+  build_folder: None
+  package_folder: None
+  cpp_info:
+    root:
+      includedirs: [&#39;include&#39;]
+      srcdirs: None
+      libdirs: [&#39;lib&#39;]
+      resdirs: None
+      bindirs: [&#39;bin&#39;]
+      builddirs: None
+      frameworkdirs: None
+      system_libs: None
+      frameworks: None
+      libs: None
+      defines: None
+      cflags: None
+      cxxflags: None
+      sharedlinkflags: None
+      exelinkflags: None
+      objects: None
+      sysroot: None
+      requires: None
+      properties: None
+  label: binutils/2.38
+  context: host
+  test: False
+  requires:
+    2: zlib/1.2.13#13c96f538b52e1600c40b88994de240f
+zlib/1.2.13#13c96f538b52e1600c40b88994de240f:
+  ref: zlib/1.2.13#13c96f538b52e1600c40b88994de240f
+  id: 2
+  recipe: Cache
+  package_id: 6fe7fa69f760aee504e0be85c12b2327c716f9e7
+  prev: None
+  build_id: None
+  binary: Skip
+  invalid_build: False
+  url: https://github.com/conan-io/conan-center-index
+  license: Zlib
+  description: A Massively Spiffy Yet Delicately Unobtrusive Compression Library (Also Free, Not to Mention Unencumbered by Patents)
+  topics: (&#39;zlib&#39;, &#39;compression&#39;)
+  homepage: https://zlib.net
+  revision_mode: hash
+  package_type: static-library
+  settings:
+    os: Macos
+    arch: x86_64
+    compiler: apple-clang
+    compiler.version: 14
+    build_type: Release
+  system_requires:
+  options:
+    fPIC: True
+    shared: False
+  recipe_folder: /Users/barbarian/.conan2/p/zlib9f370ca971ddf/e
+  source_folder: None
+  build_folder: None
+  package_folder: None
+  cpp_info:
+    root:
+      includedirs: [&#39;include&#39;]
+      srcdirs: None
+      libdirs: [&#39;lib&#39;]
+      resdirs: None
+      bindirs: [&#39;bin&#39;]
+      builddirs: None
+      frameworkdirs: None
+      system_libs: None
+      frameworks: None
+      libs: None
+      defines: None
+      cflags: None
+      cxxflags: None
+      sharedlinkflags: None
+      exelinkflags: None
+      objects: None
+      sysroot: None
+      requires: None
+      properties: None
+  label: zlib/1.2.13
+  context: host
+  test: False
+  requires:
+</pre></div>
+</div>
+<p><strong class="command">conan graph info</strong> builds the complete dependency graph, like <strong class="command">conan install</strong> does.
+The main difference is that it doesn’t try to install or build the binaries, but the package recipes
+will be retrieved from remotes if necessary.</p>
+<p>It is very important to note that the <strong class="command">conan graph info</strong> command outputs the dependency graph for a
+given configuration (settings, options), as the dependency graph can be different for different
+configurations. This means that the input to the <strong class="command">conan graph info</strong> command
+is the same as <strong class="command">conan install</strong>, the configuration can be specified directly with settings and options,
+or using profiles,and querying the graph of a specific recipe is possible by using the <code class="docutils literal notranslate"><span class="pre">--requires</span></code> flag as shown above.</p>
+<p>You can additionally filter the output, both by filtering by fields (<code class="docutils literal notranslate"><span class="pre">--filter</span></code>) and by package (<code class="docutils literal notranslate"><span class="pre">--filter-package</span></code>).
+For example, to get the options of zlib, the following command could be run:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan graph info --require=binutils/2.38 -r=conancenter --filter=options --package-filter=&quot;zlib*&quot;
+
+...
+
+======== Basic graph information ========
+zlib/1.2.13#13c96f538b52e1600c40b88994de240f:
+  ref: zlib/1.2.13#13c96f538b52e1600c40b88994de240f
+  options:
+    fPIC: True
+    shared: False
+</pre></div>
+</div>
+<p>You can generate a graph of your dependencies in <code class="docutils literal notranslate"><span class="pre">dot</span></code> or <code class="docutils literal notranslate"><span class="pre">html</span></code> formats:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>--require<span class="o">=</span>binutils/2.38<span class="w"> </span>-r<span class="o">=</span>conancenter<span class="w"> </span>--format<span class="o">=</span>dot<span class="w"> </span>&gt;<span class="w"> </span>graph.dot
+</pre></div>
+</div>
+<p>Which generates the following file:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><strong>graph.dot</strong></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-dot notranslate"><div class="highlight"><pre><span></span><span class="k">digraph</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;cli&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">&quot;binutils/2.38&quot;</span>
+<span class="w">        </span><span class="nt">&quot;binutils/2.38&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">&quot;zlib/1.2.13&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="graphviz"><object data="../../../_images/graphviz-1029d6e0291c426aa04f9d8d3aa7a2a2d2896279.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph {
+        &quot;cli&quot; -&gt; &quot;binutils/2.38&quot;
+        &quot;binutils/2.38&quot; -&gt; &quot;zlib/1.2.13&quot;
+}</p></object></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If using <code class="docutils literal notranslate"><span class="pre">format=html</span></code>, the generated html contains links to a third-party resource,
+the <em>vis.js</em> library with 2 files: <em>vis.min.js</em>, <em>vis.min.css</em>.
+By default they are retrieved from Cloudfare. However, for environments without internet connection,
+you’ll need to create a template for the file and place it in <code class="docutils literal notranslate"><span class="pre">CONAN_HOME/templates/graph.html</span></code>.
+to point to a local version of these files:</p>
+<ul class="simple">
+<li><em>vis.min.js</em>: “<a class="reference external" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.js">https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.js</a>”</li>
+<li><em>vis.min.css</em>: “<a class="reference external" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css">https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css</a>”</li>
+</ul>
+<p class="last">You can use the template found in <code class="docutils literal notranslate"><span class="pre">cli/formatters/graph/info_graph.html</span></code> as a basis for your own.</p>
 </div>
 </div>
 
