@@ -368,6 +368,37 @@ function, Conan will include automatically these files.</p>
     <span class="n">cmake</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
 </pre></div>
 </div>
+<div class="section" id="check-components-exist">
+<h4>check_components_exist<a class="headerlink" href="#check-components-exist" title="Permalink to this headline">¶</a></h4>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">check_components_exist</span></code> attribute is <strong>experimental</strong> and subject to change.</p>
+</div>
+<p>This property is <code class="docutils literal notranslate"><span class="pre">False</span></code> by default. Use this property if you want to add a check when
+you require specifying components in the consumers’ <code class="docutils literal notranslate"><span class="pre">find_package()</span></code>. For example, if we
+are consuming a Conan package like Boost that declares several components. If we set the
+attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the <code class="docutils literal notranslate"><span class="pre">find_package()</span></code> call of the consumer, will check that the
+required components exist and raise an error otherwise. You can set this attribute in the
+<code class="docutils literal notranslate"><span class="pre">generate()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;boost/1.81.0&quot;</span>
+
+<span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">deps</span> <span class="o">=</span> <span class="n">CMakeDeps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">deps</span><span class="o">.</span><span class="n">check_components_exist</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">deps</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, when consuming Boost the <code class="docutils literal notranslate"><span class="pre">find_package()</span></code> will raise an error as <cite>fakecomp</cite> does
+not exist:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cmake_minimum_required(VERSION 3.15)
+...
+find_package(Boost COMPONENTS random regex fakecomp REQUIRED)
+...
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="reference">
@@ -602,7 +633,7 @@ cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span c
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 07, 2023.
+      Last updated on Mar 08, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
