@@ -227,14 +227,14 @@ With Python 3, the built-in module <code class="docutils literal notranslate"><s
 If not using a <strong>virtualenv</strong> it is possible that conan dependencies will conflict with previously existing dependencies,
 especially if you are using Python for other purposes.</li>
 <li>In <strong>OSX</strong>, especially the latest versions that may have <strong>System Integrity Protection</strong>, pip may fail. Try using virtualenvs, or
-install with another user <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">conan</span></code>.</li>
+install it to the Python user install directory with <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">conan</span></code>.</li>
 <li>Some Linux distros, such as Linux Mint, require a restart (shell restart, or logout/system if not enough) after
 installation, so Conan is found in the path.</li>
 </ul>
 </div>
 <div class="section" id="known-installation-issues-with-pip">
 <h3>Known installation issues with pip<a class="headerlink" href="#known-installation-issues-with-pip" title="Permalink to this headline">¶</a></h3>
-<p>When Conan is installed with <strong class="command">pip install --user &lt;username&gt;</strong>, a new directory is usually created for it. However, the directory is not appended automatically to the <cite>PATH</cite> and the <strong class="command">conan</strong> commands do not work. This can usually be solved by restarting the session of the terminal or running the following command:</p>
+<p>When Conan is installed with <strong class="command">pip install --user conan</strong>, a new directory is usually created for it. However, the directory is not appended automatically to the <cite>PATH</cite> and the <strong class="command">conan</strong> commands do not work. This can usually be solved by restarting the session of the terminal or running the following command:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.profile
 </pre></div>
@@ -315,7 +315,7 @@ $<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 08, 2023.
+      Last updated on Mar 09, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
