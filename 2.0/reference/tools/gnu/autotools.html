@@ -344,14 +344,19 @@ is added to the call if the passed value is <code class="docutils literal notran
 
 <dl class="method">
 <dt id="conan.tools.gnu.autotools.Autotools.autoreconf">
-<code class="descname">autoreconf</code><span class="sig-paren">(</span><em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.gnu.autotools.Autotools.autoreconf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">autoreconf</code><span class="sig-paren">(</span><em>build_script_folder=None</em>, <em>args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.gnu.autotools.Autotools.autoreconf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call <code class="docutils literal notranslate"><span class="pre">autoreconf</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of arguments to use for the
-<code class="docutils literal notranslate"><span class="pre">autoreconf</span></code> call.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>args</strong> – (Optional, Defaulted to <code class="docutils literal notranslate"><span class="pre">None</span></code>): List of arguments to use for the
+<code class="docutils literal notranslate"><span class="pre">autoreconf</span></code> call.</li>
+<li><strong>build_script_folder</strong> – Subfolder where the <cite>configure</cite> script is located. If not specified
+conanfile.source_folder is used.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -468,7 +473,7 @@ when building.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 09, 2023.
+      Last updated on Mar 11, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
