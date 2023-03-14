@@ -37,8 +37,6 @@
   
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
-    <link rel="stylesheet" href="../../_static/_static/graphviz.css" type="text/css" />
-  
 
   
 
@@ -261,10 +259,38 @@ optional arguments:
                         -vvv or -vtrace
   --only-recipe         Download only the recipe/s, not the binary packages.
   -p PACKAGE_QUERY, --package-query PACKAGE_QUERY
-                        Only upload packages matching a specific query. e.g:
+                        Only download packages matching a specific query. e.g:
                         os=Windows AND (arch=x86 OR compiler=gcc)
   -r REMOTE, --remote REMOTE
                         Download from this specific remote
+</pre></div>
+</div>
+<p>Downloads recipe and binaries to the local cache from the specified remote.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please, be aware that <strong class="command">conan download</strong> unlike <strong class="command">conan install</strong>, will not
+download any of the transitive dependencies of the downloaded package.</p>
+</div>
+<p>You can use patterns to download specific references just like in other commands like
+<strong class="command">conan list</strong> or <strong class="command">conan upload</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># download latest revision and packages for all openssl versions in foo remote</span>
+$<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;openssl/*&quot;</span><span class="w"> </span>-r<span class="w"> </span>foo
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong class="command">conan download</strong> will download only the latest revision by default. If you want
+to download more revisions other than the latest one you can use wildcards in the
+revisions part of the reference pattern argument</p>
+</div>
+<p>You may also just download recipes (in this case selecting all the revisions in the
+pattern, not just the latest one):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># download all recipe revisions for zlib/1.2.13</span>
+$<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;zlib/1.2.13#*&quot;</span><span class="w"> </span>-r<span class="w"> </span>foo<span class="w"> </span>--only-recipe
+</pre></div>
+</div>
+<p>If you just want to download the packages belonging to a specific setting, use the <code class="docutils literal notranslate"><span class="pre">--package-query</span></code> argument:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;zlib/1.2.13#*&quot;</span><span class="w"> </span>-r<span class="w"> </span>foo<span class="w"> </span>--package-query<span class="o">=</span><span class="s2">&quot;os=Linux and arch=x86&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -292,7 +318,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 11, 2023.
+      Last updated on Mar 14, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -703,7 +729,6 @@ optional arguments:
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 

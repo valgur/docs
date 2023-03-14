@@ -37,8 +37,6 @@
   
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
-    <link rel="stylesheet" href="../../_static/_static/graphviz.css" type="text/css" />
-  
 
   
 
@@ -229,13 +227,13 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>examp
 library, an <code class="docutils literal notranslate"><span class="pre">engine</span></code> package emulating some game engine, and a <code class="docutils literal notranslate"><span class="pre">sound32</span></code> package, emulating a sound library for
 some 32bits systems. These packages are actually most empty, they do not build any code, but they are good to learn
 the concepts of lockfiles.</p>
-<div align="center" class="align-center"><div class="graphviz"><object data="../../_images/graphviz-8af47a14c61e2c80a08970d1d53665718f3e52a4.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph lockfiles {
+<div align="center" class="align-center"><object data="../../_images/graphviz-9dba247545cdd811ec811910737b286bce8a4f58.svg" type="image/svg+xml">
+            <p class="warning">digraph lockfiles {
     node [fillcolor=&quot;lightskyblue&quot;, style=filled, shape=box]
     rankdir=&quot;BT&quot;
     &quot;engine/1.0&quot; -&gt; &quot;matrix/1.0&quot;;
     &quot;engine/1.0&quot; -&gt; &quot;sound32/1.0&quot; [label=&quot;if arch==x86&quot;];
-}</p></object></div>
+}</p></object>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -516,7 +514,7 @@ most use cases, and should only be used in extreme and problematic cases.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 11, 2023.
+      Last updated on Mar 14, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -927,7 +925,6 @@ most use cases, and should only be used in extreme and problematic cases.</li>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 

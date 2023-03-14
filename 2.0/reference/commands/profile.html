@@ -37,8 +37,6 @@
   
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
-    <link rel="stylesheet" href="../../_static/_static/graphviz.css" type="text/css" />
-  
 
   
 
@@ -259,6 +257,42 @@ optional arguments:
 to adapt to latest tools, latest versions, or other changes in the environment.
 See <a class="reference internal" href="../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
 </div>
+<p>You can create a new auto-detected profile for your configuration using:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>auto-detected profile</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile detect
+Found apple-clang 14.0
+apple-clang&gt;=13, using the major as version
+Detected profile:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=apple-clang
+compiler.cppstd=gnu17
+compiler.libcxx=libc++
+compiler.version=14
+os=Macos
+
+WARN: This profile is a guess of your environment, please check it.
+WARN: Defaulted to cppstd=&#39;gnu17&#39; for apple-clang.
+WARN: The output of this command is not guaranteed to be stable and can change in future Conan versions.
+WARN: Use your own profile files for stability.
+Saving detected profile to /Users/barbarians/.conan2/profiles/default
+</pre></div>
+</div>
+</div>
+<p>Be aware that if the profile already exists you have to use <code class="docutils literal notranslate"><span class="pre">--force</span></code> to overwrite it. Otherwise it will fail</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>force overwriting already existing default profile</em></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile detect
+ERROR: Profile &#39;/Users/carlosz/.conan2/profiles/default&#39; already exists
+$ conan profile detect --force
+Found apple-clang 14.0
+...
+Saving detected profile to /Users/carlosz/.conan2/profiles/default
+</pre></div>
+</div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>Best practices</strong>
@@ -285,65 +319,36 @@ optional arguments:
                         -vvv or -vtrace
 </pre></div>
 </div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>force overwriting already existing default profile</em></span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile list
+Profiles found in the cache:
+default
+ios_base
+ios_simulator
+clang_15
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="conan-profile-path">
 <h2>conan profile path<a class="headerlink" href="#conan-profile-path" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile path -h
-usage: conan profile path [-h] [-v [V]] [-o OPTIONS_HOST]
-                          [-o:b OPTIONS_BUILD] [-o:h OPTIONS_HOST]
-                          [-pr PROFILE_HOST] [-pr:b PROFILE_BUILD]
-                          [-pr:h PROFILE_HOST] [-s SETTINGS_HOST]
-                          [-s:b SETTINGS_BUILD] [-s:h SETTINGS_HOST]
-                          [-c CONF_HOST] [-c:b CONF_BUILD] [-c:h CONF_HOST]
-                          name
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile path [-h] [-v [V]] name
 
 Show profile path location.
 
 positional arguments:
-  name                  Profile name
+name        Profile name
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -v [V]                Level of detail of the output. Valid options from less
-                        verbose to more verbose: -vquiet, -verror, -vwarning,
-                        -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
-                        -vvv or -vtrace
-  -o OPTIONS_HOST, --options OPTIONS_HOST
-                        Define options values (host machine), e.g.: -o
-                        Pkg:with_qt=true
-  -o:b OPTIONS_BUILD, --options:build OPTIONS_BUILD
-                        Define options values (build machine), e.g.: -o:b
-                        Pkg:with_qt=true
-  -o:h OPTIONS_HOST, --options:host OPTIONS_HOST
-                        Define options values (host machine), e.g.: -o:h
-                        Pkg:with_qt=true
-  -pr PROFILE_HOST, --profile PROFILE_HOST
-                        Apply the specified profile to the host machine
-  -pr:b PROFILE_BUILD, --profile:build PROFILE_BUILD
-                        Apply the specified profile to the build machine
-  -pr:h PROFILE_HOST, --profile:host PROFILE_HOST
-                        Apply the specified profile to the host machine
-  -s SETTINGS_HOST, --settings SETTINGS_HOST
-                        Settings to build the package, overwriting the
-                        defaults (host machine). e.g.: -s compiler=gcc
-  -s:b SETTINGS_BUILD, --settings:build SETTINGS_BUILD
-                        Settings to build the package, overwriting the
-                        defaults (build machine). e.g.: -s:b compiler=gcc
-  -s:h SETTINGS_HOST, --settings:host SETTINGS_HOST
-                        Settings to build the package, overwriting the
-                        defaults (host machine). e.g.: -s:h compiler=gcc
-  -c CONF_HOST, --conf CONF_HOST
-                        Configuration to build the package, overwriting the
-                        defaults (host machine). e.g.: -c
-                        tools.cmake.cmaketoolchain:generator=Xcode
-  -c:b CONF_BUILD, --conf:build CONF_BUILD
-                        Configuration to build the package, overwriting the
-                        defaults (build machine). e.g.: -c:b
-                        tools.cmake.cmaketoolchain:generator=Xcode
-  -c:h CONF_HOST, --conf:host CONF_HOST
-                        Configuration to build the package, overwriting the
-                        defaults (host machine). e.g.: -c:h
-                        tools.cmake.cmaketoolchain:generator=Xcod
+-h, --help  show this help message and exit
+-v [V]      Level of detail of the output. Valid options from less verbose to more verbose: -vquiet, -verror, -vwarning,
+            -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug, -vvv or -vtrace
+</pre></div>
+</div>
+<p>Use to get the profile location in your <code class="docutils literal notranslate"><span class="pre">[CONAN_HOME]</span></code> folder:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile path default
+/Users/barbarians/.conan2/profiles/default
 </pre></div>
 </div>
 </div>
@@ -403,6 +408,60 @@ optional arguments:
                         tools.cmake.cmaketoolchain:generator=Xcode
 </pre></div>
 </div>
+<p>Use <strong class="command">conan profile show</strong> to compute the resulting build and host profiles from
+the command line arguments. For example, combining different options and settings with the
+default profile or with any other profile using the <code class="docutils literal notranslate"><span class="pre">pr:b</span></code> or <code class="docutils literal notranslate"><span class="pre">pr:h</span></code> arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile show -s:h build_type=Debug -o:h shared=False
+Host profile:
+[settings]
+arch=x86_64
+<span class="hll">build_type=Debug
+</span>compiler=apple-clang
+compiler.cppstd=gnu17
+compiler.libcxx=libc++
+compiler.version=14
+os=Macos
+[options]
+<span class="hll">shared=False
+</span>[conf]
+
+
+Build profile:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=apple-clang
+compiler.cppstd=gnu17
+compiler.libcxx=libc++
+compiler.version=14
+os=Macos
+[conf]
+</pre></div>
+</div>
+<p>It’s also useful to show the result of the evaluation of <a class="reference internal" href="../config_files/profiles.html#reference-config-files-profiles-rendering"><span class="std std-ref">jinja2 templates in the
+profiles</span></a>. For example, a profile like this:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[settings]
+os = {{ {&quot;Darwin&quot;: &quot;Macos&quot;}.get(platform.system(), platform.system()) }}
+</pre></div>
+</div>
+</div>
+<p>Check the evaluated profile:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan profile show -pr:h=myprofile
+Host profile:
+[settings]
+os=Macos
+[conf]
+...
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>Read more about <a class="reference internal" href="../config_files/profiles.html#reference-config-files-profiles"><span class="std std-ref">profiles</span></a></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -429,7 +488,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 11, 2023.
+      Last updated on Mar 14, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -840,7 +899,6 @@ optional arguments:
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 

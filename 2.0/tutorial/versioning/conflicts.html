@@ -37,8 +37,6 @@
   
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
-    <link rel="stylesheet" href="../../_static/_static/graphviz.css" type="text/css" />
-  
 
   
 
@@ -231,15 +229,15 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>examp
 the intro credits and functionality for the videogame that depends on <code class="docutils literal notranslate"><span class="pre">matrix/1.1</span></code> and finally the
 <code class="docutils literal notranslate"><span class="pre">game</span></code> recipe that depends simultaneously on <code class="docutils literal notranslate"><span class="pre">engine/1.0</span></code> and <code class="docutils literal notranslate"><span class="pre">intro/1.0</span></code>. All these packages
 are actually empty, but they are enough to produce the conflicts.</p>
-<div align="center" class="align-center"><div class="graphviz"><object data="../../_images/graphviz-25640955a58208c4a8abb8821375a14f47c5122f.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph conflict {
+<div align="center" class="align-center"><object data="../../_images/graphviz-8d175e0a2a19aface7261bfaa7626b0226c4ef3c.svg" type="image/svg+xml">
+            <p class="warning">digraph conflict {
     node [fillcolor=&quot;lightskyblue&quot;, style=filled, shape=box]
     rankdir=&quot;BT&quot;
     &quot;game/1.0&quot; -&gt; &quot;engine/1.0&quot; -&gt; &quot;matrix/1.0&quot;;
     &quot;game/1.0&quot; -&gt; &quot;intro/1.0&quot; -&gt; &quot;matrix/1.1&quot;;
     &quot;matrix/1.0&quot; [fillcolor=&quot;orange&quot;];
     &quot;matrix/1.1&quot; [fillcolor=&quot;orange&quot;];
-}</p></object></div>
+}</p></object>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -299,8 +297,8 @@ Requirements
 <span class="w">    </span>matrix/1.1#905c3f0babc520684c84127378fefdd0<span class="w"> </span>-<span class="w"> </span>Cache
 </pre></div>
 </div>
-<div align="center" class="align-center"><div class="graphviz"><object data="../../_images/graphviz-81c63434939b8fa86a10d38ca3edc2fece907a0e.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph conflict {
+<div align="center" class="align-center"><object data="../../_images/graphviz-bec83d0873d0a6a052d7aecae838f7ffba0b04f0.svg" type="image/svg+xml">
+            <p class="warning">digraph conflict {
     node [fillcolor=&quot;lightskyblue&quot;, style=filled, shape=box]
     rankdir=&quot;BT&quot;
     &quot;game/1.0&quot; -&gt; &quot;engine/1.0&quot; -&gt; &quot;matrix/1.1&quot;;
@@ -311,7 +309,7 @@ Requirements
         &quot;matrix/1.1&quot; -&gt; &quot;matrix/1.0&quot; ;
         rankdir = LR;
     }
-}</p></object></div>
+}</p></object>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -342,8 +340,8 @@ binary for <code class="docutils literal notranslate"><span class="pre">engine/1
 </pre></div>
 </div>
 </div>
-<div align="center" class="align-center"><div class="graphviz"><object data="../../_images/graphviz-1e0749d0f2f51c081234bb0ceeee207bc3358b96.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph conflict {
+<div align="center" class="align-center"><object data="../../_images/graphviz-020745db1013cf68fa10e66732953012a8d93a84.svg" type="image/svg+xml">
+            <p class="warning">digraph conflict {
     node [fillcolor=&quot;lightskyblue&quot;, style=filled, shape=box]
     rankdir=&quot;BT&quot;
     &quot;game/1.0&quot; -&gt; &quot;engine/1.0&quot; -&gt; &quot;matrix/1.0&quot;;
@@ -358,7 +356,7 @@ binary for <code class="docutils literal notranslate"><span class="pre">engine/1
         &quot;matrix/1.1&quot; -&gt; &quot;matrix/1.2&quot; ;
         rankdir = LR;
     }
-}</p></object></div>
+}</p></object>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -395,8 +393,8 @@ Requirements
 <span class="w">    </span>matrix/1.2#905c3f0babc520684c84127378fefdd0<span class="w"> </span>-<span class="w"> </span>Cache
 </pre></div>
 </div>
-<div align="center" class="align-center"><div class="graphviz"><object data="../../_images/graphviz-317dc6a5b8993cd90a4082a76c6abfa66e38b398.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph conflict {
+<div align="center" class="align-center"><object data="../../_images/graphviz-bab905e8ce28d2d592c105860f21e935428ee39b.svg" type="image/svg+xml">
+            <p class="warning">digraph conflict {
     node [fillcolor=&quot;lightskyblue&quot;, style=filled, shape=box]
     rankdir=&quot;BT&quot;
     &quot;game/1.0&quot; -&gt; &quot;engine/1.0&quot; -&gt; &quot;matrix/1.2&quot;;
@@ -408,7 +406,7 @@ Requirements
         &quot;matrix/1.2&quot; -&gt; &quot;matrix/1.0&quot; -&gt; &quot;matrix/1.1&quot; ;
         rankdir = LR;
     }
-}</p></object></div>
+}</p></object>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -532,7 +530,7 @@ can be defined better in profiles better.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 11, 2023.
+      Last updated on Mar 14, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -943,7 +941,6 @@ can be defined better in profiles better.</p>
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 

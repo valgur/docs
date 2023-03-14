@@ -37,8 +37,6 @@
   
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
-    <link rel="stylesheet" href="../../_static/_static/graphviz.css" type="text/css" />
-  
 
   
 
@@ -357,7 +355,8 @@ and renders the template, which must result in a standard tools-configuration te
 </pre></div>
 </div>
 </div></blockquote>
-<p>The Python packages passed to render the template are <code class="docutils literal notranslate"><span class="pre">os</span></code> and <code class="docutils literal notranslate"><span class="pre">platform</span></code> for all platforms and <code class="docutils literal notranslate"><span class="pre">distro</span></code> in Linux platforms.</p>
+<p>The Python packages passed to render the template are <code class="docutils literal notranslate"><span class="pre">os</span></code> and <code class="docutils literal notranslate"><span class="pre">platform</span></code> for all platforms and <code class="docutils literal notranslate"><span class="pre">distro</span></code> in Linux platforms.
+Additionally, the variables <code class="docutils literal notranslate"><span class="pre">conan_version</span></code> and <code class="docutils literal notranslate"><span class="pre">conan_home_folder</span></code> are also available.</p>
 </div>
 <div class="section" id="configuration-data-types">
 <h2>Configuration data types<a class="headerlink" href="#configuration-data-types" title="Permalink to this headline">¶</a></h2>
@@ -469,7 +468,7 @@ core.net.http:client_cert=(&#39;/path/client.cert&#39;, &#39;/path/client.key&#3
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 11, 2023.
+      Last updated on Mar 14, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -880,7 +879,6 @@ core.net.http:client_cert=(&#39;/path/client.cert&#39;, &#39;/path/client.key&#3
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 
