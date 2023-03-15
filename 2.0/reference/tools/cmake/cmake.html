@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMake &mdash; conan 2.0.1 documentation</title>
+  <title>CMake &mdash; conan 2.0.2 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.1 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.2 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.cmake" href="../cmake.html"/>
         <link rel="next" title="cmake_layout" href="cmake_layout.html"/>
         <link rel="prev" title="CMakeToolchain" href="cmaketoolchain.html"/>
@@ -386,7 +386,7 @@ time.</li>
 <h3>conf<a class="headerlink" href="#conf" title="Permalink to this headline">¶</a></h3>
 <p>CMake() helper is affected by these <code class="docutils literal notranslate"><span class="pre">[conf]</span></code> variables:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">tools.microsoft.msbuild:verbosity</span></code> will accept one of <code class="docutils literal notranslate"><span class="pre">&quot;Quiet&quot;,</span> <span class="pre">&quot;Minimal&quot;,</span> <span class="pre">&quot;Normal&quot;,</span> <span class="pre">&quot;Detailed&quot;,</span> <span class="pre">&quot;Diagnostic&quot;</span></code> to be passed
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:verbosity</span></code> will accept one of <code class="docutils literal notranslate"><span class="pre">'quiet',</span> <span class="pre">'error',</span> <span class="pre">'warning',</span> <span class="pre">'notice',</span> <span class="pre">'status',</span> <span class="pre">'verbose',</span> <span class="pre">'normal',</span> <span class="pre">'debug',</span> <span class="pre">'v',</span> <span class="pre">'trace',</span> <span class="pre">'vv'</span></code> to be passed
 to the <code class="docutils literal notranslate"><span class="pre">CMake.build()</span></code> command, when a Visual Studio generator (MSBuild build system) is being used for CMake. It is passed as
 an argument to the underlying build system via the call <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--build</span> <span class="pre">.</span> <span class="pre">--config</span> <span class="pre">Release</span> <span class="pre">--</span> <span class="pre">/verbosity:Diagnostic</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">tools.build:jobs</span></code> argument for the <code class="docutils literal notranslate"><span class="pre">--jobs</span></code> parameter when running Ninja generator.</li>
@@ -420,7 +420,7 @@ an argument to the underlying build system via the call <code class="docutils li
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 14, 2023.
+      Last updated on Mar 15, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -821,7 +821,7 @@ an argument to the underlying build system via the call <code class="docutils li
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.1',
+            VERSION:'2.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

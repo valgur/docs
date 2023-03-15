@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan export-pkg &mdash; conan 2.0.1 documentation</title>
+  <title>conan export-pkg &mdash; conan 2.0.2 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.2 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan new" href="new.html"/>
         <link rel="prev" title="conan export" href="export.html"/>
@@ -235,19 +235,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="conan-export-pkg">
 <span id="reference-commands-export-pkg"></span><h1>conan export-pkg<a class="headerlink" href="#conan-export-pkg" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan export-pkg -h
-usage: conan export-pkg [-h] [-f FORMAT] [-v [V]]
-                        [-of OUTPUT_FOLDER] [--build-require]
-                        [-tf TEST_FOLDER] [--name NAME] [--version VERSION]
-                        [--user USER] [--channel CHANNEL] [-l LOCKFILE]
-                        [--lockfile-partial] [--lockfile-out LOCKFILE_OUT]
-                        [--lockfile-packages] [--lockfile-clean]
-                        [-o OPTIONS_HOST] [-o:b OPTIONS_BUILD]
-                        [-o:h OPTIONS_HOST] [-pr PROFILE_HOST]
-                        [-pr:b PROFILE_BUILD] [-pr:h PROFILE_HOST]
-                        [-s SETTINGS_HOST] [-s:b SETTINGS_BUILD]
-                        [-s:h SETTINGS_HOST] [-c CONF_HOST] [-c:b CONF_BUILD]
-                        [-c:h CONF_HOST]
-                        path
+usage: conan export-pkg [-h] [-f FORMAT] [-v [V]] [-of OUTPUT_FOLDER] [--build-require] [-tf TEST_FOLDER] [-sb] [-r REMOTE | -nr] [--name NAME]
+                    [--version VERSION] [--user USER] [--channel CHANNEL] [-l LOCKFILE] [--lockfile-partial] [--lockfile-out LOCKFILE_OUT]
+                    [--lockfile-packages] [--lockfile-clean] [-o OPTIONS_HOST] [-o:b OPTIONS_BUILD] [-o:h OPTIONS_HOST] [-pr PROFILE_HOST]
+                    [-pr:b PROFILE_BUILD] [-pr:h PROFILE_HOST] [-s SETTINGS_HOST] [-s:b SETTINGS_BUILD] [-s:h SETTINGS_HOST] [-c CONF_HOST]
+                    [-c:b CONF_BUILD] [-c:h CONF_HOST]
+                    path
 
 Create a package directly from pre-compiled binaries.
 
@@ -258,39 +251,34 @@ optional arguments:
   -h, --help            show this help message and exit
   -f FORMAT, --format FORMAT
                         Select the output format: json
-  -v [V]                Level of detail of the output. Valid options from less
-                        verbose to more verbose: -vquiet, -verror, -vwarning,
-                        -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
-                        -vvv or -vtrace
+  -v [V]                Level of detail of the output. Valid options from less verbose to more verbose: -vquiet, -verror, -vwarning, -vnotice, -vstatus, -v
+                        or -vverbose, -vv or -vdebug, -vvv or -vtrace
   -of OUTPUT_FOLDER, --output-folder OUTPUT_FOLDER
                         The root output folder for generated and build files
   --build-require       Whether the provided reference is a build-require
   -tf TEST_FOLDER, --test-folder TEST_FOLDER
-                        Alternative test folder name. By default it is
-                        &quot;test_package&quot;. Use &quot;&quot; to skip the test stage
+                        Alternative test folder name. By default it is &quot;test_package&quot;. Use &quot;&quot; to skip the test stage
+  -sb, --skip-binaries  Skip installing dependencies binaries
+  -r REMOTE, --remote REMOTE
+                        Look in the specified remote or remotes server
+  -nr, --no-remote      Do not use remote, resolve exclusively in the cache
   --name NAME           Provide a package name if not specified in conanfile
-  --version VERSION     Provide a package version if not specified in
-                        conanfile
+  --version VERSION     Provide a package version if not specified in conanfile
   --user USER           Provide a user if not specified in conanfile
   --channel CHANNEL     Provide a channel if not specified in conanfile
   -l LOCKFILE, --lockfile LOCKFILE
-                        Path to a lockfile. Use --lockfile=&quot;&quot; to avoid
-                        automatic use of existing &#39;conan.lock&#39; file
-  --lockfile-partial    Do not raise an error if some dependency is not found
-                        in lockfile
+                        Path to a lockfile. Use --lockfile=&quot;&quot; to avoid automatic use of existing &#39;conan.lock&#39; file
+  --lockfile-partial    Do not raise an error if some dependency is not found in lockfile
   --lockfile-out LOCKFILE_OUT
                         Filename of the updated lockfile
   --lockfile-packages   Lock package-id and package-revision information
   --lockfile-clean      Remove unused entries from the lockfile
   -o OPTIONS_HOST, --options OPTIONS_HOST
-                        Define options values (host machine), e.g.: -o
-                        Pkg:with_qt=true
+                        Define options values (host machine), e.g.: -o Pkg:with_qt=true
   -o:b OPTIONS_BUILD, --options:build OPTIONS_BUILD
-                        Define options values (build machine), e.g.: -o:b
-                        Pkg:with_qt=true
+                        Define options values (build machine), e.g.: -o:b Pkg:with_qt=true
   -o:h OPTIONS_HOST, --options:host OPTIONS_HOST
-                        Define options values (host machine), e.g.: -o:h
-                        Pkg:with_qt=true
+                        Define options values (host machine), e.g.: -o:h Pkg:with_qt=true
   -pr PROFILE_HOST, --profile PROFILE_HOST
                         Apply the specified profile to the host machine
   -pr:b PROFILE_BUILD, --profile:build PROFILE_BUILD
@@ -298,28 +286,25 @@ optional arguments:
   -pr:h PROFILE_HOST, --profile:host PROFILE_HOST
                         Apply the specified profile to the host machine
   -s SETTINGS_HOST, --settings SETTINGS_HOST
-                        Settings to build the package, overwriting the
-                        defaults (host machine). e.g.: -s compiler=gcc
+                        Settings to build the package, overwriting the defaults (host machine). e.g.: -s compiler=gcc
   -s:b SETTINGS_BUILD, --settings:build SETTINGS_BUILD
-                        Settings to build the package, overwriting the
-                        defaults (build machine). e.g.: -s:b compiler=gcc
+                        Settings to build the package, overwriting the defaults (build machine). e.g.: -s:b compiler=gcc
   -s:h SETTINGS_HOST, --settings:host SETTINGS_HOST
-                        Settings to build the package, overwriting the
-                        defaults (host machine). e.g.: -s:h compiler=gcc
+                        Settings to build the package, overwriting the defaults (host machine). e.g.: -s:h compiler=gcc
   -c CONF_HOST, --conf CONF_HOST
-                        Configuration to build the package, overwriting the
-                        defaults (host machine). e.g.: -c
-                        tools.cmake.cmaketoolchain:generator=Xcode
+                        Configuration to build the package, overwriting the defaults (host machine). e.g.: -c tools.cmake.cmaketoolchain:generator=Xcode
   -c:b CONF_BUILD, --conf:build CONF_BUILD
-                        Configuration to build the package, overwriting the
-                        defaults (build machine). e.g.: -c:b
-                        tools.cmake.cmaketoolchain:generator=Xcode
+                        Configuration to build the package, overwriting the defaults (build machine). e.g.: -c:b tools.cmake.cmaketoolchain:generator=Xcode
   -c:h CONF_HOST, --conf:host CONF_HOST
-                        Configuration to build the package, overwriting the
-                        defaults (host machine). e.g.: -c:h
-                        tools.cmake.cmaketoolchain:generator=Xcode
+                        Configuration to build the package, overwriting the defaults (host machine). e.g.: -c:h tools.cmake.cmaketoolchain:generator=Xcode
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export-pkg</span></code> command creates a package binary directly from pre-compiled binaries in a user folder. This command can be useful in different cases:</p>
+<ul class="simple">
+<li>When creating a package for some closed source or pre-compiled binaries provided by a vendor. In this case, it is not necessary that the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> recipe contains a <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, and providing the <code class="docutils literal notranslate"><span class="pre">package()</span></code> and <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method are enough to package those pre-compiled binaries. In this case the <code class="docutils literal notranslate"><span class="pre">build_policy</span> <span class="pre">=</span> <span class="pre">&quot;never&quot;</span></code> could make sense to indicate it is not possible to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span> <span class="pre">--build=this_pkg</span></code>, as it doesn’t know how to build from sources when it is a dependency.</li>
+<li>When testing some recipe locally in the <a class="reference internal" href="../../tutorial/developing_packages/local_package_development_flow.html#local-package-development-flow"><span class="std std-ref">local development flow</span></a>, it can be used to quickly put the locally built binaries in the cache to make them available to other packages for testing, without needing to go through a full <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> that would be slower.</li>
+</ul>
+<p>In general, it is expected that when <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export-pkg</span></code> executes, the possible Conan dependencies that were necessary to build this package had already been installed via <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code>, so it is not necessary to download dependencies at <code class="docutils literal notranslate"><span class="pre">export-pkg</span></code> time. But if for some reason this is not the case, the command defines <code class="docutils literal notranslate"><span class="pre">--remote</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-remote</span></code> arguments, similar to other commands, as well as the <code class="docutils literal notranslate"><span class="pre">--skip-binaries</span></code> optimization that could save some time installing dependencies binaries if they are not strictly necessary for the current <code class="docutils literal notranslate"><span class="pre">export-pkg</span></code>. But this is the responsibility of the user, as it is possible that such binaries are actually necessary, for example, if a <code class="docutils literal notranslate"><span class="pre">tool_requires</span> <span class="pre">=</span> <span class="pre">&quot;cmake/x.y&quot;</span></code> is used and the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method implements a <code class="docutils literal notranslate"><span class="pre">cmake.install()</span></code> call, this will definitely need the binaries for the dependencies installed in the current machine to execute.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export-pkg</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
@@ -356,7 +341,7 @@ change.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 14, 2023.
+      Last updated on Mar 15, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -757,7 +742,7 @@ change.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.1',
+            VERSION:'2.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

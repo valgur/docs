@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 2.0.1 documentation</title>
+  <title>Attributes &mdash; conan 2.0.2 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.2 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -1117,8 +1117,8 @@ Should be only filled in the <code class="docutils literal notranslate"><span cl
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pkg&quot;</span>
 
     <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;tools.microsoft.msbuild:verbosity&quot;</span><span class="p">,</span> <span class="s2">&quot;Diagnostic&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tools.microsoft.msbuild:verbosity&quot;</span><span class="p">)</span>  <span class="c1"># == &quot;Diagnostic&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="s2">&quot;tools.build:verbosity&quot;</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tools.build:verbosity&quot;</span><span class="p">)</span>  <span class="c1"># == &quot;debug&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;user.myconf.build:ldflags&quot;</span><span class="p">,</span> <span class="s2">&quot;--flag3&quot;</span><span class="p">)</span>  <span class="c1"># == [&quot;--flag1&quot;, &quot;--flag2&quot;, &quot;--flag3&quot;]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;tools.microsoft.msbuildtoolchain:compile_options&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;ExpandAttributedSource&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">conf_info</span><span class="o">.</span><span class="n">unset</span><span class="p">(</span><span class="s2">&quot;tools.microsoft.msbuildtoolchain:compile_options&quot;</span><span class="p">)</span>
@@ -1313,7 +1313,7 @@ to maintain teams of developers and CI machines to use the desired range of vers
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 14, 2023.
+      Last updated on Mar 15, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1714,7 +1714,7 @@ to maintain teams of developers and CI machines to use the desired range of vers
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.1',
+            VERSION:'2.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan list &mdash; conan 2.0.1 documentation</title>
+  <title>conan list &mdash; conan 2.0.2 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.1 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.2 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan lock" href="lock.html"/>
         <link rel="prev" title="conan install" href="install.html"/>
@@ -563,35 +563,12 @@ with the following structure:</p>
 <h2>List html output<a class="headerlink" href="#list-html-output" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span> <span class="pre">...</span> <span class="pre">--format=html</span></code> will return a html output in <code class="docutils literal notranslate"><span class="pre">stdout</span></code> (which can be redirected to a file)
 with the following structure:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan list &quot;zlib/1.2.12#*:*&quot; --format=html
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan list &quot;zlib/1.2.13#*:*#*&quot; --format=html -c &gt; list.html
 </pre></div>
 </div>
 <p>Here is the rendered generated HTML.</p>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>conan list results</title>
-    <script>
-      var list_results = {"Local Cache": {"zlib/1.2.12": {"revisions": {"c2cd5ec484e443e4f01b51ff5370fd11": {"timestamp": 1665747741.12, "packages": {"6fe7fa69f760aee504e0be85c12b2327c716f9e7": {"info": {"settings": {"arch": "x86_64", "build_type": "Release", "compiler": "apple-clang", "compiler.version": "14", "os": "Macos"}, "options": {"fPIC": "True", "shared": "False"}}}}}, "0de8ff7f99079cd07341311c9ead89a2": {"timestamp": 1676913747.767964, "packages": {"6fe7fa69f760aee504e0be85c12b2327c716f9e7": {"info": {"settings": {"arch": "x86_64", "build_type": "Release", "compiler": "apple-clang", "compiler.version": "14", "os": "Macos"}, "options": {"fPIC": "True", "shared": "False"}}}}}}}}};
-      document.addEventListener("DOMContentLoaded", function () {
-        var divContainer = document.getElementById("showResults");
-        divContainer.innerHTML = JSON.stringify(list_results, null, 2);
-      });
-    </script>
-  </head>
-  <body>
-  <pre id="showResults"></pre>
-  </body>
-  <footer>
-    <p>
-      Conan <b>2.0.0</b>
-      <script>
-        document.write(new Date().getFullYear());
-      </script>
-      JFrog LTD. <a href="https://conan.io">https://conan.io</a>
-    </p>
-  </footer>
-</html></div>
+<img alt="../../_images/conan-list-html.png" src="../../_images/conan-list-html.png" />
+</div>
 </div>
 
 
@@ -617,7 +594,7 @@ with the following structure:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 14, 2023.
+      Last updated on Mar 15, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1018,7 +995,7 @@ with the following structure:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.1',
+            VERSION:'2.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
