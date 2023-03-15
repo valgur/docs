@@ -220,13 +220,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="conan-migration-guide-to-2-0">
 <span id="conan2-migration-guide"></span><h1>Conan migration guide to 2.0<a class="headerlink" href="#conan-migration-guide-to-2-0" title="Permalink to this headline">¶</a></h1>
-<p>Conan 2.0.0 <a class="reference external" href="https://pypi.org/project/conan/#history">is already released</a>, you can
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Conan 2.0 <a class="reference external" href="https://pypi.org/project/conan/#history">is already released</a>, you can
 install the latest Conan version from PyPI doing:</p>
-<blockquote>
+<blockquote class="last">
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>conan
 </pre></div>
 </div>
 </div></blockquote>
+</div>
 <p>If you want to migrate to 2.0, there are several things you will need to change:</p>
 <blockquote>
 <div><ul class="simple">
@@ -237,12 +240,11 @@ the more relevant changes.</li>
 <li><strong>General changes</strong> not related to the recipes nor the Conan commands, “build profiles”, lowercase references… etc.</li>
 </ul>
 </div></blockquote>
-<p>If you are looking for precompiled binaries, there is a very short list in a separate remote which can be added (please, check the <a class="reference external" href="https://docs.conan.io/en/2.0/index.html">Conan 2.0 documentation</a> for more information)</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>conanv2<span class="w"> </span>https://conanv2beta.jfrog.io/artifactory/api/conan/conan<span class="w"> </span>--index<span class="w"> </span><span class="m">0</span>
-</pre></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There are already lots of recipes prepared for v2, some of them with generated binaries, in <a class="reference external" href="https://conan.io/center">ConanCenter</a>,
+follow the <a class="reference external" href="https://conan.io/cci-v2.html">Conan 2.0 and ConanCenter Support thread</a> for more information.</p>
 </div>
-</div></blockquote>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="migrating_to_2.0/recipes.html">Migrating the recipes</a><ul>
@@ -314,7 +316,7 @@ the more relevant changes.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2022, JFrog.
-      Last updated on Mar 14, 2023.
+      Last updated on Mar 15, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
