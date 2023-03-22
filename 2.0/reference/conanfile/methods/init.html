@@ -255,6 +255,7 @@ Assuming we have a <code class="docutils literal notranslate"><span class="pre">
 <span class="k">class</span> <span class="nc">PyReq</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;base&quot;</span>
     <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.1&quot;</span>
+    <span class="n">package_type</span> <span class="o">=</span> <span class="s2">&quot;python-require&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -277,12 +278,49 @@ Assuming we have a <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 <p>The final <code class="docutils literal notranslate"><span class="pre">Pkg</span></code> conanfile will have both <code class="docutils literal notranslate"><span class="pre">os</span></code> and <code class="docutils literal notranslate"><span class="pre">arch</span></code> as settings, and <code class="docutils literal notranslate"><span class="pre">MyLicense</span></code> as license.</p>
+<p>To extend the <code class="docutils literal notranslate"><span class="pre">options</span></code> of the base class, it is necessarry to call the <code class="docutils literal notranslate"><span class="pre">self.options.update()</span></code> method:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">base/conanfile.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">BaseConan</span><span class="p">:</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">PyReq</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;base&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+    <span class="n">package_type</span> <span class="o">=</span> <span class="s2">&quot;python-require&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">init()</span></code> is called, the <code class="docutils literal notranslate"><span class="pre">self.options</span></code> object is already initialized. Then, updating the
+<code class="docutils literal notranslate"><span class="pre">self.default_options</span></code> is useless, and it is necessary to update the <code class="docutils literal notranslate"><span class="pre">self.options</span></code> with both the
+base class options and the base class default options values:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">pkg/conanfile.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">DerivedConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;derived&quot;</span>
+    <span class="n">python_requires</span> <span class="o">=</span> <span class="s2">&quot;base/1.0.0&quot;</span>
+    <span class="n">python_requires_extend</span> <span class="o">=</span> <span class="s2">&quot;base.BaseConan&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+    <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;derived&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_requires</span><span class="p">[</span><span class="s2">&quot;base&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">BaseConan</span>
+        <span class="c1"># Note we pass the base options and default_options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">default_options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <p>This method can also be useful if you need to unconditionally initialize class attributes like
 <code class="docutils literal notranslate"><span class="pre">license</span></code> or <code class="docutils literal notranslate"><span class="pre">description</span></code> or any other from datafiles other than
 <cite>conandata.yml</cite>. For example, you can have a <cite>json</cite> file containing the information about the
 <code class="docutils literal notranslate"><span class="pre">license</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code> and <code class="docutils literal notranslate"><span class="pre">author</span></code> for the library:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">data.json</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">data.json</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MIT&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is my awesome library.&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Me&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -339,7 +377,7 @@ Assuming we have a <code class="docutils literal notranslate"><span class="pre">
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 21, 2023.
+      Last updated on Mar 22, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
