@@ -241,8 +241,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="test">
 <span id="reference-conanfile-methods-test"></span><h1>test()<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">test()</span></code> method is only used for <strong>test_package/conanfile.py</strong>. It will execute immediately after <code class="docutils literal notranslate"><span class="pre">build()</span></code> has been called, and its goal is to run some executable or tests on binaries to prove the package is correctly created. Note that it is intended to be used as a test of the package: the headers are found, the libraries are found, it is possible to link, etc. But it is <strong>not intended</strong> to run unit, integration or functional tests.</p>
-<p>It usually takes the form:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">test()</span></code> method is only used for <strong>test_package/conanfile.py</strong>.
+It will execute immediately after <code class="docutils literal notranslate"><span class="pre">build()</span></code> has been called, and its goal is to run some executable or tests on binaries to prove the package is correctly created.
+Note that it is intended to be used as a test of the package: the headers are found, the libraries are found,
+it is possible to link, etc. But it is <strong>not intended</strong> to run unit, integration or functional tests.</p>
+<p>It usually takes the form of:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">can_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">bindir</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
@@ -251,7 +254,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">See :ref:` the “testing packages” tutorial&lt;tutorial_creating_test&gt;` for more information.</p>
+<p class="last">See <a class="reference internal" href="../../../tutorial/creating_packages/test_conan_packages.html#tutorial-creating-test"><span class="std std-ref">the “testing packages” tutorial</span></a> for more information.</p>
 </div>
 </div>
 
