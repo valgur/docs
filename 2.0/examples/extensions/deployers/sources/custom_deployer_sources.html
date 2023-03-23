@@ -265,6 +265,10 @@ After this is done, extra preprocessing could be done to accomplish more specifi
 
 <span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">conanfile</span><span class="o">.</span><span class="n">dependencies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">dep</span><span class="o">.</span><span class="n">folders</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">dep</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">source_folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sources missing for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> dependency.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                  <span class="s2">&quot;This deployer needs the sources of every dependency present to work, either building from source, &quot;</span>
+                                  <span class="s2">&quot;or by using the &#39;tools.build:download_source&#39; conf.&quot;</span><span class="p">)</span>
         <span class="n">copy</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">conanfile</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">dep</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">source_folder</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;dependency_sources&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dep</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -274,6 +278,13 @@ After this is done, extra preprocessing could be done to accomplish more specifi
 <p>The <code class="docutils literal notranslate"><span class="pre">deploy()</span></code> method is called by Conan, and gets both a dependency graph and an output folder path as arguments.
 It iterates all the dependencies of our recipe and copies every source file to their respective folders
 under <code class="docutils literal notranslate"><span class="pre">dependencies_sources</span></code> using <a class="reference internal" href="../../../../reference/tools/files/basic.html#conan-tools-files-copy"><span class="std std-ref">conan.tools.copy</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you’re using this deployer as an example for your own, remember that
+<code class="docutils literal notranslate"><span class="pre">tools.build:download_source=True</span></code> is necessary so that <code class="docutils literal notranslate"><span class="pre">dep.folders.source_folder</span></code> is defined for the dependencies.
+Without the conf, said variable will not be defined for those dependencies that do not need to be built from sources
+nor in those commands that do not require building, such as <strong class="command">conan graph</strong>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -301,7 +312,7 @@ under <code class="docutils literal notranslate"><span class="pre">dependencies_
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 22, 2023.
+      Last updated on Mar 23, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
