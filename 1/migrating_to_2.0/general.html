@@ -47,7 +47,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 1.59.0 documentation" href="../index.html"/>
         <link rel="up" title="Conan migration guide to 2.0" href="../conan_v2.html"/>
-        <link rel="next" title="Training Courses" href="../training_courses.html"/>
+        <link rel="next" title="Configuration files" href="config_files.html"/>
         <link rel="prev" title="Commands" href="commands.html"/>
 
  <!-- Google Tag Manager -->
@@ -125,6 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../training_courses.html">Training Courses</a></li>
@@ -265,7 +266,8 @@ them in your Conan configuration:</p>
 </div>
 <div class="section" id="compatible-packages">
 <h2>Compatible packages<a class="headerlink" href="#compatible-packages" title="Permalink to this headline">¶</a></h2>
-<p>Work in progress</p>
+<p>Do not use <code class="docutils literal notranslate"><span class="pre">compatible_packages</span></code> definition inside <code class="docutils literal notranslate"><span class="pre">package_id()</span></code>.
+Instead, use the new <code class="docutils literal notranslate"><span class="pre">compatibility()</span></code> method.</p>
 </div>
 <div class="section" id="extensions">
 <h2>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h2>
@@ -297,7 +299,7 @@ them in your Conan configuration:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../training_courses.html" class="btn btn-neutral float-right" title="Training Courses" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="config_files.html" class="btn btn-neutral float-right" title="Configuration files" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="commands.html" class="btn btn-neutral" title="Commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -310,7 +312,7 @@ them in your Conan configuration:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2022, JFrog.
-      Last updated on Mar 15, 2023.
+      Last updated on Mar 24, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
