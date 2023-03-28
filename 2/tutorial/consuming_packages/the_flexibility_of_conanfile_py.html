@@ -225,7 +225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <span class="na">zlib/1.2.11</span>
 
 <span class="k">[tool_requires]</span>
-<span class="na">cmake/3.19.8</span>
+<span class="na">cmake/3.22.6</span>
 
 <span class="k">[generators]</span>
 <span class="na">CMakeDeps</span>
@@ -260,7 +260,7 @@ previous examples but with a <em>conanfile.py</em> instead of a <em>conanfile.tx
 <span class="na">zlib/1.2.11</span>
 
 <span class="k">[tool_requires]</span>
-<span class="na">cmake/3.19.8</span>
+<span class="na">cmake/3.22.6</span>
 
 <span class="k">[generators]</span>
 <span class="na">CMakeDeps</span>
@@ -291,7 +291,7 @@ packages in the <a class="reference internal" href="../creating_packages.html#tu
         <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.19.8&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -321,7 +321,7 @@ $<span class="w"> </span>conanbuild.bat
 $<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Visual Studio 15 2017&quot;</span><span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake
 $<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>--config<span class="w"> </span>Release
 ...
-Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.19.8
+Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.22.6
 ...
 <span class="o">[</span><span class="m">100</span>%<span class="o">]</span><span class="w"> </span>Built<span class="w"> </span>target<span class="w"> </span>compressor
 
@@ -343,7 +343,7 @@ Configuring<span class="w"> </span>environment<span class="w"> </span>variables
 $<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
 $<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.
 ...
-Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.19.8
+Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.22.6
 ...
 <span class="o">[</span><span class="m">100</span>%<span class="o">]</span><span class="w"> </span>Built<span class="w"> </span>target<span class="w"> </span>compressor
 
@@ -384,7 +384,7 @@ Windows or that you want to use the system’s CMake installation instead of usi
     <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Use the system&#39;s CMake for Windows</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.19.8&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -410,7 +410,7 @@ for every platform without adding more changes:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.19.8&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># We make the assumption that if the compiler is msvc the</span>
@@ -452,7 +452,7 @@ $<span class="w"> </span>conanbuild.bat
 $<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Visual Studio 15 2017&quot;</span><span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake
 $<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>--config<span class="w"> </span>Release
 ...
-Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.19.8
+Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.22.6
 ...
 <span class="o">[</span><span class="m">100</span>%<span class="o">]</span><span class="w"> </span>Built<span class="w"> </span>target<span class="w"> </span>compressor
 
@@ -474,7 +474,7 @@ Configuring<span class="w"> </span>environment<span class="w"> </span>variables
 $<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
 $<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.
 ...
-Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.19.8
+Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.22.6
 ...
 <span class="o">[</span><span class="m">100</span>%<span class="o">]</span><span class="w"> </span>Built<span class="w"> </span>target<span class="w"> </span>compressor
 
@@ -503,7 +503,7 @@ CMake case, there’s a <a class="reference internal" href="../../reference/tool
         <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.19.8&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">cmake_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -569,7 +569,7 @@ used for settings or options is not supported.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 23, 2023.
+      Last updated on Mar 28, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

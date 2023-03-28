@@ -326,7 +326,7 @@ the cross-build toolchain.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.19.8&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">cmake_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -335,11 +335,11 @@ the cross-build toolchain.</p>
 </div>
 <p>As you can see, this is practically the same <em>conanfile.py</em> we used in the <a class="reference internal" href="the_flexibility_of_conanfile_py.html#consuming-packages-flexibility-of-conanfile-py"><span class="std std-ref">previous
 example</span></a>. We will require <strong>zlib/1.2.11</strong>
-as a regular dependency and <strong>cmake/3.19.8</strong> as a tool needed for building the
+as a regular dependency and <strong>cmake/3.22.6</strong> as a tool needed for building the
 application.</p>
 <p>We will need the application to build for the Raspberry Pi with the cross-build
 toolchain and also link the <strong>zlib/1.2.11</strong> library built for the same platform. On the
-other side, we need the <strong>cmake/3.19.8</strong> binary to run in Ubuntu Linux. Conan manages this
+other side, we need the <strong>cmake/3.22.6</strong> binary to run in Ubuntu Linux. Conan manages this
 internally in the dependency graph differentiating between what we call the “build
 context” and the “host context”:</p>
 <ul class="simple">
@@ -349,16 +349,16 @@ added via <code class="docutils literal notranslate"><span class="pre">self.requ
 and the <strong>zlib/1.2.11</strong> dependency.</li>
 <li>The <strong>build context</strong> contains the tool requirements used in the build machine. This
 category typically includes all the developer tools like CMake, compilers and linkers.
-In this case, this includes the <strong>cmake/3.19.8</strong> tool.</li>
+In this case, this includes the <strong>cmake/3.22.6</strong> tool.</li>
 </ul>
 <p>These contexts define how Conan will manage each one of the dependencies. For example, as
 <strong>zlib/1.2.11</strong> belongs to the <strong>host context</strong>, the <code class="docutils literal notranslate"><span class="pre">[buildenv]</span></code> build environment we
 defined in the <strong>raspberry</strong> profile (profile host) will only apply to the <strong>zlib/1.2.11</strong>
 library when building and won’t affect anything that belongs to the <strong>build context</strong> like
-the <strong>cmake/3.19.8</strong> dependency.</p>
+the <strong>cmake/3.22.6</strong> dependency.</p>
 <p>Now, let’s build the application. First, call <strong class="command">conan install</strong> with the
 profiles for the build and host platforms. This will install the  <strong>zlib/1.2.11</strong>
-dependency built for <em>armv7hf</em> architecture and a <strong>cmake/3.19.8</strong> version that runs for
+dependency built for <em>armv7hf</em> architecture and a <strong>cmake/3.22.6</strong> version that runs for
 64-bit architecture.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--build<span class="w"> </span>missing<span class="w"> </span>-pr:b<span class="o">=</span>default<span class="w"> </span>-pr:h<span class="o">=</span>./profiles/raspberry
 </pre></div>
@@ -433,7 +433,7 @@ stripped
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 23, 2023.
+      Last updated on Mar 28, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
