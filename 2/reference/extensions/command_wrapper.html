@@ -228,15 +228,18 @@ a new one.</p>
 <p>This plugin must be located in the <code class="docutils literal notranslate"><span class="pre">extensions/plugins</span></code> cache folder, and can be installed
 with the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install</span></code> command.</p>
 <p>For example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cmd_wrapper</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cmd_wrapper</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">return</span> <span class="s1">&#39;echo &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Would just intercept the commands and display them to terminal, which means that all commmands
 in all recipes <code class="docutils literal notranslate"><span class="pre">self.run()</span></code> will not execute, but just be echoed.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is a mandatory generic argument to be robust against future changes and injection
+by Conan of new keyword arguments. Not adding it, even if not used could make the extension fail
+in future Conan versions.</p>
 <p>A more common use case would be the injection of a parallelization tools over some commands,
 which could look like:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cmd_wrapper</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cmd_wrapper</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="c1"># lets paralellize only CMake invocations</span>
     <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;cmake&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;parallel-build &quot;</span><span class="si">{}</span><span class="s1">&quot;  --parallel-argument&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
