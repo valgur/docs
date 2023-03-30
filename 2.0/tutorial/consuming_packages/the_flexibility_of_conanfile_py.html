@@ -358,37 +358,6 @@ $<span class="w"> </span><span class="nb">source</span><span class="w"> </span>d
 <p>So far we have achieved the same functionality we had using a <em>conanfile.txt</em>, let’s see
 how we can take advantage of the capabilities of the <em>conanfile.py</em> to define the project
 structure we want to follow and also to add some logic using Conan settings and options.</p>
-<div class="section" id="conditional-requirements-using-a-conanfile-py">
-<h2>Conditional requirements using a conanfile.py<a class="headerlink" href="#conditional-requirements-using-a-conanfile-py" title="Permalink to this headline">¶</a></h2>
-<p>You could add some logic to the <a class="reference internal" href="../../reference/conanfile/methods/requirements.html#reference-conanfile-methods-requirements"><span class="std std-ref">requirements() method</span></a> to add or remove requirements
-conditionally. Imagine, for example, that you want to add an additional dependency in
-Windows or that you want to use the system’s CMake installation instead of using the Conan
-<cite>tool_requires</cite>:</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
-
-
-<span class="k">class</span> <span class="nc">CompressorRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="c1"># Binary configuration</span>
-    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
-    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;CMakeToolchain&quot;</span><span class="p">,</span> <span class="s2">&quot;CMakeDeps&quot;</span>
-
-    <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Add base64 dependency for Windows</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;base64/0.4.0&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Use the system&#39;s CMake for Windows</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="section" id="use-the-layout-method">
 <span id="consuming-packages-flexibility-of-conanfile-py-use-layout"></span><h2>Use the layout() method<a class="headerlink" href="#use-the-layout-method" title="Permalink to this headline">¶</a></h2>
 <p>In the previous examples, every time we executed a <cite>conan install</cite> command we had to use
@@ -397,8 +366,8 @@ generates. Also, note that we used a different folder when building in Windows o
 Linux/macOS depending if we were using a multi-config CMake generator or not. You can
 define this directly in the <cite>conanfile.py</cite> inside the <cite>layout()</cite> method and make it work
 for every platform without adding more changes:</p>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 
@@ -443,8 +412,8 @@ different build_type Release/Debug). In this case we added a simple logic to con
 multi-config if the compiler name is <cite>msvc</cite>.</p>
 <p>Check that running the same commands as in the previous examples without the
 <cite>–output-folder</cite> argument will lead to the same results as before:</p>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">Windows</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">Windows</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--build<span class="o">=</span>missing
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
 $<span class="w"> </span>conanbuild.bat
@@ -464,8 +433,8 @@ $<span class="w"> </span>deactivate_conanbuild.bat
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Linux, macOS</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Linux, macOS</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--build<span class="o">=</span>missing
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
 $<span class="w"> </span><span class="nb">source</span><span class="w"> </span>conanbuild.sh
@@ -489,8 +458,8 @@ $<span class="w"> </span><span class="nb">source</span><span class="w"> </span>d
 <p>There’s no need to always write this logic in the <cite>conanfile.py</cite>. There are some
 pre-defined layouts you can import and directly use in your recipe. For example, for the
 CMake case, there’s a <a class="reference internal" href="../../reference/tools/cmake/cmake_layout.html#cmake-layout"><span class="std std-ref">cmake_layout()</span></a> already defined in Conan:</p>
-<div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 <span class="kn">from</span> <span class="nn">conan.tools.cmake</span> <span class="kn">import</span> <span class="n">cmake_layout</span>
 
@@ -518,8 +487,8 @@ it to perform checks of the input settings. If, for example, your project does n
 <em>armv8</em> architecture on macOS you can raise the <cite>ConanInvalidConfiguration</cite> exception to
 make Conan return with a special error code. This will indicate that the configuration
 used for settings or options is not supported.</p>
-<div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
 <span class="kn">from</span> <span class="nn">conan.errors</span> <span class="kn">import</span> <span class="n">ConanInvalidConfiguration</span>
 
@@ -529,6 +498,37 @@ used for settings or options is not supported.</p>
     <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Macos&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arch</span> <span class="o">==</span> <span class="s2">&quot;armv8&quot;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;ARM v8 not supported&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conditional-requirements-using-a-conanfile-py">
+<h2>Conditional requirements using a conanfile.py<a class="headerlink" href="#conditional-requirements-using-a-conanfile-py" title="Permalink to this headline">¶</a></h2>
+<p>You could add some logic to the <a class="reference internal" href="../../reference/conanfile/methods/requirements.html#reference-conanfile-methods-requirements"><span class="std std-ref">requirements() method</span></a> to add or remove requirements
+conditionally. Imagine, for example, that you want to add an additional dependency in
+Windows or that you want to use the system’s CMake installation instead of using the Conan
+<cite>tool_requires</cite>:</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+
+<span class="k">class</span> <span class="nc">CompressorRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="c1"># Binary configuration</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;CMakeToolchain&quot;</span><span class="p">,</span> <span class="s2">&quot;CMakeDeps&quot;</span>
+
+    <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;zlib/1.2.11&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add base64 dependency for Windows</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;base64/0.4.0&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Use the system&#39;s CMake for Windows</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">!=</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;cmake/3.22.6&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -569,7 +569,7 @@ used for settings or options is not supported.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 29, 2023.
+      Last updated on Mar 30, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
