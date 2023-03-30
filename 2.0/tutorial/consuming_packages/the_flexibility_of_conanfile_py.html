@@ -447,7 +447,7 @@ Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"
 ...
 <span class="o">[</span><span class="m">100</span>%<span class="o">]</span><span class="w"> </span>Built<span class="w"> </span>target<span class="w"> </span>compressor
 
-$<span class="w"> </span>./Release/compressor
+$<span class="w"> </span>./compressor
 Uncompressed<span class="w"> </span>size<span class="w"> </span>is:<span class="w"> </span><span class="m">233</span>
 Compressed<span class="w"> </span>size<span class="w"> </span>is:<span class="w"> </span><span class="m">147</span>
 ZLIB<span class="w"> </span>VERSION:<span class="w"> </span><span class="m">1</span>.2.11
@@ -497,7 +497,7 @@ used for settings or options is not supported.</p>
 
     <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s2">&quot;Macos&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arch</span> <span class="o">==</span> <span class="s2">&quot;armv8&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;ARM v8 not supported&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ConanInvalidConfiguration</span><span class="p">(</span><span class="s2">&quot;ARM v8 not supported in Macos&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
