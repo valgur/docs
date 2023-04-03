@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Copy sources from all your dependencies &mdash; conan 2.0.2 documentation</title>
+  <title>Copy sources from all your dependencies &mdash; conan 2.0.3 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="conan 2.0.2 documentation" href="../../../../index.html"/>
+    <link rel="top" title="conan 2.0.3 documentation" href="../../../../index.html"/>
         <link rel="up" title="Custom deployers" href="../custom_deployers.html"/>
         <link rel="next" title="Conan recipe tools examples" href="../../../tools.html"/>
         <link rel="prev" title="Custom deployers" href="../custom_deployers.html"/>
@@ -263,7 +263,8 @@ After this is done, extra preprocessing could be done to accomplish more specifi
 <span class="kn">import</span> <span class="nn">os</span>
 
 
-<span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Note the kwargs argument is mandatory to be robust against future changes.</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">conanfile</span><span class="o">.</span><span class="n">dependencies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">dep</span><span class="o">.</span><span class="n">folders</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">dep</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">source_folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ConanException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sources missing for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> dependency.</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -312,7 +313,7 @@ nor in those commands that do not require building, such as <strong class="comma
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 30, 2023.
+      Last updated on Apr 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -713,7 +714,7 @@ nor in those commands that do not require building, such as <strong class="comma
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.0.2',
+            VERSION:'2.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

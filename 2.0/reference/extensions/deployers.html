@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Deployers &mdash; conan 2.0.2 documentation</title>
+  <title>Deployers &mdash; conan 2.0.3 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.2 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.3 documentation" href="../../index.html"/>
         <link rel="up" title="Extensions" href="../extensions.html"/>
         <link rel="next" title="Hooks" href="hooks.html"/>
         <link rel="prev" title="Download API" href="python_api/DownloadAPI.html"/>
@@ -271,11 +271,13 @@ Conan will look in these locations for the deployer in the following order:</p>
 The function signature of your custom deployers should be as follows:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><strong>my_custom_deployer.py</strong></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">output_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 </pre></div>
 </div>
 </div>
 <p>(Note that the arguments are passed as named parameters, so both the <code class="docutils literal notranslate"><span class="pre">graph</span></code> and <code class="docutils literal notranslate"><span class="pre">output_folder</span></code> names are mandatory)</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is mandatory even if not used, as new arguments can be added in future Conan versions, and those would break
+if <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> is not defined.</p>
 <p>You can access your conanfile object with <code class="docutils literal notranslate"><span class="pre">graph.root.conanfile</span></code>.
 See <a class="reference internal" href="../conanfile/methods/generate.html#conan-conanfile-model-dependencies"><span class="std std-ref">ConanFile.dependencies</span></a> for information on how to iterate over its dependencies.
 Your custom deployer can now be invoked as if it were a built-in deployer using the filename in which it’s found,
@@ -307,7 +309,7 @@ in this case <code class="docutils literal notranslate"><span class="pre">conan<
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 30, 2023.
+      Last updated on Apr 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -708,7 +710,7 @@ in this case <code class="docutils literal notranslate"><span class="pre">conan<
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.2',
+            VERSION:'2.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

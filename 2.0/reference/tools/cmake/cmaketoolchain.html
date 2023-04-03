@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMakeToolchain &mdash; conan 2.0.2 documentation</title>
+  <title>CMakeToolchain &mdash; conan 2.0.3 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.2 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.3 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.cmake" href="../cmake.html"/>
         <link rel="next" title="CMake" href="cmake.html"/>
         <link rel="prev" title="CMakeDeps" href="cmakedeps.html"/>
@@ -666,6 +666,10 @@ cross-building if Android systems (that is managed by other blocks), and not 64b
 <li><strong>tools.cmake.cmaketoolchain:toolchain_file</strong> user toolchain file to replace the <code class="docutils literal notranslate"><span class="pre">conan_toolchain.cmake</span></code> one.</li>
 <li><strong>tools.cmake.cmaketoolchain:user_toolchain</strong> list of user toolchains to be included from the <code class="docutils literal notranslate"><span class="pre">conan_toolchain.cmake</span></code> file.</li>
 <li><strong>tools.android:ndk_path</strong> value for <code class="docutils literal notranslate"><span class="pre">ANDROID_NDK_PATH</span></code>.</li>
+<li><strong>tools.android:cmake_legacy_toolchain</strong>: boolean value for <code class="docutils literal notranslate"><span class="pre">ANDROID_USE_LEGACY_TOOLCHAIN_FILE</span></code>. It will only be defined in <code class="docutils literal notranslate"><span class="pre">conan_toolchain.cmake</span></code> if given a value. This is
+taken into account by the CMake toolchain inside the Android NDK specified in the <code class="docutils literal notranslate"><span class="pre">tools.android:ndk_path</span></code> config, for versions <code class="docutils literal notranslate"><span class="pre">r23c</span></code> and above.
+It may be useful to set this to <code class="docutils literal notranslate"><span class="pre">False</span></code> if compiler flags are defined via <code class="docutils literal notranslate"><span class="pre">tools.build:cflags</span></code> or <code class="docutils literal notranslate"><span class="pre">tools.build:cxxflags</span></code> to prevent Android’s legacy CMake toolchain
+from overriding the values. If setting this to <code class="docutils literal notranslate"><span class="pre">False</span></code>, please ensure you are using CMake 3.21 or above.</li>
 <li><strong>tools.cmake.cmaketoolchain:system_name</strong> is not necessary in most cases and is only used to force-define <code class="docutils literal notranslate"><span class="pre">CMAKE_SYSTEM_NAME</span></code>.</li>
 <li><strong>tools.cmake.cmaketoolchain:system_version</strong> is not necessary in most cases and is only used to force-define <code class="docutils literal notranslate"><span class="pre">CMAKE_SYSTEM_VERSION</span></code>.</li>
 <li><strong>tools.cmake.cmaketoolchain:system_processor</strong> is not necessary in most cases and is only used to force-define <code class="docutils literal notranslate"><span class="pre">CMAKE_SYSTEM_PROCESSOR</span></code>.</li>
@@ -723,7 +727,7 @@ follows:<ul>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Mar 30, 2023.
+      Last updated on Apr 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1124,7 +1128,7 @@ follows:<ul>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.2',
+            VERSION:'2.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
