@@ -381,6 +381,7 @@ any of your profiles:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">+=</span></code> == <code class="docutils literal notranslate"><span class="pre">append</span></code>: appends values at the end of the existing value (only for lists).</li>
 <li><code class="docutils literal notranslate"><span class="pre">=+</span></code> == <code class="docutils literal notranslate"><span class="pre">prepend</span></code>: puts values at the beginning of the existing value (only for lists).</li>
+<li><code class="docutils literal notranslate"><span class="pre">*=</span></code> == <code class="docutils literal notranslate"><span class="pre">update</span></code>: updates the specified keys only, leaving the rest unmodified (only for dictionaries)</li>
 <li><code class="docutils literal notranslate"><span class="pre">=!</span></code> == <code class="docutils literal notranslate"><span class="pre">unset</span></code>: gets rid of any configuration value.</li>
 </ul>
 <div class="literal-block-wrapper docutils container" id="id2">
@@ -396,6 +397,12 @@ user.myconf.build:flags=+[&quot;-f0&quot;]
 
 # Unset the value
 user.myconf.build:flags=!
+
+# Define the value =&gt; {&quot;a&quot;: 1, &quot;b&quot;: 2}
+user.myconf.build:other={&quot;a&quot;: 1, &quot;b&quot;: 2}
+
+# Update b = 4 =&gt; {&quot;a&quot;: 1, &quot;b&quot;: 4}
+user.myconf.build:other*={&quot;b&quot;: 4}
 </pre></div>
 </div>
 </div>
