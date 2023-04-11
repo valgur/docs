@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan remove &mdash; conan 2.0.3 documentation</title>
+  <title>conan remove &mdash; conan 2.0.4 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.3 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.4 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan remote" href="remote.html"/>
         <link rel="prev" title="conan profile" href="profile.html"/>
@@ -317,7 +317,13 @@ $ conan remove zlib/1.2.11:#latest&lt;package_id&gt;#latest
 # in normal situations
 </pre></div>
 </div>
-<p>All the above commands, by default operate in the Conan cache.
+<p>Note that you can filter which packages will be removed using the <code class="docutils literal notranslate"><span class="pre">--package-query</span></code> argument:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remove zlib/1.2.11:* -p compiler=clang
+# Removes all the zlib/1.2.11 packages built with Clang compiler
+</pre></div>
+</div>
+<p>You can query packages by both their settings and options, including custom ones.</p>
+<p>All the above commands, by default, operate in the Conan cache.
 To remove artifacts from a server, use the <code class="docutils literal notranslate"><span class="pre">-r=myremote</span></code> argument:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remove zlib/1.2.11:* -r=myremote
 # Removes all the zlib/1.2.11 package binaries from all the recipe revisions in
@@ -750,7 +756,7 @@ To remove artifacts from a server, use the <code class="docutils literal notrans
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.3',
+            VERSION:'2.0.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
