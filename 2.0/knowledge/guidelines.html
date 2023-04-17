@@ -237,6 +237,10 @@ complicated, and it does not work the same as the built-in Python one.</li>
 for example different parallel CI jobs should use different caches (with CONAN_HOME env-var). This might
 change in the future and we will work on providing concurrency in the cache, but until then,
 use isolated caches for concurrent tasks.</li>
+<li><strong>Avoid ‘force’ and ‘override’ traits as a versioning mechanism.</strong> The <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">override</span></code> traits to
+solve conflicts are not recommended as a general versioning solution, just as a temporary workaround to solve
+a version conflict. Its usage should be avoided whenever possible, and updating versions or version ranges in
+the graph to avoid the conflicts without overrides and forces is the recommended approach.</li>
 </ul>
 </div>
 <div class="section" id="forbidden-practices">
@@ -294,7 +298,7 @@ artifacts or files from the Conan cache by any other means that Conan command li
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Apr 13, 2023.
+      Last updated on Apr 17, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

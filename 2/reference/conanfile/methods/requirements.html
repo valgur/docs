@@ -329,6 +329,14 @@ existing conflicts. The downstream consunmers <code class="docutils literal notr
 transitive dependency to override, this <code class="docutils literal notranslate"><span class="pre">require</span></code> will be discarded. This trait only
 exists at the time of defining a <code class="docutils literal notranslate"><span class="pre">requires</span></code>, but it will not exist as an actual
 <code class="docutils literal notranslate"><span class="pre">requires</span></code> once the graph is fully evaluated</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Best practices</strong></p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">override</span></code> traits to solve conflicts are not recommended as a general versioning
+solution, just as a temporary workaround to solve a version conflict. Its usage should be avoided
+whenever possible, and updating versions or version ranges in the graph to avoid the conflicts without
+overrides and forces is the recommended approach.</p>
+</div>
 </div>
 <div class="section" id="direct">
 <h3>direct<a class="headerlink" href="#direct" title="Permalink to this headline">¶</a></h3>
@@ -361,7 +369,7 @@ recipe, or if it is a transitive one.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Apr 13, 2023.
+      Last updated on Apr 17, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
