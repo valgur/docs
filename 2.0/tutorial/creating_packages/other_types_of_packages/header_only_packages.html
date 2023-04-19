@@ -258,9 +258,17 @@ This is a basic recipe for a header-only recipe:</p>
      <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
          <span class="c1"># This will also copy the &quot;include&quot; folder</span>
          <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">)</span>
+
+     <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="c1"># For header-only packages, libdirs and bindirs are not used</span>
+         <span class="c1"># so it&#39;s necessary to set those as empty.</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">bindirs</span> <span class="o">=</span> <span class="p">[]</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[]</span>
 </pre></div>
 </div>
 </div>
+<p>Please, note that we are setting <code class="docutils literal notranslate"><span class="pre">cpp_info.bindirs</span></code> and <code class="docutils literal notranslate"><span class="pre">cpp_info.libdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">[]</span></code> because
+header-only libraries don’t have compiled libraries or binaries, but they default to <code class="docutils literal notranslate"><span class="pre">[&quot;bin&quot;]</span></code>, and <code class="docutils literal notranslate"><span class="pre">[&quot;lib&quot;]</span></code>, then it is necessary to change it.</p>
 <p>Our header-only library is this simple function that sums two numbers:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">include/sum.h</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
@@ -357,6 +365,12 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>examp
         <span class="c1"># This will also copy the &quot;include&quot; folder</span>
         <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># For header-only packages, libdirs and bindirs are not used</span>
+        <span class="c1"># so it&#39;s necessary to set those as empty.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">bindirs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">libdirs</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
@@ -450,7 +464,7 @@ settings.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Apr 18, 2023.
+      Last updated on Apr 19, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
