@@ -280,6 +280,15 @@ Such helpers as <code class="docutils literal notranslate"><span class="pre">CMa
 build system syntax and command line arguments, so they can be extended or replaced with your own
 one that would handle your own private settings.</p>
 </div>
+<div class="section" id="error-authenticationexception">
+<h3>ERROR: AuthenticationException:<a class="headerlink" href="#error-authenticationexception" title="Permalink to this headline">¶</a></h3>
+<p>This error can happen, if there are no or false authentication credentials in the HTTP request from conan. To get more information try enabling the debug level for HTTP connections:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">http.client</span>
+<span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="o">.</span><span class="n">debuglevel</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>One source of error can be the <code class="docutils literal notranslate"><span class="pre">.netrc</span></code> file, which is <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/quickstart/#custom-headers">honored by the requests library</a>.</p>
+</div>
 </div>
 </div>
 
