@@ -595,6 +595,11 @@ user.confvar:something=False
 </pre></div>
 </div>
 </div>
+<p>Recall some hints about configuration scope and naming:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">core.xxx</span></code> configuration can only be defined in <code class="docutils literal notranslate"><span class="pre">global.conf</span></code> file, but not in profiles</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.yyy</span></code> and <code class="docutils literal notranslate"><span class="pre">user.zzz</span></code> can be defined in <code class="docutils literal notranslate"><span class="pre">global.conf</span></code> and they will affect both the “build” and the “host” context. But configurations defined in a profile <code class="docutils literal notranslate"><span class="pre">[conf]</span></code> will only affect the respective “build” or “host” context of the profile, not both.</li>
+</ul>
 <p>They can also be used in <a class="reference internal" href="global_conf.html#reference-config-files-global-conf"><span class="std std-ref">global.conf</span></a>,
 but <strong>profiles values will have priority over globally defined ones in global.conf</strong>, so let’s see an example that is a bit more complex,
 trying different configurations coming from the <em>global.conf</em> and another profile <em>myprofile</em>:</p>
@@ -845,7 +850,7 @@ zlib*:compiler.version=3.5
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Apr 21, 2023.
+      Last updated on Apr 24, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

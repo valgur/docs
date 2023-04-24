@@ -341,6 +341,15 @@ user.confvar:something=False
 <p class="first admonition-title">Important</p>
 <p class="last">Profiles values will have priority over globally defined ones in global.conf.</p>
 </div>
+<p>These are some hints about configuration items scope and naming:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">core.xxx</span></code> and <code class="docutils literal notranslate"><span class="pre">tools.yyy</span></code> are Conan built-ins, users cannot define their own ones in these scopes.</li>
+<li><code class="docutils literal notranslate"><span class="pre">core.xxx</span></code> can be defined in <code class="docutils literal notranslate"><span class="pre">global.conf</span></code> only, but not in profiles.</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.yyy</span></code> can be defined in <code class="docutils literal notranslate"><span class="pre">global.conf</span></code>, in profiles <code class="docutils literal notranslate"><span class="pre">[conf]</span></code> section and cli <code class="docutils literal notranslate"><span class="pre">-c</span></code> arguments</li>
+<li><code class="docutils literal notranslate"><span class="pre">user.zzz</span></code> can be defined everywhere, and they are totally at the user discretion, no established naming convention. However this would be more or less expected:
+- For open source libraries, specially those in conancenter, <code class="docutils literal notranslate"><span class="pre">user.packagename:conf</span></code> might be expected, like the <code class="docutils literal notranslate"><span class="pre">boost</span></code> recipe defining <code class="docutils literal notranslate"><span class="pre">user.boost:conf</span></code> conf
+- For private usage, the recommendation could be to use something like <code class="docutils literal notranslate"><span class="pre">user.orgname:conf</span></code> for global org configuration accross all projects, <code class="docutils literal notranslate"><span class="pre">user.orgname.project:conf</span></code> for project or package configuration, though <code class="docutils literal notranslate"><span class="pre">user.project:conf</span></code> might be also good if the project name is unique enough.</li>
+</ul>
 </div>
 <div class="section" id="configuration-file-template">
 <h2>Configuration file template<a class="headerlink" href="#configuration-file-template" title="Permalink to this headline">¶</a></h2>
@@ -474,7 +483,7 @@ core.net.http:client_cert=(&#39;/path/client.cert&#39;, &#39;/path/client.key&#3
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Apr 21, 2023.
+      Last updated on Apr 24, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
