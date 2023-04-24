@@ -322,7 +322,9 @@ $ conan remove zlib/1.2.11:#latest&lt;package_id&gt;#latest
 # Removes all the zlib/1.2.11 packages built with Clang compiler
 </pre></div>
 </div>
-<p>You can query packages by both their settings and options, including custom ones.</p>
+<p>You can query packages by both their settings and options, including custom ones.
+To query for options you need to explicitly add the <cite>options.</cite> prefix, so that
+<cite>-p options.shared=False</cite> will work but <cite>-p shared=False</cite> won’t.</p>
 <p>All the above commands, by default, operate in the Conan cache.
 To remove artifacts from a server, use the <code class="docutils literal notranslate"><span class="pre">-r=myremote</span></code> argument:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan remove zlib/1.2.11:* -r=myremote
