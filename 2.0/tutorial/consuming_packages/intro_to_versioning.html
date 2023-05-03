@@ -310,13 +310,16 @@ or <code class="docutils literal notranslate"><span class="pre">pkgname/version&
 The recipe revision is a hash of the contents of the recipe and the source code. So if something changes either in the recipe,
 its associated files or in the source code that this recipe is packaging, it will create a new recipe revision.</p>
 <p>You can list existing revisions with the <strong class="command">conan list</strong> command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>list<span class="w"> </span>zlib/1.2.12#*<span class="w"> </span>-r<span class="o">=</span>conancenter
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>list<span class="w"> </span>zlib/1.2.12#*<span class="w"> </span>-r<span class="o">=</span>conancenter
 
-conanv2:
-zlib
-<span class="w">    </span>zlib/1.2.12#0de8ff7f99079cd07341311c9ead89a2<span class="w"> </span><span class="o">(</span><span class="m">2022</span>-12-12<span class="w"> </span><span class="m">11</span>:39:43<span class="w"> </span>UTC<span class="o">)</span>
-<span class="w">    </span>zlib/1.2.12#6758146baf425dc62ecc5246a1e955e4<span class="w"> </span><span class="o">(</span><span class="m">2022</span>-08-25<span class="w"> </span><span class="m">07</span>:45:24<span class="w"> </span>UTC<span class="o">)</span>
-<span class="w">    </span>zlib/1.2.12#87a7211557b6690ef5bf7fc599dd8349<span class="w"> </span><span class="o">(</span><span class="m">2022</span>-04-21<span class="w"> </span><span class="m">11</span>:01:59<span class="w"> </span>UTC<span class="o">)</span>
+conancenter
+<span class="w">  </span>zlib
+<span class="w">    </span>zlib/1.2.12
+<span class="w">      </span>revisions
+<span class="w">        </span>82202701ea360c0863f1db5008067122<span class="w"> </span><span class="o">(</span><span class="m">2022</span>-03-29<span class="w"> </span><span class="m">15</span>:47:45<span class="w"> </span>UTC<span class="o">)</span>
+<span class="w">        </span>bd533fb124387a214816ab72c8d1df28<span class="w"> </span><span class="o">(</span><span class="m">2022</span>-05-09<span class="w"> </span><span class="m">06</span>:59:58<span class="w"> </span>UTC<span class="o">)</span>
+<span class="w">        </span>3b9e037ae1c615d045a06c67d88491ae<span class="w"> </span><span class="o">(</span><span class="m">2022</span>-05-13<span class="w"> </span><span class="m">13</span>:55:39<span class="w"> </span>UTC<span class="o">)</span>
+<span class="w">        </span>...
 </pre></div>
 </div>
 <p>Revisions always resolve to the latest (chronological order of creation or upload to the server) revision.
@@ -415,7 +418,7 @@ allowed range <code class="docutils literal notranslate"><span class="pre">zlib/
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Apr 24, 2023.
+      Last updated on May 03, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
