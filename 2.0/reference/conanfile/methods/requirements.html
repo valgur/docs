@@ -134,6 +134,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4"><a class="reference internal" href="package_id.html">package_id()</a></li>
 <li class="toctree-l4"><a class="reference internal" href="package_info.html">package_info()</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">requirements()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#package-type-trait-inferring">package_type trait inferring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-traits-for-each-kind-of-requires">Default traits for each kind of requires</a></li>
 <li class="toctree-l4"><a class="reference internal" href="set_name.html">set_name()</a></li>
 <li class="toctree-l4"><a class="reference internal" href="set_version.html">set_version()</a></li>
 <li class="toctree-l4"><a class="reference internal" href="source.html">source()</a></li>
@@ -321,7 +323,7 @@ specify it in the <code class="docutils literal notranslate"><span class="pre">r
 <h3>force<a class="headerlink" href="#force" title="Permalink to this headline">¶</a></h3>
 <p>This <code class="docutils literal notranslate"><span class="pre">requires</span></code> will force its version in the dependency graph upstream, overriding
 other existing versions even of transitive dependencies, and also solving potential
-existing conflicts. The downstream consunmers <code class="docutils literal notranslate"><span class="pre">force</span></code> trait always have higher priority.</p>
+existing conflicts. The downstream consumer’s <code class="docutils literal notranslate"><span class="pre">force</span></code> traits always have higher priority.</p>
 </div>
 <div class="section" id="override">
 <h3>override<a class="headerlink" href="#override" title="Permalink to this headline">¶</a></h3>
@@ -344,6 +346,37 @@ overrides and forces is the recommended approach.</p>
 recipe, or if it is a transitive one.</p>
 </div>
 </div>
+</div>
+<div class="section" id="package-type-trait-inferring">
+<span id="reference-conanfile-package-type-trait-inferring"></span><h1>package_type trait inferring<a class="headerlink" href="#package-type-trait-inferring" title="Permalink to this headline">¶</a></h1>
+<p>Some traits are automatically inferred based on the value of the <code class="docutils literal notranslate"><span class="pre">package_type</span></code> if not explicitly set by the recipe.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">application</span></code>: <code class="docutils literal notranslate"><span class="pre">headers=False</span></code>, <code class="docutils literal notranslate"><span class="pre">libs=False</span></code>, <code class="docutils literal notranslate"><span class="pre">run=True</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">shared-library</span></code>: <code class="docutils literal notranslate"><span class="pre">run=True</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">static-library</span></code>: <code class="docutils literal notranslate"><span class="pre">run=False</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">header-library</span></code>: <code class="docutils literal notranslate"><span class="pre">headers=True</span></code>, <code class="docutils literal notranslate"><span class="pre">libs=False</span></code>, <code class="docutils literal notranslate"><span class="pre">run=False</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">build-scripts</span></code>: <code class="docutils literal notranslate"><span class="pre">headers=False</span></code>, <code class="docutils literal notranslate"><span class="pre">libs=False</span></code>, <code class="docutils literal notranslate"><span class="pre">run=False</span></code>, <code class="docutils literal notranslate"><span class="pre">visible=False</span></code></li>
+</ul>
+</div></blockquote>
+<p>Additionally, some additional traits are inferred on top of the above mentioned based on the <code class="docutils literal notranslate"><span class="pre">package_type</span></code> of the dependant:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">header-library</span></code>: <code class="docutils literal notranslate"><span class="pre">transitive_headers=True</span></code>, <code class="docutils literal notranslate"><span class="pre">transitive_libs=True</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="default-traits-for-each-kind-of-requires">
+<h1>Default traits for each kind of requires<a class="headerlink" href="#default-traits-for-each-kind-of-requires" title="Permalink to this headline">¶</a></h1>
+<p>Each kind of requires sets some additional traits by default on top of the ones stated in the last section. Those are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">requires</span></code>: <code class="docutils literal notranslate"><span class="pre">build=False</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">build_requires</span></code>:  <code class="docutils literal notranslate"><span class="pre">headers=False</span></code>, <code class="docutils literal notranslate"><span class="pre">libs=False</span></code>, <code class="docutils literal notranslate"><span class="pre">build=True</span></code>, <code class="docutils literal notranslate"><span class="pre">visible=False</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">tool_requires</span></code>: <code class="docutils literal notranslate"><span class="pre">headers=False</span></code>, <code class="docutils literal notranslate"><span class="pre">libs=False</span></code>, <code class="docutils literal notranslate"><span class="pre">build=True</span></code>, <code class="docutils literal notranslate"><span class="pre">run=True</span></code>, <code class="docutils literal notranslate"><span class="pre">visible=False</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">test_requires</span></code>: <code class="docutils literal notranslate"><span class="pre">headers=True</span></code>, <code class="docutils literal notranslate"><span class="pre">libs=True</span></code>, <code class="docutils literal notranslate"><span class="pre">build=False</span></code>, <code class="docutils literal notranslate"><span class="pre">visible=False</span></code>, <code class="docutils literal notranslate"><span class="pre">test=True</span></code></li>
+</ul>
+</div></blockquote>
 </div>
 
 
@@ -369,7 +402,7 @@ recipe, or if it is a transitive one.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 03, 2023.
+      Last updated on May 08, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
