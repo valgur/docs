@@ -486,16 +486,9 @@ conanfile.py method to learn a more flexible way to add them.</p>
 </div>
 <div class="section" id="build-requires">
 <span id="reference-conanfile-attributes-build-requires"></span><h3><a class="toc-backref" href="#id17">build_requires</a><a class="headerlink" href="#build-requires" title="Permalink to this headline">¶</a></h3>
-<p>List or tuple of strings for dependencies. Generic type of build dependencies that are not
-applications (nothing runs), like build scripts. If there is
-an existing pre-compiled binary for the current package, the binaries for the build_require
-won’t be retrieved. They cannot conflict.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">build_requires</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_build_scripts/1.3&quot;</span><span class="p">,]</span>
-</pre></div>
-</div>
-<p>This is the declarative way to add <code class="docutils literal notranslate"><span class="pre">build_requires</span></code>. Check the &lt;MISSING PAGE&gt; build_requires()
-conanfile.py method to learn a more flexible way to add them.</p>
+<p><cite>build_requires</cite> are used in Conan 2.0 to provide compatibility with the Conan 1.X syntax,
+but their use is discouraged in Conan 2 and will be deprecated in future 2.X releases.
+Please use <cite>tool_requires</cite> instead of <cite>build_requires</cite> in your Conan 2 recipes.</p>
 </div>
 <div class="section" id="test-requires">
 <h3><a class="toc-backref" href="#id18">test_requires</a><a class="headerlink" href="#test-requires" title="Permalink to this headline">¶</a></h3>
@@ -1343,7 +1336,7 @@ to maintain teams of developers and CI machines to use the desired range of vers
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 14, 2023.
+      Last updated on May 16, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
