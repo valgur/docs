@@ -289,6 +289,16 @@ one that would handle your own private settings.</p>
 </div>
 <p>One source of error can be the <code class="docutils literal notranslate"><span class="pre">.netrc</span></code> file, which is <a class="reference external" href="https://requests.readthedocs.io/en/latest/user/quickstart/#custom-headers">honored by the requests library</a>.</p>
 </div>
+<div class="section" id="error-obtaining-different-revisions-in-linux-and-windows">
+<h3>ERROR: Obtaining different revisions in Linux and Windows<a class="headerlink" href="#error-obtaining-different-revisions-in-linux-and-windows" title="Permalink to this headline">¶</a></h3>
+<p>Git will (by default) checkout files in Windows systems using <code class="docutils literal notranslate"><span class="pre">CRLF</span></code> line endings, effectively producing different files than in Linux that files will use <code class="docutils literal notranslate"><span class="pre">LF</span></code> line endings. As files are different, the Conan recipe revision will be different from the revisions computed in other platforms such as Linux, resulting in missing the respective binaries in the other revision.</p>
+<p>Conan will not normalize or change in any way the source files, it is not its responsibility and there are risks of breaking things. The source control is the application changing the files, so that is a more correct place to handle this. It is necessary to instruct Git to do the checkout with the same line endings. This can be done several ways, for example, by adding a <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> file to the project repository:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[auto]</span>
+<span class="w">  </span><span class="na">crlf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+</pre></div>
+</div>
+<p>Other approach would be to change the <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> to change it globally. Modern editors (even Notepad) in Windows can perfectly work with files with <code class="docutils literal notranslate"><span class="pre">LF</span></code>, it is no longer necessary to change the line endings.</p>
+</div>
 </div>
 </div>
 
@@ -315,7 +325,7 @@ one that would handle your own private settings.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 16, 2023.
+      Last updated on May 18, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
