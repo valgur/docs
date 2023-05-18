@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>global.conf &mdash; conan 2.0.4 documentation</title>
+  <title>global.conf &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="profiles" href="profiles.html"/>
         <link rel="prev" title="Configuration files" href="../config_files.html"/>
@@ -121,6 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Recipe tools</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../config_files.html">Configuration files</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">global.conf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#information-about-built-in-confs">Information about built-in confs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="profiles.html">profiles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="settings.html">settings.yml</a></li>
 <li class="toctree-l3"><a class="reference internal" href="remotes.html">remotes.json</a></li>
@@ -218,7 +219,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="global-conf">
 <span id="reference-config-files-global-conf"></span><h1>global.conf<a class="headerlink" href="#global-conf" title="Permalink to this headline">¶</a></h1>
-<p>The <strong>global.conf</strong> file is located in the Conan user home directory, e.g., <em>[CONAN_HOME]/global.conf</em>.</p>
+<p>The <strong>global.conf</strong> file is located in the Conan user home directory, e.g., <em>[CONAN_HOME]/global.conf</em>. If it does not
+already exist, a default one is automatically created.</p>
 <div class="section" id="introduction-to-configuration">
 <h2>Introduction to configuration<a class="headerlink" href="#introduction-to-configuration" title="Permalink to this headline">¶</a></h2>
 <p><em>global.conf</em> is aimed to save some core/tools/user configuration variables that will be used by Conan. For instance:</p>
@@ -434,8 +436,14 @@ configuration lines above:</p>
 effect because it’s the first one evaluated, and after that, Conan is overriding that specific pattern with the most
 general one, so it deserves to pay special attention to the order.</p>
 </div>
+</div>
+<div class="section" id="information-about-built-in-confs">
+<h1>Information about built-in confs<a class="headerlink" href="#information-about-built-in-confs" title="Permalink to this headline">¶</a></h1>
+<p>This section provides extra information about specific confs.</p>
+<div class="section" id="networking-confs">
+<h2>Networking confs<a class="headerlink" href="#networking-confs" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="configuration-of-client-certificates">
-<span id="reference-config-files-global-conf-ssl-certificates"></span><h2>Configuration of client certificates<a class="headerlink" href="#configuration-of-client-certificates" title="Permalink to this headline">¶</a></h2>
+<span id="reference-config-files-global-conf-ssl-certificates"></span><h3>Configuration of client certificates<a class="headerlink" href="#configuration-of-client-certificates" title="Permalink to this headline">¶</a></h3>
 <p>Conan supports client TLS certificates. You can configure the path to your existing <em>Cacert</em> file and/or your client
 certificate (and the key) using the following configuration variables:</p>
 <ul class="simple">
@@ -456,6 +464,21 @@ core.net.http:client_cert=(&#39;/path/client.cert&#39;, &#39;/path/client.key&#3
 <ul class="last simple">
 <li><a class="reference internal" href="../conanfile/methods/package_info.html#conan-conanfile-model-conf-info"><span class="std std-ref">Managing configuration in your recipes (self.conf_info)</span></a></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="section" id="ux-confs">
+<h2>UX confs<a class="headerlink" href="#ux-confs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="skip-warnings">
+<h3>Skip warnings<a class="headerlink" href="#skip-warnings" title="Permalink to this headline">¶</a></h3>
+<p>There are several warnings that Conan outputs in certain cases which can be omitted via the <code class="docutils literal notranslate"><span class="pre">core:skip_warnings</span></code> conf,
+by adding the warning tag to its value.</p>
+<p>Those warnings are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">deprecated</span></code>: Messages for deprecated features such as legacy generators</li>
+</ul>
+</div></blockquote>
 </div>
 </div>
 </div>
@@ -890,7 +913,7 @@ core.net.http:client_cert=(&#39;/path/client.cert&#39;, &#39;/path/client.key&#3
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan inspect &mdash; conan 2.0.4 documentation</title>
+  <title>conan inspect &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan install" href="install.html"/>
         <link rel="prev" title="conan graph build-order-merge" href="graph/build_order_merge.html"/>
@@ -239,7 +239,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p class="last">This feature is experimental and subject to breaking changes.</p>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan inspect -h
-usage: conan inspect [-h] [-f FORMAT] [-v [V]] path
+usage: conan inspect [-h] [-f FORMAT] [-v [V]] [-r REMOTE] [-l LOCKFILE]
+                     [--lockfile-partial]
+                     path
 
 Inspect a conanfile.py to return its public fields.
 
@@ -254,11 +256,15 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
+  -r REMOTE, --remote REMOTE
+                        Remote names. Accepts wildcards (&#39;*&#39; means all the
+                        remotes available)
+  -l LOCKFILE, --lockfile LOCKFILE
+                        Path to a lockfile. Use --lockfile=&quot;&quot; to avoid
+                        automatic use of existing &#39;conan.lock&#39; file
+  --lockfile-partial    Do not raise an error if some dependency is not found
+                        in lockfile
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">inspect</span></code> doesn’t really evaluate any methods or apply any conditional logic. It lists class attributes only.</p>
 </div>
 <p>The <strong class="command">conan inspect</strong> command shows the public attributes of any recipe (<cite>conanfile.py</cite>) as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan inspect .
@@ -273,33 +279,48 @@ default_options:
 description: libpng is the official PNG file format reference library.
 generators: []
 homepage: http://www.libpng.org
+label:
 license: libpng-2.0
 name: libpng
-no_copy_source: False
 options:
-    shared: [True, False]
-    fPIC: [True, False]
-    neon: [True, &#39;check&#39;, False]
-    msa: [True, False]
-    sse: [True, False]
-    vsx: [True, False]
+    api_prefix:
+    fPIC: True
+    msa: True
+    neon: True
+    shared: False
+    sse: True
+    vsx: True
+options_definitions:
+    shared: [&#39;True&#39;, &#39;False&#39;]
+    fPIC: [&#39;True&#39;, &#39;False&#39;]
+    neon: [&#39;True&#39;, &#39;check&#39;, &#39;False&#39;]
+    msa: [&#39;True&#39;, &#39;False&#39;]
+    sse: [&#39;True&#39;, &#39;False&#39;]
+    vsx: [&#39;True&#39;, &#39;False&#39;]
     api_prefix: [&#39;ANY&#39;]
+package_type: None
+requires: []
 revision_mode: hash
-settings: (&#39;os&#39;, &#39;arch&#39;, &#39;compiler&#39;, &#39;build_type&#39;)
-topics: (&#39;png&#39;, &#39;graphics&#39;, &#39;image&#39;)
+settings: [&#39;os&#39;, &#39;arch&#39;, &#39;compiler&#39;, &#39;build_type&#39;]
+topics: [&#39;png&#39;, &#39;graphics&#39;, &#39;image&#39;]
 url: https://github.com/conan-io/conan-center-index
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">inspect</span></code> evaluates recipe methods such as <code class="docutils literal notranslate"><span class="pre">set_name()</span></code> and <code class="docutils literal notranslate"><span class="pre">set_version()</span></code>,
+and is capable of resolving <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> dependencies (which can be locked with the <code class="docutils literal notranslate"><span class="pre">--lockfile</span></code> argument),
+so its base methods will also be properly executed.</p>
+</div>
 <p>The <strong class="command">conan inspect ... --format=json</strong> returns a JSON output format in <code class="docutils literal notranslate"><span class="pre">stdout</span></code> (which can be redirected to a file) with the following structure:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan inspect -f json .
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan inspect . --format=json
 {
-    &quot;author&quot;: null,
-    &quot;build_policy&quot;: null,
-    &quot;build_requires&quot;: null,
-    &quot;buildenv_info&quot;: null,
-    &quot;channel&quot;: null,
-    &quot;conf_info&quot;: null,
-    &quot;cpp&quot;: null,
+    &quot;name&quot;: &quot;libpng&quot;,
+    &quot;url&quot;: &quot;https://github.com/conan-io/conan-center-index&quot;,
+    &quot;license&quot;: &quot;libpng-2.0&quot;,
+    &quot;description&quot;: &quot;libpng is the official PNG file format reference library.&quot;,
+    &quot;homepage&quot;: &quot;http://www.libpng.org&quot;,
+    &quot;revision_mode&quot;: &quot;hash&quot;,
     &quot;default_options&quot;: {
         &quot;shared&quot;: false,
         &quot;fPIC&quot;: true,
@@ -309,73 +330,71 @@ url: https://github.com/conan-io/conan-center-index
         &quot;vsx&quot;: true,
         &quot;api_prefix&quot;: &quot;&quot;
     },
-    &quot;deprecated&quot;: null,
-    &quot;description&quot;: &quot;libpng is the official PNG file format reference library.&quot;,
-    &quot;exports&quot;: null,
-    &quot;exports_sources&quot;: null,
-    &quot;generators&quot;: [],
-    &quot;homepage&quot;: &quot;http://www.libpng.org&quot;,
-    &quot;license&quot;: &quot;libpng-2.0&quot;,
-    &quot;name&quot;: &quot;libpng&quot;,
-    &quot;no_copy_source&quot;: false,
-    &quot;options&quot;: {
-        &quot;shared&quot;: [
-            true,
-            false
-        ],
-        &quot;fPIC&quot;: [
-            true,
-            false
-        ],
-        &quot;neon&quot;: [
-            true,
-            &quot;check&quot;,
-            false
-        ],
-        &quot;msa&quot;: [
-            true,
-            false
-        ],
-        &quot;sse&quot;: [
-            true,
-            false
-        ],
-        &quot;vsx&quot;: [
-            true,
-            false
-        ],
-        &quot;api_prefix&quot;: [
-            &quot;ANY&quot;
-        ]
-    },
-    &quot;package_type&quot;: null,
-    &quot;provides&quot;: null,
-    &quot;recipe_folder&quot;: null,
-    &quot;requires&quot;: null,
-    &quot;revision_mode&quot;: &quot;hash&quot;,
-    &quot;runenv_info&quot;: null,
+    &quot;topics&quot;: [
+        &quot;png&quot;,
+        &quot;graphics&quot;,
+        &quot;image&quot;
+    ],
+    &quot;package_type&quot;: &quot;None&quot;,
     &quot;settings&quot;: [
         &quot;os&quot;,
         &quot;arch&quot;,
         &quot;compiler&quot;,
         &quot;build_type&quot;
     ],
-    &quot;test_requires&quot;: null,
-    &quot;tested_reference_str&quot;: null,
-    &quot;tool_requires&quot;: null,
-    &quot;topics&quot;: [
-        &quot;png&quot;,
-        &quot;graphics&quot;,
-        &quot;image&quot;
-    ],
-    &quot;upload_policy&quot;: null,
-    &quot;url&quot;: &quot;https://github.com/conan-io/conan-center-index&quot;,
-    &quot;user&quot;: null,
-    &quot;version&quot;: null,
-    &quot;win_bash&quot;: null,
-    &quot;win_bash_run&quot;: null
+    &quot;options&quot;: {
+        &quot;api_prefix&quot;: &quot;&quot;,
+        &quot;fPIC&quot;: &quot;True&quot;,
+        &quot;msa&quot;: &quot;True&quot;,
+        &quot;neon&quot;: &quot;True&quot;,
+        &quot;shared&quot;: &quot;False&quot;,
+        &quot;sse&quot;: &quot;True&quot;,
+        &quot;vsx&quot;: &quot;True&quot;
+    },
+    &quot;options_definitions&quot;: {
+        &quot;shared&quot;: [
+            &quot;True&quot;,
+            &quot;False&quot;
+        ],
+        &quot;fPIC&quot;: [
+            &quot;True&quot;,
+            &quot;False&quot;
+        ],
+        &quot;neon&quot;: [
+            &quot;True&quot;,
+            &quot;check&quot;,
+            &quot;False&quot;
+        ],
+        &quot;msa&quot;: [
+            &quot;True&quot;,
+            &quot;False&quot;
+        ],
+        &quot;sse&quot;: [
+            &quot;True&quot;,
+            &quot;False&quot;
+        ],
+        &quot;vsx&quot;: [
+            &quot;True&quot;,
+            &quot;False&quot;
+        ],
+        &quot;api_prefix&quot;: [
+            &quot;ANY&quot;
+        ]
+    },
+    &quot;generators&quot;: [],
+    &quot;requires&quot;: [],
+    &quot;source_folder&quot;: null,
+    &quot;build_folder&quot;: null,
+    &quot;generators_folder&quot;: null,
+    &quot;package_folder&quot;: null,
+    &quot;label&quot;: &quot;&quot;
 }
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">inspect</span></code> does not list any requirements listed in the <code class="docutils literal notranslate"><span class="pre">requirements()</span></code> method,
+only those present in the <code class="docutils literal notranslate"><span class="pre">requires</span></code> attribute will be shown.</p>
 </div>
 </div>
 
@@ -809,7 +828,7 @@ url: https://github.com/conan-io/conan-center-index
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

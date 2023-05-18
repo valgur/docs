@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>build_requirements() &mdash; conan 2.0.4 documentation</title>
+  <title>build_requirements() &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../../index.html"/>
         <link rel="up" title="Methods" href="../methods.html"/>
         <link rel="next" title="compatibility()" href="compatibility.html"/>
         <link rel="prev" title="build_id()" href="build_id.html"/>
@@ -261,6 +261,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><code class="docutils literal notranslate"><span class="pre">headers=False</span></code> A tool requirement does not have headers.</li>
 <li><code class="docutils literal notranslate"><span class="pre">libs=False</span></code>: A tool requirement does not have libraries to be linked by the consumer (if it had libraries they would be in the “build” context and could be incompatible with the “host” context of the consumer package).</li>
 </ul>
+<div class="section" id="host-version">
+<h3>&lt;host_version&gt;<a class="headerlink" href="#host-version" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature is experimental and subject to breaking changes.</p>
+</div>
+<p>This syntax is useful when you’re using the same package recipe as a <em>requires</em> and as a <em>tool_requires</em> and you want to avoid
+conflicting downstream if any user decides to override the original <em>requires</em> version in the <em>host</em> context, i.e., the user could end up with
+two different versions in the host and build contexts of the same dependency.</p>
+<p>In a nutshell, the <code class="docutils literal notranslate"><span class="pre">&lt;host_version&gt;</span></code> specifier allows us to ensure that the version resolved for the <em>tool_requires</em>
+always matches the one for the host requirement.</p>
+<p>For instance, let’s show a simple recipe using <em>protobuf</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">mylibRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;mylib&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+    <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;protobuf/3.18.1&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">build_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_requires</span><span class="p">(</span><span class="s2">&quot;protobuf/&lt;host_version&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, if any user wants to use <em>mylib/0.1</em>, but another version of <em>protobuf</em>, there shouldn’t be any problems overriding it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">myappRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;myapp&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+    <span class="k">def</span> <span class="nf">requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;mylib/0.1&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires</span><span class="p">(</span><span class="s2">&quot;protobuf/3.21.9&quot;</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;host_version&gt;</span></code> defined upstream is ensuring that the host and build contexts are using the same version of that requirement.</p>
+</div>
 </div>
 <div class="section" id="test-requires">
 <h2>test_requires<a class="headerlink" href="#test-requires" title="Permalink to this headline">¶</a></h2>
@@ -722,7 +758,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

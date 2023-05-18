@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>settings.yml &mdash; conan 2.0.4 documentation</title>
+  <title>settings.yml &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="remotes.json" href="remotes.html"/>
         <link rel="prev" title="profiles" href="profiles.html"/>
@@ -121,6 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../tools.html">Recipe tools</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../config_files.html">Configuration files</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="global_conf.html">global.conf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="global_conf.html#information-about-built-in-confs">Information about built-in confs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="profiles.html">profiles</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">settings.yml</a></li>
 <li class="toctree-l3"><a class="reference internal" href="remotes.html">remotes.json</a></li>
@@ -228,7 +229,7 @@ It looks like this:</p>
 <span class="w">    </span><span class="nt">WindowsStore</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;8.1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;10.0&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">WindowsCE</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ANY</span>
+<span class="w">        </span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ANY</span><span class="p p-Indicator">]</span>
 <span class="w">        </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;5.0&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;6.0&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;7.0&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;8.0&quot;</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">Linux</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">iOS</span><span class="p">:</span>
@@ -352,6 +353,7 @@ to distribute an unified <em>settings.yml</em> file you can use the <a class="re
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
 <li><a class="reference internal" href="../../tutorial/creating_packages/configure_options_settings.html#creating-packages-configure-options-settings"><span class="std std-ref">Conan packages binary compatibility: the package ID</span></a></li>
+<li><a class="reference internal" href="../conanfile/attributes.html#conan-conanfile-properties-settings"><span class="std std-ref">settings</span></a></li>
 </ul>
 </div>
 <div class="section" id="operating-systems">
@@ -1062,7 +1064,7 @@ composition of both files, the <em>settings.yml</em> and the <em>settings_user.y
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

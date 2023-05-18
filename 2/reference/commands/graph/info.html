@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan graph info &mdash; conan 2.0.4 documentation</title>
+  <title>conan graph info &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../../index.html"/>
         <link rel="up" title="conan graph" href="../graph.html"/>
         <link rel="next" title="conan graph build-order" href="build_order.html"/>
         <link rel="prev" title="conan graph" href="../graph.html"/>
@@ -254,7 +254,7 @@ usage: conan graph info [-h] [-f FORMAT] [-v [V]] [--name NAME]
                         [-l LOCKFILE] [--lockfile-partial]
                         [--lockfile-out LOCKFILE_OUT] [--lockfile-packages]
                         [--lockfile-clean] [--check-updates] [--filter FILTER]
-                        [--package-filter PACKAGE_FILTER] [--deploy DEPLOY]
+                        [--package-filter PACKAGE_FILTER] [-d DEPLOYER]
                         [--build-require]
                         [path]
 
@@ -361,8 +361,8 @@ optional arguments:
 --package-filter PACKAGE_FILTER
                         Print information only for packages that match the
                         patterns
---deploy DEPLOY       Deploy using the provided deployer to the output
-                        folder
+-d DEPLOYER, --deployer DEPLOYER
+                      Deploy using the provided deployer to the output folder
 --build-require       Whether the provided reference is a build-require
 </pre></div>
 </div>
@@ -1045,7 +1045,7 @@ to point to a local version of these files:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

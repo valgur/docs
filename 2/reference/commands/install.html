@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan install &mdash; conan 2.0.4 documentation</title>
+  <title>conan install &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan list" href="list.html"/>
         <link rel="prev" title="conan inspect" href="inspect.html"/>
@@ -246,7 +246,7 @@ usage: conan install [-h] [-f FORMAT] [-v [V]] [--name NAME]
                     [-c:b CONF_BUILD] [-c:h CONF_HOST] [-l LOCKFILE]
                     [--lockfile-partial] [--lockfile-out LOCKFILE_OUT]
                     [--lockfile-packages] [--lockfile-clean] [-g GENERATOR]
-                    [-of OUTPUT_FOLDER] [--deploy DEPLOY] [--build-require]
+                    [-of OUTPUT_FOLDER] [-d DEPLOYER] [--build-require]
                     [path]
 
 Install the requirements specified in a recipe (conanfile.py or conanfile.txt).
@@ -361,8 +361,8 @@ optional arguments:
                         Generators to use
 -of OUTPUT_FOLDER, --output-folder OUTPUT_FOLDER
                         The root output folder for generated and build files
---deploy DEPLOY       Deploy using the provided deployer to the output
-                        folder
+-d DEPLOYER, --deployer DEPLOYER
+                      Deploy using the provided deployer to the output folder
 --build-require       Whether the provided reference is a build-require
 </pre></div>
 </div>
@@ -444,7 +444,7 @@ and only for the <code class="docutils literal notranslate"><span class="pre">--
 main use case is to copy files from the Conan cache to user space, and performing any other custom operations over the dependency graph,
 like collecting licenses, generating reports, deploying binaries to the system, etc. The syntax for deployers is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># does a full copy of the dependencies binaries to the current user folder
-$ conan install . --deploy=full_deploy
+$ conan install . --deployer=full_deploy
 </pre></div>
 </div>
 <p>There are 2 built-in deployers:</p>
@@ -944,7 +944,7 @@ it should not be necessary in the vast majority of cases, so it is discouraged i
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

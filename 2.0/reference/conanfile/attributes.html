@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 2.0.4 documentation</title>
+  <title>Attributes &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -655,7 +655,7 @@ reading the <code class="docutils literal notranslate"><span class="pre">self.op
 </div>
 <div class="section" id="settings">
 <span id="conan-conanfile-properties-settings"></span><h3><a class="toc-backref" href="#id27">settings</a><a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
-<p>List of strings with the first level settings (from <code class="docutils literal notranslate"><span class="pre">settings.yml</span></code>) that the recipe
+<p>List of strings with the first level settings (from <a class="reference internal" href="../config_files/settings.html#reference-config-files-settings-yml"><span class="std std-ref">settings.yml</span></a>) that the recipe
 needs, because:
 - They are read for building (e.g: <cite>if self.settings.compiler == “gcc”</cite>)
 - They affect the <code class="docutils literal notranslate"><span class="pre">package_id</span></code>. If a value of the declared setting changes, the <code class="docutils literal notranslate"><span class="pre">package_id</span></code> has to be different.</p>
@@ -685,8 +685,26 @@ for the <code class="docutils literal notranslate"><span class="pre">msvc</span>
     <span class="n">build_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;build_type&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;Release&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">get_safe()</span></code> method will return <code class="docutils literal notranslate"><span class="pre">None</span></code> if that setting or sub-setting doesn’t
+<p>The <code class="docutils literal notranslate"><span class="pre">get_safe()</span></code> method returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if that setting or sub-setting doesn’t
 exist and there is no default value assigned.</p>
+<p>It’s also feasible to check the possible values defined in <a class="reference internal" href="../config_files/settings.html#reference-config-files-settings-yml"><span class="std std-ref">settings.yml</span></a> using the
+<code class="docutils literal notranslate"><span class="pre">possible_values()</span></code> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Print if Android exists as OS in the whole settings.yml</span>
+    <span class="n">is_android</span> <span class="o">=</span> <span class="s2">&quot;Android&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">possible_values</span><span class="p">()[</span><span class="s2">&quot;os&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Android in settings.yml: </span><span class="si">{</span><span class="n">is_android</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Print the available versions for the compiler used by the HOST profile</span>
+    <span class="n">compiler_versions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">possible_values</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[HOST] Versions for </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="p">)</span><span class="si">}</span><span class="s2">:  </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">compiler_versions</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Print the available versions for the compiler used by the BUILD profile</span>
+    <span class="n">compiler_versions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_build</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">possible_values</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[BUILD] Versions for </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="p">)</span><span class="si">}</span><span class="s2">:  </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">compiler_versions</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you can see above, doing <code class="docutils literal notranslate"><span class="pre">self.settings.possible_values()</span></code> returns the
+whole <a class="reference internal" href="../config_files/settings.html#reference-config-files-settings-yml"><span class="std std-ref">settings.yml</span></a> as a Python dict-like object, and doing
+<code class="docutils literal notranslate"><span class="pre">self.settings.compiler.version.possible_values()</span></code> for instance returns the available versions for the compiler
+used by the consumer.</p>
 <p>If you want to do a safe deletion of settings, you could use the <code class="docutils literal notranslate"><span class="pre">rm_safe()</span></code> method.
 For example, in the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method a typical pattern for a C library would be:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -697,6 +715,7 @@ For example, in the <code class="docutils literal notranslate"><span class="pre"
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
+<li><a class="reference internal" href="../config_files/settings.html#reference-config-files-settings-yml"><span class="std std-ref">settings.yml</span></a>.</li>
 <li>Removing settings in the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method. &lt;MISSING PAGE&gt;</li>
 </ul>
 </div>
@@ -1269,12 +1288,17 @@ The profile entries have priority.</p>
 <div class="section" id="revision-mode">
 <span id="revision-mode-attribute"></span><h3><a class="toc-backref" href="#id59">revision_mode</a><a class="headerlink" href="#revision-mode" title="Permalink to this headline">¶</a></h3>
 <p>This attribute allow each recipe to declare how the revision for the recipe itself should
-be computed. It can take two different values:</p>
+be computed. It can take three different values:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">&quot;hash&quot;</span></code> (by default): Conan will use the checksum hash of the recipe manifest to
 compute the revision for the recipe.</li>
-<li><code class="docutils literal notranslate"><span class="pre">&quot;scm&quot;</span></code>: the commit ID will be used as the recipe revision if it belongs to a known
-repository system (Git or SVN). If there is no repository it will raise an error.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;scm&quot;</span></code>: if the project is inside a Git repository the commit ID will be used as the
+recipe revision. If there is no repository it will raise an error.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;scm_folder&quot;</span></code>: This configuration applies when you have a mono-repository project, but
+still want to use <em>scm</em> revisions. In this scenario, the revision of the exported
+<cite>conanfile.py</cite> will correspond to the commit ID of the folder where it’s located. This
+approach allows multiple <cite>conanfile.py</cite> files to exist within the same Git repository,
+with each file exported under its distinct revision.</li>
 </ul>
 </div>
 <div class="section" id="upload-policy">
@@ -1743,7 +1767,7 @@ to maintain teams of developers and CI machines to use the desired range of vers
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

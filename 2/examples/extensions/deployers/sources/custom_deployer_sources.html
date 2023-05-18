@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Copy sources from all your dependencies &mdash; conan 2.0.4 documentation</title>
+  <title>Copy sources from all your dependencies &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="conan 2.0.4 documentation" href="../../../../index.html"/>
+    <link rel="top" title="conan 2.0.5 documentation" href="../../../../index.html"/>
         <link rel="up" title="Custom deployers" href="../custom_deployers.html"/>
         <link rel="next" title="Conan recipe tools examples" href="../../../tools.html"/>
         <link rel="prev" title="Custom deployers" href="../custom_deployers.html"/>
@@ -126,6 +126,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../../tools.html">Conan recipe tools examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../cross_build.html">Cross-building examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">Configuration files examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../graph.html">Graph examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev_flow.html">Developer tools and flows</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
@@ -247,7 +249,7 @@ Conan will look for the specified deployer in a few extra places in order, namel
 With the help of the <code class="docutils literal notranslate"><span class="pre">tools.build:download_source=True</span></code> conf, we can force the invocation of its <code class="docutils literal notranslate"><span class="pre">source()</span></code> method,
 which will ensure that sources are available even if no build needs to be carried out.</p>
 <p>Now, you should be able to use the new deployer in both <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> and <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span></code> commands for any given recipe:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>.<span class="w"> </span>-c<span class="w"> </span>tools.build:download_source<span class="o">=</span>True<span class="w"> </span>--deploy<span class="o">=</span>sources_deploy
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>.<span class="w"> </span>-c<span class="w"> </span>tools.build:download_source<span class="o">=</span>True<span class="w"> </span>--deployer<span class="o">=</span>sources_deploy
 </pre></div>
 </div>
 <p>Inspecting the command output we can see that it copied the sources of our direct dependencies <code class="docutils literal notranslate"><span class="pre">zlib</span></code> and <code class="docutils literal notranslate"><span class="pre">mcap</span></code>,
@@ -720,7 +722,7 @@ nor in those commands that do not require building, such as <strong class="comma
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.0.4',
+            VERSION:'2.0.5',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
