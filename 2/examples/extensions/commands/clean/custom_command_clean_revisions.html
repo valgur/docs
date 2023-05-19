@@ -47,7 +47,7 @@
         <link rel="search" title="Search" href="../../../../search.html"/>
     <link rel="top" title="conan 2.0.5 documentation" href="../../../../index.html"/>
         <link rel="up" title="Custom commands" href="../custom_commands.html"/>
-        <link rel="next" title="Custom deployers" href="../../deployers/custom_deployers.html"/>
+        <link rel="next" title="Builtin deployers" href="../../deployers/builtin_deployers.html"/>
         <link rel="prev" title="Custom commands" href="../custom_commands.html"/>
 
  <!-- Google Tag Manager -->
@@ -120,6 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Custom command: Clean old recipe and package revisions</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../../deployers/builtin_deployers.html">Builtin deployers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../deployers/custom_deployers.html">Custom deployers</a></li>
 </ul>
 </li>
@@ -219,6 +220,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="custom-command-clean-old-recipe-and-package-revisions">
 <span id="examples-extensions-commands-clean-revisions"></span><h1>Custom command: Clean old recipe and package revisions<a class="headerlink" href="#custom-command-clean-old-recipe-and-package-revisions" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is mostly an example command. The built-in <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">remove</span> <span class="pre">*#!latest</span></code> syntax,
+meaning “all revisions but the latest” would probably be enough for this use case,
+without needing this custom command.</p>
+</div>
 <p>Please, first of all, clone the sources to recreate this project. You can find them in the
 <a class="reference external" href="https://github.com/conan-io/examples2">examples2.0 repository</a> in GitHub:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/conan-io/examples2.git
@@ -417,7 +424,7 @@ getting an ordered list always.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../deployers/custom_deployers.html" class="btn btn-neutral float-right" title="Custom deployers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../deployers/builtin_deployers.html" class="btn btn-neutral float-right" title="Builtin deployers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../custom_commands.html" class="btn btn-neutral" title="Custom commands" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -430,7 +437,7 @@ getting an ordered list always.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 18, 2023.
+      Last updated on May 19, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
