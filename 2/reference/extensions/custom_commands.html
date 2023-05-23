@@ -324,8 +324,47 @@ For instance, the previous example, the file name is <code class="docutils liter
 <p class="last">Notice that to declare a sub-command is required an empty Python function acts as the main command.</p>
 </div>
 </div>
-<div class="section" id="formatters-arguments">
-<h3>Formatters arguments<a class="headerlink" href="#formatters-arguments" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="argument-definition-and-parsing">
+<h2>Argument definition and parsing<a class="headerlink" href="#argument-definition-and-parsing" title="Permalink to this headline">¶</a></h2>
+<p>Commands can define their own arguments with the <code class="docutils literal notranslate"><span class="pre">argparse</span></code> Python library.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@conan_command</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;Creator&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">conan_api</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Command help</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;help for command&#39;</span><span class="p">)</span>
+    <span class="n">add_reference_args</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="c1"># Use args.path</span>
+</pre></div>
+</div>
+<p>When there are sub-commands, the base command cannot define arguments, only the sub-commands can do it. If you have a set of common arguments to all sub-commands, you can define a function that adds them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@conan_command</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s2">&quot;MyGroup&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mycommand</span><span class="p">(</span><span class="n">conan_api</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Command help</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Do not define arguments in the base command</span>
+    <span class="k">pass</span>
+
+<span class="nd">@conan_subcommand</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">mycommand_mysubcommand</span><span class="p">(</span><span class="n">conan_api</span><span class="p">:</span> <span class="n">ConanAPI</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">subparser</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subcommand help</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Arguments are added to &quot;subparser&quot;</span>
+    <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Recipe reference or Package reference&quot;</span><span class="p">)</span>
+    <span class="c1"># You can add common args with your helper</span>
+    <span class="c1"># add_my_common_args(subparser)</span>
+    <span class="c1"># But parsing all of them happens to &quot;parser&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="c1"># use args.reference</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="formatters">
+<h2>Formatters<a class="headerlink" href="#formatters" title="Permalink to this headline">¶</a></h2>
 <p>The return of the command will be passed as argument to the formatters. If there are different formatters that
 require different arguments, the approach is to return a dictionary, and let the formatters chose the
 arguments they need. For example, the <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">info</span></code> command uses several formatters like:</p>
@@ -353,9 +392,8 @@ arguments they need. For example, the <code class="docutils literal notranslate"
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="command-function-arguments">
-<h2>Command function arguments<a class="headerlink" href="#command-function-arguments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="commands-parameters">
+<h2>Commands parameters<a class="headerlink" href="#commands-parameters" title="Permalink to this headline">¶</a></h2>
 <p>These are the passed arguments to any custom command and its sub-commands functions:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">cmd_command.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
@@ -431,7 +469,7 @@ the command function will receive them as a Python list-like <code class="docuti
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 19, 2023.
+      Last updated on May 23, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
