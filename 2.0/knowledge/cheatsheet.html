@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Core guidelines &mdash; conan 2.0.5 documentation</title>
+  <title>Cheat sheet &mdash; conan 2.0.5 documentation</title>
   
 
   
@@ -47,8 +47,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="conan 2.0.5 documentation" href="../index.html"/>
         <link rel="up" title="Knowledge" href="../knowledge.html"/>
-        <link rel="next" title="FAQ" href="faq.html"/>
-        <link rel="prev" title="Cheat sheet" href="cheatsheet.html"/>
+        <link rel="next" title="Core guidelines" href="guidelines.html"/>
+        <link rel="prev" title="Knowledge" href="../knowledge.html"/>
 
  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -116,8 +116,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../knowledge.html">Knowledge</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="cheatsheet.html">Cheat sheet</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Core guidelines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guidelines.html">Core guidelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="videos.html">Videos</a></li>
 </ul>
@@ -176,14 +176,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li><a href="../knowledge.html">Knowledge</a> &raquo;</li>
         
-      <li>Core guidelines</li>
+      <li>Cheat sheet</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/conan-io/docs/blob/develop2/knowledge/guidelines.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/conan-io/docs/blob/develop2/knowledge/cheatsheet.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -203,77 +203,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="core-guidelines">
-<h1>Core guidelines<a class="headerlink" href="#core-guidelines" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="good-practices">
-<h2>Good practices<a class="headerlink" href="#good-practices" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><strong>build() should be simple, prepare the builds in generate() instead</strong>:
-The recipes’ <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method purpose is to prepare the build as much as possible.
-Users calling <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code> will execute this method, and the generated files should
-allow users to do “native” builds (calling directly “cmake”, “meson”, etc.) as easy as possible.
-Thus, avoiding as much as possible any logic in the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, and moving it to
-the <code class="docutils literal notranslate"><span class="pre">generate()</span></code> method helps developers achieve the same build locally as the one that
-would be produced by a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> build in the local cache.</li>
-<li><strong>Always use your own profiles in production</strong>, instead of relying on the auto-detected profile,
-as the output of such auto detection can vary over time, resulting in unexpected results.
-Profiles (and many other configuration), can be managed with <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">config</span> <span class="pre">install</span></code>.</li>
-<li><strong>Developers should not be able to upload to “development” and “production” repositories</strong> in the server.
-Only CI builds have write permissions in the server. Developers should only have read permissions and
-at most to some “playground” repositories used to work and share things with colleagues,
-but which packages are never used, moved or copied to the development or production repositories.</li>
-<li><strong>The test_package purpose is to validate the correct creation of the package, not for functional testing</strong>. The <code class="docutils literal notranslate"><span class="pre">test_package</span></code> purpose is to check that the package has been correctly created (that is,
-that it has correctly packaged the headers, the libraries, etc, in the right folders), not that
-the functionality of the package is correct. Then, it should be kept as simple as possible, like
-building and running an executable that uses the headers and links against a packaged library
-should be enough. Such execution should be as simple as possible too. Any kind of
-unit and functional tests should be done in the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method.</li>
-<li><strong>All input sources must be common for all binary configurations</strong>: All the “source” inputs, including the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>, the <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code>, the <code class="docutils literal notranslate"><span class="pre">exports</span></code> and <code class="docutils literal notranslate"><span class="pre">exports_source</span></code>, the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method, patches applied in the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method, cannot be conditional to anything, platform, OS or compiler, as they are shared among all configurations. Furthermore, the line endings for all these things should be the same, it is recommended to use always just line-feeds in all platforms, and do not convert or checkout to <code class="docutils literal notranslate"><span class="pre">crlf</span></code> in Windows, as that will cause different recipe revisions.</li>
-<li><strong>Keep ``python_requires`` as simple as possible</strong>. Avoid transitive <code class="docutils literal notranslate"><span class="pre">python_requires</span></code>, keep them
-as reduced as possible, and at most, require them explicitly in a “flat” structure, without
-<code class="docutils literal notranslate"><span class="pre">python_requires</span></code> requiring other <code class="docutils literal notranslate"><span class="pre">python_requires</span></code>. Avoid inheritance (via <code class="docutils literal notranslate"><span class="pre">python_requires_extend</span></code>)
-if not strictly necessary, and avoid multiple inheritance at all costs, as it is extremely
-complicated, and it does not work the same as the built-in Python one.</li>
-<li>At the moment the <strong>Conan cache is not concurrent</strong>. Avoid any kind of concurrency or parallelism,
-for example different parallel CI jobs should use different caches (with CONAN_HOME env-var). This might
-change in the future and we will work on providing concurrency in the cache, but until then,
-use isolated caches for concurrent tasks.</li>
-<li><strong>Avoid ‘force’ and ‘override’ traits as a versioning mechanism.</strong> The <code class="docutils literal notranslate"><span class="pre">force</span></code> and <code class="docutils literal notranslate"><span class="pre">override</span></code> traits to
-solve conflicts are not recommended as a general versioning solution, just as a temporary workaround to solve
-a version conflict. Its usage should be avoided whenever possible, and updating versions or version ranges in
-the graph to avoid the conflicts without overrides and forces is the recommended approach.</li>
-</ul>
-</div>
-<div class="section" id="forbidden-practices">
-<h2>Forbidden practices<a class="headerlink" href="#forbidden-practices" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><strong>Conan is not re-entrant</strong>: Calling the Conan process from Conan itself cannot be done. That includes calling
-Conan from recipe code, hooks, plugins, and basically every code that already executes when
-Conan is called. Doing it will result in undefined behavior. For example it is not valid
-to run <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">search</span></code> from a <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>. This includes indirect calls, like running
-Conan from a build script (like <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>) while this build script is already being
-executed as a result of a Conan invocation. For the same reason <strong>Conan Python API cannot be used from recipes</strong>: The Conan Python API can only be called from Conan custom commands or from user Python scripts,
-but never from <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> recipes, hooks, extensions, plugins, or any other code
-executed by Conan.</li>
-<li><strong>Settings and configration (conf) are read-only in recipes</strong>: The settings and configuration cannot be defined or assigned values in recipes. Something like <code class="docutils literal notranslate"><span class="pre">self.settings.compiler</span> <span class="pre">=</span> <span class="pre">&quot;gcc&quot;</span></code> in recipes shouldn’t be done. That is undefined behavior and can crash at any time, or just be ignored. Settings and configuration can only be defined in profiles, in command line arguments or in the <code class="docutils literal notranslate"><span class="pre">profile.py</span></code> plugin.</li>
-<li><strong>Recipes reserved names</strong>: Conan <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code> recipes user attributes and methods should always start with <code class="docutils literal notranslate"><span class="pre">_</span></code>.
-Conan reserves the “public” namespace for all attributes and methods, and <code class="docutils literal notranslate"><span class="pre">_conan</span></code> for
-private ones. Using any non-documented Python function, method, class, attribute, even if
-it is “public” in the Python sense, is undefined behavior if such element is not documented
-in this documentation.</li>
-<li><strong>Conan artifacts are immutable</strong>: Conan packages and artifacts, once they are in the Conan cache, they are assumed to be immutable.
-Any attempt to modify the exported sources, the recipe, the conandata.yml or any of the exported
-or the packaged artifacts, is undefined behavior. For example, it is not possible to modify the
-contents of a package inside the  <code class="docutils literal notranslate"><span class="pre">package_info()</span></code> method or the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method, those
-methods should never modify, delete or create new files inside the packages. If you need to modify
-some package, you might use your own custom <code class="docutils literal notranslate"><span class="pre">deployer</span></code>.</li>
-<li><strong>Conan cache paths are internal implementation detail</strong>: The Conan cache paths are an internal implementation detail. Conan recipes provide abstractions
-like <code class="docutils literal notranslate"><span class="pre">self.build_folder</span></code> to represent the necessary information about folders, and commands
-like <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">cache</span> <span class="pre">path</span></code> to get information of the current folders. The Conan cache might
-be checked while debugging, as read-only, but it is not allowed to edit, modify or delete
-artifacts or files from the Conan cache by any other means that Conan command line or public API.</li>
-</ul>
-</div>
+  <div class="section" id="cheat-sheet">
+<h1>Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permalink to this headline">¶</a></h1>
+<p>This is a visual cheat sheet for basic Conan commands and
+concepts which users can print out and use as a handy reference. It is available
+as both a PDF and PNG.</p>
+<blockquote>
+<div><p><a class="reference download internal" href="../_downloads/conan2-cheatsheet-v5.pdf" download=""><code class="xref download docutils literal notranslate"><span class="pre">PDF</span> <span class="pre">Format</span></code></a></p>
+<p><a class="reference download internal" href="../_downloads/conan2-cheatsheet-v5.png" download=""><code class="xref download docutils literal notranslate"><span class="pre">PNG</span> <span class="pre">Format</span></code></a></p>
+</div></blockquote>
+<a class="reference internal image-reference" href="../_images/conan2-cheatsheet-v5.png"><img alt="../_images/conan2-cheatsheet-v5.png" class="align-center" src="../_images/conan2-cheatsheet-v5.png" style="width: 800px; height: 600px;" /></a>
 </div>
 
 
@@ -286,10 +225,10 @@ artifacts or files from the Conan cache by any other means that Conan command li
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="guidelines.html" class="btn btn-neutral float-right" title="Core guidelines" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cheatsheet.html" class="btn btn-neutral" title="Cheat sheet" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../knowledge.html" class="btn btn-neutral" title="Knowledge" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
