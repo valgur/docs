@@ -199,6 +199,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="section" id="may-2023">
 <h2>2.0.5 (18-May-2023)<a class="headerlink" href="#may-2023" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>Feature: <cite>-v</cite> argument defaults to the <cite>VERBOSE</cite> level. <a class="reference external" href="https://github.com/conan-io/conan/pull/13839">#13839</a></li>
+<li>Feature: Avoid showing unnecessary skipped dependencies. Now, it only shows a list of reference names if exists skipped binaries. They can be completely listed by adding <cite>-v</cite> (verbose mode) to the current command. <a class="reference external" href="https://github.com/conan-io/conan/pull/13836">#13836</a></li>
+<li>Feature: Allow step-into dependencies debugging for packages built locally with <code class="docutils literal notranslate"><span class="pre">--build</span></code> <a class="reference external" href="https://github.com/conan-io/conan/pull/13833">#13833</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3210">here</a></li>
+<li>Feature: Allow non relocatable, locally built packages with <code class="docutils literal notranslate"><span class="pre">upload_policy=&quot;skip&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">build_policy=&quot;missing&quot;</span></code> <a class="reference external" href="https://github.com/conan-io/conan/pull/13833">#13833</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3210">here</a></li>
+<li>Feature: Do not move “build” folders in cache when <code class="docutils literal notranslate"><span class="pre">package-revision</span></code> is computed to allow locating sources for dependencies debuggability with step-into <a class="reference external" href="https://github.com/conan-io/conan/pull/13810">#13810</a></li>
+<li>Feature: New <code class="docutils literal notranslate"><span class="pre">settings.possible_values()</span></code> method to query the range of possible values for a setting. <a class="reference external" href="https://github.com/conan-io/conan/pull/13796">#13796</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3212">here</a></li>
+<li>Feature: Optimize and avoid hitting servers for binaries when <code class="docutils literal notranslate"><span class="pre">upload_policy=skip</span></code> <a class="reference external" href="https://github.com/conan-io/conan/pull/13771">#13771</a></li>
+<li>Feature: Partially relativize generated environment .sh shell scripts <a class="reference external" href="https://github.com/conan-io/conan/pull/13764">#13764</a></li>
+<li>Feature: Improve settings.yml error messages <a class="reference external" href="https://github.com/conan-io/conan/pull/13748">#13748</a></li>
+<li>Feature: Auto create empty <code class="docutils literal notranslate"><span class="pre">global.conf</span></code> to improve UX looking for file in home. <a class="reference external" href="https://github.com/conan-io/conan/pull/13746">#13746</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3211">here</a></li>
+<li>Feature: Render the profile file name as profile_name <a class="reference external" href="https://github.com/conan-io/conan/pull/13721">#13721</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3180">here</a></li>
+<li>Feature: New global custom generators in cache “extensions/generators” that can be used by name. <a class="reference external" href="https://github.com/conan-io/conan/pull/13718">#13718</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3213">here</a></li>
+<li>Feature: Improve <strong class="command">conan inspect</strong> output, it now understands <cite>set_name</cite>/<cite>set_version</cite>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13716">#13716</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3204">here</a></li>
+<li>Feature: Define new <code class="docutils literal notranslate"><span class="pre">self.tool_requires(&quot;pkg/&lt;host_version&gt;&quot;)</span></code> to allow some tool-requires to follow and use the same version as the “host” regular requires do. <a class="reference external" href="https://github.com/conan-io/conan/pull/13712">#13712</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3223">here</a></li>
+<li>Feature: Introduce new <code class="docutils literal notranslate"><span class="pre">core:skip_warns</span></code> configuration to be able to silence some warnings in the output. <a class="reference external" href="https://github.com/conan-io/conan/pull/13706">#13706</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3215">here</a></li>
+<li>Feature: Add info_invalid to graph node serialization <a class="reference external" href="https://github.com/conan-io/conan/pull/13688">#13688</a></li>
+<li>Feature: Computing and reporting the <code class="docutils literal notranslate"><span class="pre">overrides</span></code> in the graph, and in the <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">build-order</span></code> <a class="reference external" href="https://github.com/conan-io/conan/pull/13680">#13680</a></li>
+<li>Feature: New <code class="docutils literal notranslate"><span class="pre">revision_mode</span> <span class="pre">=</span> <span class="pre">&quot;scm_folder&quot;</span></code> for mono-repo projects that want to use <code class="docutils literal notranslate"><span class="pre">scm</span></code> revisions. <a class="reference external" href="https://github.com/conan-io/conan/pull/13562">#13562</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3218">here</a></li>
+<li>Feature: Demonstrate that it is possible to <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> different versions of the same package. <a class="reference external" href="https://github.com/conan-io/conan/pull/13529">#13529</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3219">here</a></li>
+<li>Fix: <cite>build_scripts</cite> now set the <cite>run</cite> trait to <cite>True</cite> by default <a class="reference external" href="https://github.com/conan-io/conan/pull/13901">#13901</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3206">here</a></li>
 <li>Fix: Fix XcodeDeps includes skipped dependencies. <a class="reference external" href="https://github.com/conan-io/conan/pull/13880">#13880</a></li>
 <li>Fix: Do not allow line feeds into <code class="docutils literal notranslate"><span class="pre">pkg/version</span></code> reference fields <a class="reference external" href="https://github.com/conan-io/conan/pull/13870">#13870</a></li>
 <li>Fix: Fix <code class="docutils literal notranslate"><span class="pre">AutotoolsToolchain</span></code> definition of  <code class="docutils literal notranslate"><span class="pre">tools.build:compiler_executable</span></code> for Windows subsystems <a class="reference external" href="https://github.com/conan-io/conan/pull/13867">#13867</a></li>
@@ -245,8 +265,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>Bugfix: Fix double delete error in <cite>conan cache clean</cite>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13601">#13601</a></li>
 </ul>
 </div>
-<div class="section" id="id40">
-<h2>2.0.3 (03-Apr-2023)<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id60">
+<h2>2.0.3 (03-Apr-2023)<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Feature: <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">cache</span> <span class="pre">clean</span></code> learned the <code class="docutils literal notranslate"><span class="pre">--all</span></code> and <code class="docutils literal notranslate"><span class="pre">--temp</span></code> to clean everything (sources, builds) and also the temporary folders. <a class="reference external" href="https://github.com/conan-io/conan/pull/13581">#13581</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3145">here</a></li>
 <li>Feature: Introduce the <code class="docutils literal notranslate"><span class="pre">conf</span></code> dictionary update semantics with <code class="docutils literal notranslate"><span class="pre">*=</span></code> operator. <a class="reference external" href="https://github.com/conan-io/conan/pull/13571">#13571</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3141">here</a></li>
@@ -303,8 +323,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>Bugfix: adds qcc cppstd compatibility info to allow dep graph to be calculated. <a class="reference external" href="https://github.com/conan-io/conan/pull/13326">#13326</a></li>
 </ul>
 </div>
-<div class="section" id="id89">
-<h2>2.0.1 (03-Mar-2023)<a class="headerlink" href="#id89" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id109">
+<h2>2.0.1 (03-Mar-2023)<a class="headerlink" href="#id109" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Feature: Add <cite>–insecure</cite> alias to <cite>–verify-ssl</cite> in config install. <a class="reference external" href="https://github.com/conan-io/conan/pull/13270">#13270</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3035">here</a></li>
 <li>Feature: Add <cite>.conanignore</cite> support to <cite>conan config install</cite>. <a class="reference external" href="https://github.com/conan-io/conan/pull/13269">#13269</a> . Docs <a class="reference external" href="https://github.com/conan-io/docs/pull/3036">here</a></li>
@@ -520,7 +540,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 24, 2023.
+      Last updated on May 26, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
