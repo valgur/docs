@@ -360,15 +360,18 @@ how we can take advantage of the capabilities of the <em>conanfile.py</em> to de
 structure we want to follow and also to add some logic using Conan settings and options.</p>
 <div class="section" id="use-the-layout-method">
 <span id="consuming-packages-flexibility-of-conanfile-py-use-layout"></span><h2>Use the layout() method<a class="headerlink" href="#use-the-layout-method" title="Permalink to this headline">¶</a></h2>
-<p>In the previous examples, every time we executed a <cite>conan install</cite> command we had to use
-the <cite>–output-folder argument</cite> to define where we wanted to create the files that Conan
-generates. Also, note that we used a different folder when building in Windows or in
-Linux/macOS depending if we were using a multi-config CMake generator or not. You can
-define this directly in the <cite>conanfile.py</cite> inside the <cite>layout()</cite> method and make it work
-for every platform without adding more changes:</p>
+<p>In the previous examples, every time we executed a <cite>conan install</cite> command, we had to use
+the <cite>–output-folder</cite> argument to define where we wanted to create the files that Conan
+generates. There’s a neater way to decide where we want Conan to generate the files for
+the build system that will allow us to decide, for example, if we want different output
+folders depending on the type of CMake generator we are using. You can define this
+directly in the <cite>conanfile.py</cite> inside the <cite>layout()</cite> method and make it work for every
+platform without adding more changes.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text"><strong>conanfile.py</strong></span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
 
 
 <span class="k">class</span> <span class="nc">CompressorRecipe</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
@@ -384,25 +387,17 @@ for every platform without adding more changes:</p>
     <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># We make the assumption that if the compiler is msvc the</span>
         <span class="c1"># CMake generator is multi-config</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;compiler&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;msvc&quot;</span><span class="p">:</span>
-            <span class="n">multi</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">multi</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;compiler&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;msvc&quot;</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">multi</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">,</span> <span class="s2">&quot;generators&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">multi</span> <span class="o">=</span> <span class="kc">False</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">build</span> <span class="o">=</span> <span class="s2">&quot;build&quot;</span> <span class="k">if</span> <span class="n">multi</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;build/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;build&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">build_type</span><span class="p">),</span> <span class="s2">&quot;generators&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>As you can see, we defined two different attributes for the Conanfile in the <cite>layout()</cite> method:</p>
-<ul class="simple">
-<li><strong>self.folders.build</strong> is the folder where the resulting binaries will be placed. The
-location depends on the type of CMake generator. For multi-config, they will be located
-in a dedicated folder inside the build folder, while for single-config, they will be
-located directly in the build folder.</li>
-<li><strong>self.folders.generators</strong> is the folder where all the auxiliary files generated by
-Conan (CMake toolchain and cmake dependencies files) will be placed.</li>
-</ul>
+<p>As you can see, we defined the <strong>self.folders.generators</strong> attribute in the <cite>layout()</cite>
+method. This is the folder where all the auxiliary files generated by Conan (CMake
+toolchain and cmake dependencies files) will be placed.</p>
 <p>Note that the definitions of the folders is different if it is a multi-config generator
 (like Visual Studio), or a single-config generator (like Unix Makefiles). In the
 first case, the folder is the same irrespective of the build type, and the build system
@@ -416,9 +411,9 @@ multi-config if the compiler name is <cite>msvc</cite>.</p>
 <div class="code-block-caption"><span class="caption-text">Windows</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--build<span class="o">=</span>missing
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
-$<span class="w"> </span>conanbuild.bat
+$<span class="w"> </span>generators<span class="se">\c</span>onanbuild.bat
 <span class="c1"># assuming Visual Studio 15 2017 is your VS version and that it matches your default profile</span>
-$<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Visual Studio 15 2017&quot;</span><span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake
+$<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Visual Studio 15 2017&quot;</span><span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>generators<span class="se">\c</span>onan_toolchain.cmake
 $<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </span>--config<span class="w"> </span>Release
 ...
 Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.22.6
@@ -429,7 +424,7 @@ $<span class="w"> </span>Release<span class="se">\c</span>ompressor.exe
 Uncompressed<span class="w"> </span>size<span class="w"> </span>is:<span class="w"> </span><span class="m">233</span>
 Compressed<span class="w"> </span>size<span class="w"> </span>is:<span class="w"> </span><span class="m">147</span>
 ZLIB<span class="w"> </span>VERSION:<span class="w"> </span><span class="m">1</span>.2.11
-$<span class="w"> </span>deactivate_conanbuild.bat
+$<span class="w"> </span>generators<span class="se">\d</span>eactivate_conanbuild.bat
 </pre></div>
 </div>
 </div>
@@ -437,10 +432,10 @@ $<span class="w"> </span>deactivate_conanbuild.bat
 <div class="code-block-caption"><span class="caption-text">Linux, macOS</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--build<span class="o">=</span>missing
 $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
-$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>conanbuild.sh
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>./Release/generators/conanbuild.sh
 Capturing<span class="w"> </span>current<span class="w"> </span>environment<span class="w"> </span><span class="k">in</span><span class="w"> </span>deactivate_conanbuildenv-release-x86_64.sh
 Configuring<span class="w"> </span>environment<span class="w"> </span>variables
-$<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>conan_toolchain.cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+$<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>Release/generators/conan_toolchain.cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
 $<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.
 ...
 Building<span class="w"> </span>with<span class="w"> </span>CMake<span class="w"> </span>version:<span class="w"> </span><span class="m">3</span>.22.6
@@ -451,7 +446,7 @@ $<span class="w"> </span>./compressor
 Uncompressed<span class="w"> </span>size<span class="w"> </span>is:<span class="w"> </span><span class="m">233</span>
 Compressed<span class="w"> </span>size<span class="w"> </span>is:<span class="w"> </span><span class="m">147</span>
 ZLIB<span class="w"> </span>VERSION:<span class="w"> </span><span class="m">1</span>.2.11
-$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>deactivate_conanbuild.sh
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>./Release/generators/deactivate_conanbuild.sh
 </pre></div>
 </div>
 </div>
