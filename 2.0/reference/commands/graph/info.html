@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan graph info &mdash; conan 2.0.5 documentation</title>
+  <title>conan graph info &mdash; conan 2.0.6 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.5 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.6 documentation" href="../../../index.html"/>
         <link rel="up" title="conan graph" href="../graph.html"/>
         <link rel="next" title="conan graph build-order" href="build_order.html"/>
         <link rel="prev" title="conan graph" href="../graph.html"/>
@@ -142,6 +142,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../source.html">conan source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../test.html">conan test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../upload.html">conan upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../formatters/graph_info_json_formatter.html">Formatter: Graph-info JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../conanfile.html">conanfile.py</a></li>
@@ -240,7 +241,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="conan-graph-info">
-<h1>conan graph info<a class="headerlink" href="#conan-graph-info" title="Permalink to this headline">¶</a></h1>
+<span id="reference-graph-info"></span><h1>conan graph info<a class="headerlink" href="#conan-graph-info" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan graph info -h
 usage: conan graph info [-h] [-f FORMAT] [-v [V]] [--name NAME]
                         [--version VERSION] [--user USER] [--channel CHANNEL]
@@ -367,11 +368,6 @@ optional arguments:
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span> <span class="pre">info</span></code> command shows information about the dependency graph for the recipe specified in <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span> <span class="pre">info</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
-change.</p>
-</div>
 <p><strong>Examples</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>.
 $<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>myproject_folder
@@ -581,13 +577,17 @@ zlib/1.2.13#13c96f538b52e1600c40b88994de240f:
     shared: False
 </pre></div>
 </div>
-<p>You can generate a graph of your dependencies in <code class="docutils literal notranslate"><span class="pre">dot</span></code> or <code class="docutils literal notranslate"><span class="pre">html</span></code> formats:</p>
+<p>You can generate a graph of your dependencies in <code class="docutils literal notranslate"><span class="pre">json</span></code>, <code class="docutils literal notranslate"><span class="pre">dot</span></code> or <code class="docutils literal notranslate"><span class="pre">html</span></code> formats:</p>
+<p>Now, let’s try the <code class="docutils literal notranslate"><span class="pre">dot</span></code> format for instance:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><strong>binutils/2.38 graph info to DOT</strong></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>graph<span class="w"> </span>info<span class="w"> </span>--require<span class="o">=</span>binutils/2.38<span class="w"> </span>-r<span class="o">=</span>conancenter<span class="w"> </span>--format<span class="o">=</span>dot<span class="w"> </span>&gt;<span class="w"> </span>graph.dot
 </pre></div>
 </div>
+</div>
 <p>Which generates the following file:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><strong>graph.dot</strong></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><strong>graph.dot</strong></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-dot notranslate"><div class="highlight"><pre><span></span><span class="k">digraph</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;cli&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">&quot;binutils/2.38&quot;</span>
 <span class="w">        </span><span class="nt">&quot;binutils/2.38&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nt">&quot;zlib/1.2.13&quot;</span>
@@ -612,6 +612,12 @@ to point to a local version of these files:</p>
 <li><em>vis.min.css</em>: “<a class="reference external" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css">https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css</a>”</li>
 </ul>
 <p class="last">You can use the template found in <code class="docutils literal notranslate"><span class="pre">cli/formatters/graph/info_graph.html</span></code> as a basis for your own.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>Check the <a class="reference internal" href="../formatters/graph_info_json_formatter.html#reference-commands-graph-info-json-format"><span class="std std-ref">JSON format output</span></a> for this command.</li>
+</ul>
 </div>
 </div>
 
@@ -638,7 +644,7 @@ to point to a local version of these files:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 26, 2023.
+      Last updated on May 27, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1045,7 +1051,7 @@ to point to a local version of these files:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.5',
+            VERSION:'2.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

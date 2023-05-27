@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan install &mdash; conan 2.0.5 documentation</title>
+  <title>conan install &mdash; conan 2.0.6 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan list" href="list.html"/>
         <link rel="prev" title="conan inspect" href="inspect.html"/>
@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="source.html">conan source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">conan test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="upload.html">conan upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="formatters/graph_info_json_formatter.html">Formatter: Graph-info JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
@@ -379,10 +380,11 @@ dependency version is desired, it should be explicitly required.</li>
 <li>Create the necessary files as requested by the “generators”, so build systems and other tools can locate the locally installed dependencies</li>
 <li>Optionally, execute the desired <code class="docutils literal notranslate"><span class="pre">deployers</span></code>.</li>
 </ul>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
-change.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>Check the <a class="reference internal" href="formatters/graph_info_json_formatter.html#reference-commands-graph-info-json-format"><span class="std std-ref">JSON format output</span></a> for this command.</li>
+</ul>
 </div>
 <div class="section" id="conanfile-path-or-requires">
 <h2>Conanfile path or –requires<a class="headerlink" href="#conanfile-path-or-requires" title="Permalink to this headline">¶</a></h2>
@@ -537,7 +539,7 @@ it should not be necessary in the vast majority of cases, so it is discouraged i
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 26, 2023.
+      Last updated on May 27, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -944,7 +946,7 @@ it should not be necessary in the vast majority of cases, so it is discouraged i
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.5',
+            VERSION:'2.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

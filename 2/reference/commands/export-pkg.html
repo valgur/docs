@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan export-pkg &mdash; conan 2.0.5 documentation</title>
+  <title>conan export-pkg &mdash; conan 2.0.6 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan new" href="new.html"/>
         <link rel="prev" title="conan export" href="export.html"/>
@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="source.html">conan source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">conan test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="upload.html">conan upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="formatters/graph_info_json_formatter.html">Formatter: Graph-info JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
@@ -305,15 +306,11 @@ optional arguments:
 <li>When testing some recipe locally in the <a class="reference internal" href="../../tutorial/developing_packages/local_package_development_flow.html#local-package-development-flow"><span class="std std-ref">local development flow</span></a>, it can be used to quickly put the locally built binaries in the cache to make them available to other packages for testing, without needing to go through a full <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> that would be slower.</li>
 </ul>
 <p>In general, it is expected that when <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export-pkg</span></code> executes, the possible Conan dependencies that were necessary to build this package had already been installed via <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">install</span></code>, so it is not necessary to download dependencies at <code class="docutils literal notranslate"><span class="pre">export-pkg</span></code> time. But if for some reason this is not the case, the command defines <code class="docutils literal notranslate"><span class="pre">--remote</span></code> and <code class="docutils literal notranslate"><span class="pre">--no-remote</span></code> arguments, similar to other commands, as well as the <code class="docutils literal notranslate"><span class="pre">--skip-binaries</span></code> optimization that could save some time installing dependencies binaries if they are not strictly necessary for the current <code class="docutils literal notranslate"><span class="pre">export-pkg</span></code>. But this is the responsibility of the user, as it is possible that such binaries are actually necessary, for example, if a <code class="docutils literal notranslate"><span class="pre">tool_requires</span> <span class="pre">=</span> <span class="pre">&quot;cmake/x.y&quot;</span></code> is used and the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method implements a <code class="docutils literal notranslate"><span class="pre">cmake.install()</span></code> call, this will definitely need the binaries for the dependencies installed in the current machine to execute.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">export-pkg</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
-change.</p>
-</div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
-<li>Read the tutorial about the <a class="reference internal" href="../../tutorial/developing_packages/local_package_development_flow.html#local-package-development-flow"><span class="std std-ref">local package developement flow</span></a>.</li>
+<li>Check the <a class="reference internal" href="formatters/graph_info_json_formatter.html#reference-commands-graph-info-json-format"><span class="std std-ref">JSON format output</span></a> for this command.</li>
+<li>Read the tutorial about the <a class="reference internal" href="../../tutorial/developing_packages/local_package_development_flow.html#local-package-development-flow"><span class="std std-ref">local package development flow</span></a>.</li>
 </ul>
 </div>
 </div>
@@ -341,7 +338,7 @@ change.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 26, 2023.
+      Last updated on May 27, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -748,7 +745,7 @@ change.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.5',
+            VERSION:'2.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

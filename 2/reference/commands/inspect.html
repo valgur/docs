@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan inspect &mdash; conan 2.0.5 documentation</title>
+  <title>conan inspect &mdash; conan 2.0.6 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan install" href="install.html"/>
         <link rel="prev" title="conan graph build-order-merge" href="graph/build_order_merge.html"/>
@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="source.html">conan source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">conan test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="upload.html">conan upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="formatters/graph_info_json_formatter.html">Formatter: Graph-info JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
@@ -306,11 +307,13 @@ topics: [&#39;png&#39;, &#39;graphics&#39;, &#39;image&#39;]
 url: https://github.com/conan-io/conan-center-index
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">inspect</span></code> evaluates recipe methods such as <code class="docutils literal notranslate"><span class="pre">set_name()</span></code> and <code class="docutils literal notranslate"><span class="pre">set_version()</span></code>,
+<p><code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">inspect</span></code> evaluates recipe methods such as <code class="docutils literal notranslate"><span class="pre">set_name()</span></code> and <code class="docutils literal notranslate"><span class="pre">set_version()</span></code>,
 and is capable of resolving <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> dependencies (which can be locked with the <code class="docutils literal notranslate"><span class="pre">--lockfile</span></code> argument),
 so its base methods will also be properly executed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">--remote</span></code> argument is used <em>only</em> for fetching remote <code class="docutils literal notranslate"><span class="pre">python_requires</span></code> in cases where they are needed,
+<strong>not</strong> to inspect recipes from a remote. Use <a class="reference internal" href="graph/info.html#reference-graph-info"><span class="std std-ref">conan graph info</span></a> for such cases.</p>
 </div>
 <p>The <strong class="command">conan inspect ... --format=json</strong> returns a JSON output format in <code class="docutils literal notranslate"><span class="pre">stdout</span></code> (which can be redirected to a file) with the following structure:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan inspect . --format=json
@@ -421,7 +424,7 @@ only those present in the <code class="docutils literal notranslate"><span class
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 26, 2023.
+      Last updated on May 27, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -828,7 +831,7 @@ only those present in the <code class="docutils literal notranslate"><span class
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.5',
+            VERSION:'2.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

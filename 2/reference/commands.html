@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Commands &mdash; conan 2.0.5 documentation</title>
+  <title>Commands &mdash; conan 2.0.6 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 2.0.5 documentation" href="../index.html"/>
+    <link rel="top" title="conan 2.0.6 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="conan cache" href="commands/cache.html"/>
         <link rel="prev" title="Reference" href="../reference.html"/>
@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="commands/source.html">conan source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/test.html">conan test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/upload.html">conan upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands/formatters/graph_info_json_formatter.html">Formatter: Graph-info JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="conanfile.html">conanfile.py</a></li>
@@ -266,6 +267,18 @@ and these <a class="reference internal" href="../examples/extensions/commands/cu
 <li><a class="reference internal" href="commands/test.html"><span class="doc">conan test</span></a>: Test a package</li>
 <li><a class="reference internal" href="commands/upload.html"><span class="doc">conan upload</span></a>: Upload packages from the local cache to a specified remote</li>
 </ul>
+<div class="section" id="command-formatters">
+<h2>Command formatters<a class="headerlink" href="#command-formatters" title="Permalink to this headline">¶</a></h2>
+<p>Almost all the commands have the parameter <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">xxxx</span></code> which is used to apply an output conversion.
+The command formatters help users see the command output in a different way that could fit better with their needs.
+Here, there are only some of the most important ones whose details are worthy of having a separate section.</p>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="commands/formatters/graph_info_json_formatter.html"><span class="doc">graph-info formatter</span></a>: Show the graph information in JSON
+format. It’s used by several commands.</li>
+</ul>
+</div>
 </div>
 
 
@@ -291,7 +304,7 @@ and these <a class="reference internal" href="../examples/extensions/commands/cu
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 26, 2023.
+      Last updated on May 27, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -698,7 +711,7 @@ and these <a class="reference internal" href="../examples/extensions/commands/cu
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.0.5',
+            VERSION:'2.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

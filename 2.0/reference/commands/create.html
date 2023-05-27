@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan create &mdash; conan 2.0.5 documentation</title>
+  <title>conan create &mdash; conan 2.0.6 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.5 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan download" href="download.html"/>
         <link rel="prev" title="conan build" href="build.html"/>
@@ -137,6 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="source.html">conan source</a></li>
 <li class="toctree-l3"><a class="reference internal" href="test.html">conan test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="upload.html">conan upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="formatters/graph_info_json_formatter.html">Formatter: Graph-info JSON</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../conanfile.html">conanfile.py</a></li>
@@ -348,11 +349,6 @@ optional arguments:
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> command creates a package from the recipe specified in <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The json output of the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span> <span class="pre">--format=json</span></code> is <strong>experimental</strong> and subject to
-change.</p>
-</div>
 <p>This command will first ::comnand::<cite>export</cite> the recipe to the local cache and then build
 and create the package. If a <code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder (you can change the folder name with
 the <code class="docutils literal notranslate"><span class="pre">-tf</span></code> argument) is found, the command will run the consumer project to ensure that
@@ -364,6 +360,12 @@ the test package stage by passing an empty value as the <code class="docutils li
 <div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>create<span class="w"> </span>.<span class="w"> </span>--test-folder<span class="o">=</span>
 </pre></div>
 </div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li>Check the <a class="reference internal" href="formatters/graph_info_json_formatter.html#reference-commands-graph-info-json-format"><span class="std std-ref">JSON format output</span></a> for this command.</li>
+</ul>
 </div>
 <div class="section" id="using-conan-create-with-build-requirements">
 <h2>Using conan create with build requirements<a class="headerlink" href="#using-conan-create-with-build-requirements" title="Permalink to this headline">¶</a></h2>
@@ -406,7 +408,7 @@ tutorial</span></a></li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 26, 2023.
+      Last updated on May 27, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -813,7 +815,7 @@ tutorial</span></a></li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.5',
+            VERSION:'2.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
