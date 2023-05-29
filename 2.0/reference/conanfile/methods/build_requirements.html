@@ -252,7 +252,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>For simple cases the attribute syntax can be enough, like <code class="docutils literal notranslate"><span class="pre">tool_requires</span> <span class="pre">=</span> <span class="pre">&quot;cmake/3.23.5&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">test_requires</span> <span class="pre">=</span> <span class="pre">&quot;gtest/1.13.0&quot;</span></code>. The method form can be necessary for conditional or parameterized requirements.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> and <code class="docutils literal notranslate"><span class="pre">test_requires</span></code> methods are just a specialized instance of <code class="docutils literal notranslate"><span class="pre">requires</span></code> with some predefined trait values. See the <a class="reference internal" href="requirements.html#reference-conanfile-methods-requirements"><span class="std std-ref">requires() reference</span></a> for more information about traits.</p>
 <div class="section" id="tool-requires">
-<h2>tool_requires<a class="headerlink" href="#tool-requires" title="Permalink to this headline">¶</a></h2>
+<h2>tool_requires()<a class="headerlink" href="#tool-requires" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">requires()</span></code> with the following traits:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">build=True</span></code>. This dependency is in the “build” context, being necessary at build time, but not at application runtime, and will receive the “build” profile and configuration.</li>
@@ -296,6 +296,12 @@ always matches the one for the host requirement.</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">&lt;host_version&gt;</span></code> defined upstream is ensuring that the host and build contexts are using the same version of that requirement.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../../../examples/graph/tool_requires/using_protobuf.html#examples-graph-tool-requires-protobuf"><span class="std std-ref">Using the same requirement as a requires and as a tool_requires</span></a></li>
+</ul>
+</div>
 </div>
 </div>
 <div class="section" id="test-requires">
@@ -323,6 +329,7 @@ always matches the one for the host requirement.</p>
 <ul class="last simple">
 <li>Follow the <a class="reference internal" href="../../../tutorial/consuming_packages/use_tools_as_conan_packages.html#consuming-packages-tool-requires"><span class="std std-ref">tutorial about consuming Conan packages as tools</span></a>.</li>
 <li>Read the <a class="reference internal" href="../../../tutorial/creating_packages/other_types_of_packages/tool_requires_packages.html#tutorial-other-tool-requires-packages"><span class="std std-ref">tutorial about creating tool_requires packages</span></a>.</li>
+<li><a class="reference internal" href="../../../examples/graph/tool_requires/using_protobuf.html#examples-graph-tool-requires-protobuf"><span class="std std-ref">Using the same requirement as a requires and as a tool_requires</span></a></li>
 </ul>
 </div>
 </div>
@@ -351,7 +358,7 @@ always matches the one for the host requirement.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on May 27, 2023.
+      Last updated on May 29, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
