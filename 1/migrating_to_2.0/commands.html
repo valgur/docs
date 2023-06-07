@@ -114,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="properties.html">Migrating legacy cpp_info attributes to set_property()</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#changes-to-expect">Changes to expect</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#json-output-in-2-x-commands">JSON output in 2.X commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conan-install">conan install</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">conan install</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conan-create">conan create</a></li>
@@ -249,6 +250,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 You will need to adapt to the new commands once you migrate to Conan 2.0</p>
 <div class="section" id="changes-to-expect">
 <h2>Changes to expect<a class="headerlink" href="#changes-to-expect" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="json-output-in-2-x-commands">
+<h3>JSON output in 2.X commands<a class="headerlink" href="#json-output-in-2-x-commands" title="Permalink to this headline">¶</a></h3>
+<p>In Conan version 1.X, you can use the <code class="docutils literal notranslate"><span class="pre">--json</span></code> flag followed by the path to the output
+file when executing commands. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>create<span class="w"> </span>...<span class="w"> </span>--json<span class="o">=</span>path/to/file.json
+</pre></div>
+</div>
+<p>Starting with Conan version 2.0, you are expected to use the <code class="docutils literal notranslate"><span class="pre">--format</span></code> flag followed by
+the output format type, and redirect standard output to a file. The same command in
+version 2.0 would be:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>create<span class="w"> </span>...<span class="w"> </span>--format<span class="o">=</span>json<span class="w"> </span>&gt;<span class="w"> </span>path/to/file.json
+</pre></div>
+</div>
+<p>For more information, please check the <a class="reference external" href="https://docs.conan.io/2/reference/commands.html">Conan 2 commands reference</a></p>
+</div>
 <div class="section" id="conan-install">
 <h3>conan install<a class="headerlink" href="#conan-install" title="Permalink to this headline">¶</a></h3>
 <p>Almost the same command, the major change is the way to specify (or complete if not defined) the fields of the reference.
@@ -437,7 +453,7 @@ WIP documentation.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2022, JFrog.
-      Last updated on Jun 06, 2023.
+      Last updated on Jun 07, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
