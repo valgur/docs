@@ -245,8 +245,8 @@ $<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>examp
 <p>The folder also contains a standard <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and a <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> source file that can create
 an executable that links with <code class="docutils literal notranslate"><span class="pre">zlib</span></code> library.</p>
 <p>We can install the Debug and Release dependencies, and deploy a local copy of the packages with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--deploy<span class="o">=</span>full_deploy<span class="w"> </span>--build<span class="o">=</span>missing
-$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--deploy<span class="o">=</span>full_deploy<span class="w"> </span>-s<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>Debug<span class="w"> </span>--build<span class="o">=</span>missing
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--deployer<span class="o">=</span>full_deploy<span class="w"> </span>--build<span class="o">=</span>missing
+$<span class="w"> </span>conan<span class="w"> </span>install<span class="w"> </span>.<span class="w"> </span>--deployer<span class="o">=</span>full_deploy<span class="w"> </span>-s<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>Debug<span class="w"> </span>--build<span class="o">=</span>missing
 </pre></div>
 </div>
 <p>This will create the following folders:</p>
