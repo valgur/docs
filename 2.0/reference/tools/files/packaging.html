@@ -236,62 +236,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="conan-tools-files-autopackager">
 <span id="conan-tools-files-packaging"></span><h1>conan.tools.files AutoPackager<a class="headerlink" href="#conan-tools-files-autopackager" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">AutoPackager</span></code> together with the layout() feature, allow to automatically
-package the files following the declared information in the <code class="docutils literal notranslate"><span class="pre">layout()</span></code> method:</p>
-<p>It will copy:</p>
-<ul class="simple">
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.includedirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.includedirs</span></code></li>
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.libdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.libdirs</span></code></li>
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.bindirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.bindirs</span></code></li>
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.srcdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.srcdirs</span></code></li>
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.builddirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.builddirs</span></code></li>
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.resdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.resdirs</span></code></li>
-<li>Files from <code class="docutils literal notranslate"><span class="pre">self.cpp.local.frameworkdirs</span></code> to <code class="docutils literal notranslate"><span class="pre">self.cpp.package.frameworkdirs</span></code></li>
-</ul>
-<p>The patterns of the files to be copied can be defined with the <cite>.patterns</cite> property of the <code class="docutils literal notranslate"><span class="pre">AutoPackager</span></code> instance.
-The default patterns are:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">packager</span> <span class="o">=</span> <span class="n">AutoPackager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">include</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="s2">&quot;*.hpp&quot;</span><span class="p">,</span> <span class="s2">&quot;*.hxx&quot;</span><span class="p">]</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">lib</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;*.so&quot;</span><span class="p">,</span> <span class="s2">&quot;*.so.*&quot;</span><span class="p">,</span> <span class="s2">&quot;*.a&quot;</span><span class="p">,</span> <span class="s2">&quot;*.lib&quot;</span><span class="p">,</span> <span class="s2">&quot;*.dylib&quot;</span><span class="p">]</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">bin</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;*.exe&quot;</span><span class="p">,</span> <span class="s2">&quot;*.dll&quot;</span><span class="p">]</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">src</span> <span class="o">==</span> <span class="p">[]</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">build</span> <span class="o">==</span> <span class="p">[]</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">res</span> <span class="o">==</span> <span class="p">[]</span>
-<span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">framework</span> <span class="o">==</span> <span class="p">[]</span>
-</pre></div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This feature is <strong>deprecated</strong>, and will be removed in future Conan 2.0.X version.
+It was used to automatically deduce what to <code class="docutils literal notranslate"><span class="pre">copy()</span></code> in the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method.</p>
+<p class="last">The recommended approach is to use explicit <code class="docutils literal notranslate"><span class="pre">copy()</span></code> calls in the <code class="docutils literal notranslate"><span class="pre">package()</span></code> method, as explained
+in the rest of the documentation.</p>
 </div>
-<p>Usage:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
-<span class="kn">from</span> <span class="nn">conan.tools.files</span> <span class="kn">import</span> <span class="n">AutoPackager</span>
-
-<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span>
-
-    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">packager</span> <span class="o">=</span> <span class="n">AutoPackager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">include</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.hpp&quot;</span><span class="p">,</span> <span class="s2">&quot;*.h&quot;</span><span class="p">,</span> <span class="s2">&quot;include3.h&quot;</span><span class="p">]</span>
-        <span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">lib</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.a&quot;</span><span class="p">]</span>
-        <span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">bin</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.exe&quot;</span><span class="p">]</span>
-        <span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">src</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;*.cpp&quot;</span><span class="p">]</span>
-        <span class="n">packager</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">framework</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sframe*&quot;</span><span class="p">,</span> <span class="s2">&quot;bframe*&quot;</span><span class="p">]</span>
-        <span class="n">packager</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-<dl class="class">
-<dt id="conan.tools.files.AutoPackager">
-<em class="property">class </em><code class="descname">AutoPackager</code><span class="sig-paren">(</span><em>conanfile</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.files.AutoPackager" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>conanfile</strong> – The current recipe object. Always use <code class="docutils literal notranslate"><span class="pre">self</span></code>.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 
 
@@ -317,7 +268,7 @@ The default patterns are:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 12, 2023.
+      Last updated on Jun 13, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
