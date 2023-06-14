@@ -247,7 +247,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="commands">
 <h1>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h1>
 <p>There is no “compatible with 2.X” commands introduced in Conan 1.X.
-You will need to adapt to the new commands once you migrate to Conan 2.0</p>
+You will need to adapt to the new commands once you migrate to Conan 2.0.</p>
+<p>For a comparison of some 1.x versus 2.0 commands, see the
+<a class="reference external" href="https://blog.conan.io/2023/06/07/New-Cheat-Sheet-For-Conan-2.html">Conan 2.0 Cheat Sheet Blog Post</a>.</p>
 <div class="section" id="changes-to-expect">
 <h2>Changes to expect<a class="headerlink" href="#changes-to-expect" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="json-output-in-2-x-commands">
@@ -343,7 +345,7 @@ zlib
 </div>
 </div>
 <div class="section" id="conan-remote-login">
-<span id="conan-v2-remote-login"></span><h3>conan remote login<a class="headerlink" href="#conan-remote-login" title="Permalink to this headline">¶</a></h3>
+<h3>conan remote login<a class="headerlink" href="#conan-remote-login" title="Permalink to this headline">¶</a></h3>
 <p>This is the substitute of the old “conan user”.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>remote<span class="w"> </span>login<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f<span class="w"> </span>FORMAT<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="w"> </span><span class="o">[</span>V<span class="o">]]</span><span class="w"> </span><span class="o">[</span>--logger<span class="o">]</span><span class="w"> </span><span class="o">[</span>-p<span class="w"> </span><span class="o">[</span>PASSWORD<span class="o">]]</span><span class="w"> </span>remote<span class="w"> </span>username
 </pre></div>
@@ -415,7 +417,7 @@ server-side, copying packages from one server repository to another repository.<
 </div>
 <div class="section" id="removed-conan-user">
 <h3>Removed “conan user”<a class="headerlink" href="#removed-conan-user" title="Permalink to this headline">¶</a></h3>
-<p>This has been replaced with :ref:&lt;conan_v2_remote_login&gt;</p>
+<p>This has been replaced with the <a class="reference external" href="https://docs.conan.io/2/reference/commands/remote.html#conan-remote-login">remote login command</a> in 2.0.</p>
 </div>
 <div class="section" id="removed-conan-config-set">
 <h3>Removed “conan config set”<a class="headerlink" href="#removed-conan-config-set" title="Permalink to this headline">¶</a></h3>
@@ -426,7 +428,7 @@ the file is updated with <cite>conan config install</cite>. Alternatively, you c
 <div class="section" id="custom-commands">
 <h2>Custom commands<a class="headerlink" href="#custom-commands" title="Permalink to this headline">¶</a></h2>
 <p>You can build custom commands on top of the Conan Python API.
-WIP documentation.</p>
+Refer to the <a class="reference external" href="https://docs.conan.io/2/reference/extensions/custom_commands.html">Conan 2.0 documentation for custom commands</a>.</p>
 </div>
 </div>
 
@@ -453,7 +455,7 @@ WIP documentation.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2022, JFrog.
-      Last updated on Jun 07, 2023.
+      Last updated on Jun 14, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
