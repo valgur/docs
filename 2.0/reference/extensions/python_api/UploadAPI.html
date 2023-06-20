@@ -256,10 +256,14 @@ the package_list in that case</p>
 
 <dl class="method">
 <dt id="conan.api.subapi.upload.UploadAPI.prepare">
-<code class="descname">prepare</code><span class="sig-paren">(</span><em>package_list</em>, <em>enabled_remotes</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.api.subapi.upload.UploadAPI.prepare" title="Permalink to this definition">¶</a></dt>
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>package_list</em>, <em>enabled_remotes</em>, <em>metadata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.api.subapi.upload.UploadAPI.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compress the recipes and packages and fill the upload_data objects
 with the complete information. It doesn’t perform the upload nor checks upstream to see
-if the recipe is still there</p>
+if the recipe is still there
+:param package_list:
+:param enabled_remotes:
+:param metadata: A list of patterns of metadata that should be uploaded. Default None
+means all metadata will be uploaded together with the pkg artifacts</p>
 </dd></dl>
 
 </dd></dl>
@@ -289,7 +293,7 @@ if the recipe is still there</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 15, 2023.
+      Last updated on Jun 20, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
