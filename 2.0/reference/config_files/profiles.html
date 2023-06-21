@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>profiles &mdash; conan 2.0.6 documentation</title>
+  <title>profiles &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="settings.yml" href="settings.html"/>
         <link rel="prev" title="global.conf" href="global_conf.html"/>
@@ -412,7 +412,8 @@ cmake/3.25.2
 <span id="reference-config-files-profiles-system-tools"></span><h3>[system_tools]<a class="headerlink" href="#system-tools" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This feature is experimental and subject to breaking changes.</p>
+<p class="last">This feature is experimental and subject to breaking changes.
+See <a class="reference internal" href="../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
 </div>
 <p>This section is similar to the previous one, <strong>[tool_requires]</strong>, but it’s intended to list only the tool requires
 that are already in your own system and you don’t want Conan to search for, neither remotely nor locally.</p>
@@ -587,7 +588,7 @@ MyPath1=!
 <div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text"><em>myprofile</em></span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[conf]
-tools.build:verbosity=debug
+tools.build:verbosity=verbose
 tools.microsoft.msbuild:max_cpu_count=2
 tools.microsoft.msbuild:vs_version = 16
 tools.build:jobs=10
@@ -866,7 +867,7 @@ zlib*:compiler.version=3.5
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1273,7 +1274,7 @@ zlib*:compiler.version=3.5
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

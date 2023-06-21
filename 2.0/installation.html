@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Install &mdash; conan 2.0.6 documentation</title>
+  <title>Install &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="index.html"/>
         <link rel="next" title="Tutorial" href="tutorial.html"/>
         <link rel="prev" title="What’s new in Conan 2.0" href="whatsnew.html"/>
 
@@ -251,10 +251,13 @@ installation, so Conan is found in the path.</li>
 <div class="section" id="use-a-system-installer-or-create-a-self-contained-executable">
 <h2>Use a system installer or create a self-contained executable<a class="headerlink" href="#use-a-system-installer-or-create-a-self-contained-executable" title="Permalink to this headline">¶</a></h2>
 <p>There will be a number of existing installers in <a class="reference external" href="https://conan.io/downloads">Conan downloads</a> for OSX Brew, Debian, Windows, Linux Arch, that will not require Python first.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">These installers are not available at the moment of the 2.0 launch, but we will work to make them available after the launch.
-Please use the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> or create your own self-contained executable using this instructions in the meantime.</p>
+<p>We also distribute <a class="reference external" href="https://github.com/conan-io/conan/releases/latest">Conan binaries</a> for Windows, Linux, and macOS in a compressed file
+that you can uncompress in your system and run directly.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you are using <strong>macOS</strong>, please be aware of the Gatekeeper feature that may
+quarantine the compressed binaries if downloaded directly using a web browser. To
+avoid this issue, download them using a tool such as <cite>curl</cite>, <cite>wget</cite>, or similar.</p>
 </div>
 <p>If there is no installer for your platform, you can create your own Conan executable, with the <code class="docutils literal notranslate"><span class="pre">pyinstaller.py</span></code> utility in the repo. This process is able to create a self-contained Conan executable that contains all it needs,
 including the Python interpreter, so it wouldn’t be necessary to have Python installed in the system.</p>
@@ -313,7 +316,7 @@ $<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -720,7 +723,7 @@ $<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Graph examples &mdash; conan 2.0.6 documentation</title>
+  <title>Graph examples &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,9 +45,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../index.html"/>
         <link rel="up" title="Examples" href="../examples.html"/>
-        <link rel="next" title="Depending on different versions of the same tool-require" href="graph/tool_requires/different_versions.html"/>
+        <link rel="next" title="Use a CMake macro packaged in a dependency" href="graph/requires/consume_cmake_macro.html"/>
         <link rel="prev" title="Customize your settings: create your settings_user.yml" href="config_files/settings/settings_user.html"/>
 
  <!-- Google Tag Manager -->
@@ -120,12 +120,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="cross_build.html">Cross-building examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files examples</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Graph examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="graph/requires/consume_cmake_macro.html">Use a CMake macro packaged in a dependency</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graph/tool_requires/different_versions.html">Depending on different versions of the same tool-require</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graph/tool_requires/different_options.html">Depending on same version of a tool-require with different options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="graph/tool_requires/using_protobuf.html">Using the same requirement as a requires and as a tool_requires</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="dev_flow.html">Developer tools and flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Conan commands examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
@@ -217,6 +219,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 advanced usage of requirement traits, etc.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="graph/requires/consume_cmake_macro.html">Use a CMake macro packaged in a dependency</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graph/tool_requires/different_versions.html">Depending on different versions of the same tool-require</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graph/tool_requires/different_options.html">Depending on same version of a tool-require with different options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graph/tool_requires/using_protobuf.html">Using the same requirement as a requires and as a tool_requires</a></li>
@@ -234,7 +237,7 @@ advanced usage of requirement traits, etc.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="graph/tool_requires/different_versions.html" class="btn btn-neutral float-right" title="Depending on different versions of the same tool-require" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="graph/requires/consume_cmake_macro.html" class="btn btn-neutral float-right" title="Use a CMake macro packaged in a dependency" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="config_files/settings/settings_user.html" class="btn btn-neutral" title="Customize your settings: create your settings_user.yml" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -247,7 +250,7 @@ advanced usage of requirement traits, etc.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -654,7 +657,7 @@ advanced usage of requirement traits, etc.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

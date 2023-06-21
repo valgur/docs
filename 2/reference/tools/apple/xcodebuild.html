@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>XcodeBuild &mdash; conan 2.0.6 documentation</title>
+  <title>XcodeBuild &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.apple" href="../apple.html"/>
         <link rel="next" title="conan.tools.apple.fix_apple_shared_install_name()" href="other.html"/>
         <link rel="prev" title="XcodeToolchain" href="xcodetoolchain.html"/>
@@ -141,6 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html">conan.tools.CppInfo</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
@@ -306,13 +307,14 @@ take preference and will directly pass <code class="docutils literal notranslate
 account</strong> that for this case the skd located in that path should set your <code class="docutils literal notranslate"><span class="pre">os.sdk</span></code> and
 <code class="docutils literal notranslate"><span class="pre">os.sdk_version</span></code> settings values.</li>
 <li><code class="docutils literal notranslate"><span class="pre">verbosity</span></code> is the verbosity level for the build and can take value ‘verbose’ or
-‘quiet’ if set by <code class="docutils literal notranslate"><span class="pre">tools.build:verbosity</span></code> by mapping the conf’s possible values from your <strong>[conf]</strong></li>
+‘quiet’ if set by <code class="docutils literal notranslate"><span class="pre">tools.build:verbosity</span></code> in your <strong>[conf]</strong></li>
 </ul>
 </div>
 <div class="section" id="conf">
 <h2>conf<a class="headerlink" href="#conf" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">tools.apple.xcodebuild:verbosity</span></code> verbosity value for the build, can be ‘verbose’ or ‘quiet’</li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.build:verbosity</span></code> (or <code class="docutils literal notranslate"><span class="pre">tools.compilation:verbosity</span></code> as fallback) which accepts <code class="docutils literal notranslate"><span class="pre">quiet</span></code> or <code class="docutils literal notranslate"><span class="pre">verbose</span></code>,
+and sets the <code class="docutils literal notranslate"><span class="pre">-verbose</span></code> or <code class="docutils literal notranslate"><span class="pre">-quiet</span></code> flags in <code class="docutils literal notranslate"><span class="pre">XcodeBuild.install()</span></code></li>
 <li><code class="docutils literal notranslate"><span class="pre">tools.apple:sdk_path</span></code> path for the sdk location, will set the <code class="docutils literal notranslate"><span class="pre">SDKROOT</span></code> value with
 preference over composing the value from the <code class="docutils literal notranslate"><span class="pre">os.sdk</span></code> and <code class="docutils literal notranslate"><span class="pre">os.sdk_version</span></code> settings.</li>
 </ul>
@@ -342,7 +344,7 @@ preference over composing the value from the <code class="docutils literal notra
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -749,7 +751,7 @@ preference over composing the value from the <code class="docutils literal notra
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Git &mdash; conan 2.0.6 documentation</title>
+  <title>Git &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.scm" href="../scm.html"/>
         <link rel="next" title="Version" href="version.html"/>
         <link rel="prev" title="conan.tools.scm" href="../scm.html"/>
@@ -136,6 +136,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html">conan.tools.CppInfo</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
@@ -232,6 +233,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
   <div class="section" id="git">
 <span id="conan-tools-scm-git"></span><h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Git</span></code> helper is a thin wrapper over the <code class="docutils literal notranslate"><span class="pre">git</span></code> command. It can be used for different purposes:
+- Obtaining the current tag in the <code class="docutils literal notranslate"><span class="pre">set_version()</span></code> method to assign it to <code class="docutils literal notranslate"><span class="pre">self.version</span></code>
+- Clone sources in third-party or open source package recipes in the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method (in general, doing a <code class="docutils literal notranslate"><span class="pre">download()</span></code> or <code class="docutils literal notranslate"><span class="pre">get()</span></code> to fetch release tarballs will be preferred)
+- Capturing the “scm” coordinates (url, commit) of your own package sources in the <code class="docutils literal notranslate"><span class="pre">export()</span></code> method, to be able to reproduce a build from source later, retrieving the code in the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method. See the <a class="reference internal" href="../../../examples/tools/scm/git/capture_scm/git_capture_scm.html#examples-tools-scm-git-capture"><span class="std std-ref">example of git-scm capture</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Git()</span></code> constructor receives the current folder as argument, but that can be changed if necessary, for example, to clone the sources of some repo in <code class="docutils literal notranslate"><span class="pre">source()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="n">git</span> <span class="o">=</span> <span class="n">Git</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># by default, the current folder &quot;.&quot;</span>
+   <span class="n">git</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;&lt;repourl&gt;&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">)</span> <span class="c1"># git clone url target</span>
+   <span class="c1"># we need to cd directory for next command &quot;checkout&quot; to work</span>
+   <span class="n">git</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;target&quot;</span>                       <span class="c1"># cd target</span>
+   <span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="s2">&quot;&lt;commit&gt;&quot;</span><span class="p">)</span>             <span class="c1"># git checkout commit</span>
+</pre></div>
+</div>
+<p>An alternative, equivalent approach would be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="n">git</span> <span class="o">=</span> <span class="n">Git</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">)</span>
+   <span class="c1"># Cloning in current dir, not a children folder</span>
+   <span class="n">git</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;&lt;repourl&gt;&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+   <span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="s2">&quot;&lt;commit&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="class">
 <dt id="conan.tools.scm.git.Git">
 <em class="property">class </em><code class="descname">Git</code><span class="sig-paren">(</span><em>conanfile</em>, <em>folder='.'</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.scm.git.Git" title="Permalink to this definition">¶</a></dt>
@@ -466,7 +488,7 @@ should be faster.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -873,7 +895,7 @@ should be faster.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan create &mdash; conan 2.0.6 documentation</title>
+  <title>conan create &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan download" href="download.html"/>
         <link rel="prev" title="conan build" href="build.html"/>
@@ -362,12 +362,6 @@ the test package stage by passing an empty value as the <code class="docutils li
 </pre></div>
 </div>
 </div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<ul class="last simple">
-<li>Check the <a class="reference internal" href="formatters/graph_info_json_formatter.html#reference-commands-graph-info-json-format"><span class="std std-ref">JSON format output</span></a> for this command.</li>
-</ul>
-</div>
 <div class="section" id="using-conan-create-with-build-requirements">
 <h2>Using conan create with build requirements<a class="headerlink" href="#using-conan-create-with-build-requirements" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--build-require</span></code> argument allows to create the package using the configuration and
@@ -375,6 +369,19 @@ settings of the “build” context, as it was a <code class="docutils literal n
 create packages in a way that is consistent with the way they will be used later.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>create<span class="w"> </span>.<span class="w"> </span>--name<span class="o">=</span>cmake<span class="w"> </span>--version<span class="o">=</span><span class="m">3</span>.23.1<span class="w"> </span>--build-require
 </pre></div>
+</div>
+</div>
+<div class="section" id="conan-create-output">
+<h2>Conan create output<a class="headerlink" href="#conan-create-output" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span> <span class="pre">...</span> <span class="pre">--format=json</span></code> creates a json output containing the full dependency graph information.
+This json is the same as the one created with <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">graph</span> <span class="pre">info</span></code> (see the <a class="reference internal" href="formatters/graph_info_json_formatter.html#reference-commands-graph-info-json-format"><span class="std std-ref">graph info json format</span></a>)
+with extended information about the binaries, like a more complete <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> field.
+This resulting json is the dependency graph of the package recipe being created, excluding all the <code class="docutils literal notranslate"><span class="pre">test_package</span></code> and other possible dependencies of the <code class="docutils literal notranslate"><span class="pre">test_package/conanfile.py</span></code>. These dependencies only exist in the <code class="docutils literal notranslate"><span class="pre">test_package</span></code> functionality, and as such, are not part of the “main” product or package. If you are interested in capturing the dependency graph including the <code class="docutils literal notranslate"><span class="pre">test_package</span></code> (most likely not necessary in most cases), then you can do it running the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">test</span></code> command separately.</p>
+<p>The same happens for lockfiles created with <code class="docutils literal notranslate"><span class="pre">--lockfile-out</span></code> argument. The lockfile will only contain the created package and its transitive dependencies versions, but it will not contain the <code class="docutils literal notranslate"><span class="pre">test_package</span></code> or the transitive dependencies of the <code class="docutils literal notranslate"><span class="pre">test_package/conanfile.py</span></code>. It is possible to capture a lockfile which includes those with the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">test</span></code> command (though again, this might not be really necessary)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Best practice</strong></p>
+<p class="last">In general, having <code class="docutils literal notranslate"><span class="pre">test_package/conanfile.py</span></code> with other dependencies rather than the tested one should be avoided. The <code class="docutils literal notranslate"><span class="pre">test_package</span></code> functionality should be a very simple check that the package is correctly created, adding extra dependencies to <code class="docutils literal notranslate"><span class="pre">test_package</span></code> could be an indicator that it is not a simple check, or that its functionality is being abused.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -409,7 +416,7 @@ tutorial</span></a></li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -816,7 +823,7 @@ tutorial</span></a></li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

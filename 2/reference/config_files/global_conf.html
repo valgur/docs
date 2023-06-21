@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>global.conf &mdash; conan 2.0.6 documentation</title>
+  <title>global.conf &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Configuration files" href="../config_files.html"/>
         <link rel="next" title="profiles" href="profiles.html"/>
         <link rel="prev" title="Configuration files" href="../config_files.html"/>
@@ -261,13 +261,20 @@ core.package_id:default_embed_mode: By default, &#39;full_mode&#39;
 core.package_id:default_non_embed_mode: By default, &#39;minor_mode&#39;
 core.package_id:default_python_mode: By default, &#39;minor_mode&#39;
 core.package_id:default_unknown_mode: By default, &#39;semver_mode&#39;
+core.sources:download_cache: Folder to store the sources backup
+core.sources:download_urls: List of URLs to download backup sources from
+core.sources:exclude_urls: URLs which will not be backed up
+core.sources:upload_url: Remote URL to upload backup sources to
 core.upload:retry: Number of retries in case of failure when uploading to Conan server
 core.upload:retry_wait: Seconds to wait between upload attempts to Conan server
+core.version_ranges:resolve_prereleases: Whether version ranges can resolve to pre-releases or not
 core:allow_uppercase_pkg_names: Temporarily (will be removed in 2.X) allow uppercase names
 core:default_build_profile: Defines the default build profile (&#39;default&#39; by default)
 core:default_profile: Defines the default host profile (&#39;default&#39; by default)
 core:non_interactive: Disable interactive user input, raises error if input necessary
 core:required_conan_version: Raise if current version does not match the defined range.
+core:skip_warnings: Do not show warnings in this list
+tools.android:cmake_legacy_toolchain: Define to explicitly pass ANDROID_USE_LEGACY_TOOLCHAIN_FILE in CMake toolchain
 tools.android:ndk_path: Argument for the CMAKE_ANDROID_NDK
 tools.apple:enable_arc: (boolean) Enable/Disable ARC Apple Clang flags
 tools.apple:enable_bitcode: (boolean) Enable/Disable Bitcode Apple Clang flags
@@ -285,7 +292,7 @@ tools.build:linker_scripts: List of linker script files to pass to the linker us
 tools.build:sharedlinkflags: List of extra flags used by CMakeToolchain for CMAKE_SHARED_LINKER_FLAGS_INIT variable
 tools.build:skip_test: Do not execute CMake.test() and Meson.test() when enabled
 tools.build:sysroot: Pass the --sysroot=&lt;tools.build:sysroot&gt; flag if available. (None by default)
-tools.build:verbosity: Verbosity of MSBuild and XCodeBuild build systems. Possible values are &#39;quiet&#39;, &#39;error&#39;, &#39;warning&#39;, &#39;notice&#39;, &#39;status&#39;, &#39;verbose&#39;, &#39;normal&#39;, &#39;debug&#39;, &#39;v&#39;, &#39;trace&#39; and &#39;vv&#39;
+tools.build:verbosity: Verbosity of build systems if set. Possible values are &#39;quiet&#39; and &#39;verbose&#39;
 tools.cmake.cmake_layout:build_folder_vars: Settings and Options that will produce a different build folder and different CMake presets names
 tools.cmake.cmaketoolchain:find_package_prefer_config: Argument for the CMAKE_FIND_PACKAGE_PREFER_CONFIG
 tools.cmake.cmaketoolchain:generator: User defined CMake generator to use instead of default
@@ -295,6 +302,8 @@ tools.cmake.cmaketoolchain:system_version: Define CMAKE_SYSTEM_VERSION in CMakeT
 tools.cmake.cmaketoolchain:toolchain_file: Use other existing file rather than conan_toolchain.cmake one
 tools.cmake.cmaketoolchain:toolset_arch: Toolset architecture to be used as part of CMAKE_GENERATOR_TOOLSET in CMakeToolchain
 tools.cmake.cmaketoolchain:user_toolchain: Inject existing user toolchains at the beginning of conan_toolchain.cmake
+tools.cmake:cmake_program: Path to CMake executable
+tools.compilation:verbosity: Verbosity of compilation tools if set. Possible values are &#39;quiet&#39; and &#39;verbose&#39;
 tools.env.virtualenv:powershell: If it is set to True it will generate powershell launchers if os=Windows
 tools.files.download:retry: Number of retries in case of failure when downloading
 tools.files.download:retry_wait: Seconds to wait between download attempts
@@ -317,7 +326,7 @@ tools.microsoft.msbuild:max_cpu_count: Argument for the /m when running msvc to 
 tools.microsoft.msbuild:vs_version: Defines the IDE version when using the new msvc compiler
 tools.microsoft.msbuilddeps:exclude_code_analysis: Suppress MSBuild code analysis for patterns
 tools.microsoft.msbuildtoolchain:compile_options: Dictionary with MSBuild compiler options
-tools.system.package_manager:mode: Mode for package_manager tools: &#39;check&#39; or &#39;install&#39;
+tools.system.package_manager:mode: Mode for package_manager tools: &#39;check&#39;, &#39;report&#39;, &#39;report-installed&#39; or &#39;install&#39;
 tools.system.package_manager:sudo: Use &#39;sudo&#39; when invoking the package manager tools in Linux (False by default)
 tools.system.package_manager:sudo_askpass: Use the &#39;-A&#39; argument if using sudo in Linux to invoke the system package manager (False by default)
 tools.system.package_manager:tool: Default package manager tool: &#39;apt-get&#39;, &#39;yum&#39;, &#39;dnf&#39;, &#39;brew&#39;, &#39;pacman&#39;, &#39;choco&#39;, &#39;zypper&#39;, &#39;pkg&#39; or &#39;pkgutil&#39;
@@ -330,7 +339,7 @@ tools.system.package_manager:tool: Default package manager tool: &#39;apt-get&#3
 <a class="reference internal" href="profiles.html#reference-config-files-profiles-conf"><span class="std std-ref">Conan profiles</span></a>. They look like:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><em>global.conf</em></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tools.build:verbosity=debug
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tools.build:verbosity=verbose
 tools.microsoft.msbuild:max_cpu_count=2
 tools.microsoft.msbuild:vs_version = 16
 tools.build:jobs=10
@@ -372,7 +381,7 @@ Additionally, the variables <code class="docutils literal notranslate"><span cla
 <h2>Configuration data types<a class="headerlink" href="#configuration-data-types" title="Permalink to this headline">¶</a></h2>
 <p>All the values will be interpreted by Conan as the result of the python built-in <cite>eval()</cite> function:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># String
-tools.build:verbosity=debug
+tools.build:verbosity=verbose
 # Boolean
 tools.system.package_manager:sudo=True
 # Integer
@@ -506,7 +515,7 @@ by adding the warning tag to its value.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -913,7 +922,7 @@ by adding the warning tag to its value.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

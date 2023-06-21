@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python requires &mdash; conan 2.0.6 documentation</title>
+  <title>Python requires &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Extensions" href="../extensions.html"/>
         <link rel="next" title="Custom commands" href="custom_commands.html"/>
         <link rel="prev" title="Extensions" href="../extensions.html"/>
@@ -341,6 +341,22 @@ pkg/0.1:<span class="w"> </span>My<span class="w"> </span>cool<span class="w"> <
 <p>In general, base class attributes are not inherited, and should be avoided as much as possible.
 There are method alternatives to some of them like <code class="docutils literal notranslate"><span class="pre">export()</span></code> or <code class="docutils literal notranslate"><span class="pre">set_version()</span></code>.
 For exceptional situations, see the <code class="docutils literal notranslate"><span class="pre">init()</span></code> method documentation for more information to extend inherited attributes.</p>
+<p>It is possible to re-implement some of the base class methods, and also to call the base class
+method explicitly, with the Python <code class="docutils literal notranslate"><span class="pre">super()</span></code> syntax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pkg&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+    <span class="n">python_requires</span> <span class="o">=</span> <span class="s2">&quot;pyreq/0.1&quot;</span>
+    <span class="n">python_requires_extend</span> <span class="o">=</span> <span class="s2">&quot;pyreq.MyBase&quot;</span>
+
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">source</span><span class="p">()</span>  <span class="c1"># call the base class method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MY OWN SOURCE&quot;</span><span class="p">)</span> <span class="c1"># Your own implementation</span>
+</pre></div>
+</div>
+<p>It is not mandatory to call the base class method, a full overwrite without calling <code class="docutils literal notranslate"><span class="pre">super()</span></code> is possible. Also the call order can be changed, and calling your own code, then <code class="docutils literal notranslate"><span class="pre">super()</span></code> is possible.</p>
 </div>
 <div class="section" id="reusing-files">
 <h2>Reusing files<a class="headerlink" href="#reusing-files" title="Permalink to this headline">¶</a></h2>
@@ -499,7 +515,7 @@ exported together with the recipe.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -906,7 +922,7 @@ exported together with the recipe.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

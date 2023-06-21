@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan config &mdash; conan 2.0.6 documentation</title>
+  <title>conan config &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan graph" href="graph.html"/>
         <link rel="prev" title="conan cache" href="cache.html"/>
@@ -387,6 +387,7 @@ optional arguments:
 recipes and tools used within recipes, like <code class="docutils literal notranslate"><span class="pre">CMakeToolchain</span></code></li>
 </ul>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan config list
+
 core.cache:storage_path: Absolute path where the packages and database are stored
 core.download:download_cache: Define path to a file download cache
 core.download:parallel: Number of concurrent threads to download packages
@@ -407,6 +408,7 @@ core.package_id:default_python_mode: By default, &#39;minor_mode&#39;
 core.package_id:default_unknown_mode: By default, &#39;semver_mode&#39;
 core.sources:download_cache: Folder to store the sources backup
 core.sources:download_urls: List of URLs to download backup sources from
+core.sources:exclude_urls: URLs which will not be backed up
 core.sources:upload_url: Remote URL to upload backup sources to
 core.upload:retry: Number of retries in case of failure when uploading to Conan server
 core.upload:retry_wait: Seconds to wait between upload attempts to Conan server
@@ -435,7 +437,7 @@ tools.build:linker_scripts: List of linker script files to pass to the linker us
 tools.build:sharedlinkflags: List of extra flags used by CMakeToolchain for CMAKE_SHARED_LINKER_FLAGS_INIT variable
 tools.build:skip_test: Do not execute CMake.test() and Meson.test() when enabled
 tools.build:sysroot: Pass the --sysroot=&lt;tools.build:sysroot&gt; flag if available. (None by default)
-tools.build:verbosity: Verbosity of MSBuild and XCodeBuild build systems. Possible values are &#39;quiet&#39;, &#39;error&#39;, &#39;warning&#39;, &#39;notice&#39;, &#39;status&#39;, &#39;verbose&#39;, &#39;normal&#39;, &#39;debug&#39;, &#39;v&#39;, &#39;trace&#39; and &#39;vv&#39;
+tools.build:verbosity: Verbosity of build systems if set. Possible values are &#39;quiet&#39; and &#39;verbose&#39;
 tools.cmake.cmake_layout:build_folder_vars: Settings and Options that will produce a different build folder and different CMake presets names
 tools.cmake.cmaketoolchain:find_package_prefer_config: Argument for the CMAKE_FIND_PACKAGE_PREFER_CONFIG
 tools.cmake.cmaketoolchain:generator: User defined CMake generator to use instead of default
@@ -446,6 +448,7 @@ tools.cmake.cmaketoolchain:toolchain_file: Use other existing file rather than c
 tools.cmake.cmaketoolchain:toolset_arch: Toolset architecture to be used as part of CMAKE_GENERATOR_TOOLSET in CMakeToolchain
 tools.cmake.cmaketoolchain:user_toolchain: Inject existing user toolchains at the beginning of conan_toolchain.cmake
 tools.cmake:cmake_program: Path to CMake executable
+tools.compilation:verbosity: Verbosity of compilation tools if set. Possible values are &#39;quiet&#39; and &#39;verbose&#39;
 tools.env.virtualenv:powershell: If it is set to True it will generate powershell launchers if os=Windows
 tools.files.download:retry: Number of retries in case of failure when downloading
 tools.files.download:retry_wait: Seconds to wait between download attempts
@@ -567,7 +570,7 @@ tools.files.download:retry_wait: 10
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -974,7 +977,7 @@ tools.files.download:retry_wait: 10
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

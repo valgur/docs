@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan upload &mdash; conan 2.0.6 documentation</title>
+  <title>conan upload &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="Formatter: Graph-info JSON" href="formatters/graph_info_json_formatter.html"/>
         <link rel="prev" title="conan test" href="test.html"/>
@@ -240,9 +240,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 information on how to work with Conan repositories, please check the <a class="reference internal" href="../../tutorial/conan_repositories.html#conan-repositories"><span class="std std-ref">dedicated
 section</span></a>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan upload -h
-usage: conan upload [-h] [-v [V]] [-p PACKAGE_QUERY] -r REMOTE
-                    [--only-recipe] [--force] [--check] [-c]
-                    reference
+usage: conan upload [-h] [-v [V]] [-f FORMAT] [-p PACKAGE_QUERY] -r REMOTE
+                [--only-recipe] [--force] [--check] [-c] [--dry-run]
+                [-l LIST]
+                [pattern]
 
 Upload packages to a remote.
 
@@ -252,9 +253,10 @@ binary packages, unless --only-recipe is specified. You can use the &quot;latest
 &quot;reference&quot; argument to specify the latest revision of the recipe or the package.
 
 positional arguments:
-  reference             Recipe reference or package reference, can contain *
-                        as wildcard at any reference field. If no revision is
-                        specified, it is assumed to be the latest
+  pattern               A pattern in the form
+                        &#39;pkg/version#revision:package_id#revision&#39;, e.g:
+                        zlib/1.2.13:* means all binaries for zlib/1.2.13. If
+                        revision is not specified, it is assumed latest one.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -262,6 +264,8 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
+  -f FORMAT, --format FORMAT
+                        Select the output format: json
   -p PACKAGE_QUERY, --package-query PACKAGE_QUERY
                         Only upload packages matching a specific query. e.g:
                         os=Windows AND (arch=x86 OR compiler=gcc)
@@ -273,8 +277,16 @@ optional arguments:
   --check               Perform an integrity check, using the manifests,
                         before upload
   -c, --confirm         Upload all matching recipes without confirmation
+  --dry-run             Do not execute the real upload (experimental)
+  -l LIST, --list LIST  Package list file
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">upload</span></code> command can upload packages to 1 server repository specified by the <code class="docutils literal notranslate"><span class="pre">-r=myremote</span></code> argument.</p>
+<p>It has 2 possible and mutually exclusive inputs:
+- The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">upload</span> <span class="pre">&lt;pattern&gt;</span></code> pattern-based matching of recipes, with a pattern similar to the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span> <span class="pre">&lt;pattern&gt;</span></code>.
+- The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">upload</span> <span class="pre">--list=&lt;pkglist&gt;</span></code> that will upload the artifacts specified in the <code class="docutils literal notranslate"><span class="pre">pkglist</span></code> json file</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">--format=json</span></code> formatter is specified, the result will be a “PackageList”, compatible with other Conan commands, for example the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">remove</span></code> command, so it is possible to concatenate different commands using the generated json file. See the <a class="reference internal" href="../../examples/commands/pkglists.html#examples-commands-pkglists"><span class="std std-ref">Packages Lists examples</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> argument will prepare the packages for upload, zip files if necessary, check in the server to see what needs to be uploaded and what is already in the server, but it will not execute the actual upload.</p>
 <div class="section" id="read-more">
 <h2>Read more<a class="headerlink" href="#read-more" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -308,7 +320,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -715,7 +727,7 @@ optional arguments:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

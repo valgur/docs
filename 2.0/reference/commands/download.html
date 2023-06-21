@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>conan download &mdash; conan 2.0.6 documentation</title>
+  <title>conan download &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../index.html"/>
         <link rel="up" title="Commands" href="../commands.html"/>
         <link rel="next" title="conan editable" href="editable.html"/>
         <link rel="prev" title="conan create" href="create.html"/>
@@ -237,21 +237,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="conan-download">
 <span id="reference-commands-download"></span><h1>conan download<a class="headerlink" href="#conan-download" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ conan download -h
-usage: conan download [-h] [-v [V]] [--only-recipe]
-                      [-p PACKAGE_QUERY] -r REMOTE
-                      reference
+usage: conan download [-h] [-v [V]] [-f FORMAT] [--only-recipe]
+                      [-p PACKAGE_QUERY] -r REMOTE [-l LIST]
+                      [pattern]
 
 Download (without installing) a single conan package from a remote server.
 
 It downloads just the package, but not its transitive dependencies, and it will not call
 any generate, generators or deployers.
-It can download multiple packages if patterns are used, and also works with queries over
-the package binaries.
+It can download multiple packages if patterns are used, and also works with
+queries over the package binaries.
 
 positional arguments:
-  reference             Recipe reference or package reference, can contain *
-                        as wildcard at any reference field. If revision is not
-                        specified, it is assumed latest one.
+  pattern               A pattern in the form
+                        &#39;pkg/version#revision:package_id#revision&#39;, e.g:
+                        zlib/1.2.13:* means all binaries for zlib/1.2.13. If
+                        revision is not specified, it is assumed latest one.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -259,12 +260,15 @@ optional arguments:
                         verbose to more verbose: -vquiet, -verror, -vwarning,
                         -vnotice, -vstatus, -v or -vverbose, -vv or -vdebug,
                         -vvv or -vtrace
+  -f FORMAT, --format FORMAT
+                        Select the output format: json
   --only-recipe         Download only the recipe/s, not the binary packages.
   -p PACKAGE_QUERY, --package-query PACKAGE_QUERY
                         Only download packages matching a specific query. e.g:
                         os=Windows AND (arch=x86 OR compiler=gcc)
   -r REMOTE, --remote REMOTE
                         Download from this specific remote
+  -l LIST, --list LIST  Package list file
 </pre></div>
 </div>
 <p>Downloads recipe and binaries to the local cache from the specified remote.</p>
@@ -273,8 +277,14 @@ optional arguments:
 <p class="last">Please, be aware that <strong class="command">conan download</strong> unlike <strong class="command">conan install</strong>, will not
 download any of the transitive dependencies of the downloaded package.</p>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">download</span></code> command can downlaod packages to 1 server repository specified by the <code class="docutils literal notranslate"><span class="pre">-r=myremote</span></code> argument.</p>
+<p>It has 2 possible and mutually exclusive inputs:</p>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">download</span> <span class="pre">&lt;pattern&gt;</span></code> pattern-based matching of recipes, with a pattern similar to the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span> <span class="pre">&lt;pattern&gt;</span></code>.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">download</span> <span class="pre">--list=&lt;pkglist&gt;</span></code> that will upload the artifacts specified in the <code class="docutils literal notranslate"><span class="pre">pkglist</span></code> json file</li>
+</ul>
 <p>You can use patterns to download specific references just like in other commands like
-<strong class="command">conan list</strong> or <strong class="command">conan upload</strong>:</p>
+<strong class="command">conan list</strong> (see the patterns documentation there <a class="reference internal" href="list.html#reference-commands-list"><span class="std std-ref">conan list</span></a>) or <strong class="command">conan upload</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># download latest revision and packages for all openssl versions in foo remote</span>
 $<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;openssl/*&quot;</span><span class="w"> </span>-r<span class="w"> </span>foo
 </pre></div>
@@ -295,6 +305,7 @@ $<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> <
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> </span><span class="s2">&quot;zlib/1.2.13#*&quot;</span><span class="w"> </span>-r<span class="w"> </span>foo<span class="w"> </span>--package-query<span class="o">=</span><span class="s2">&quot;os=Linux and arch=x86&quot;</span>
 </pre></div>
 </div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">--format=json</span></code> formatter is specified, the result will be a “PackageList”, compatible with other Conan commands, for example the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">upload</span></code> command, so it is possible to concatenate a <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">+</span> <span class="pre">upload</span></code>, using the generated json file. See the <a class="reference internal" href="../../examples/commands/pkglists.html#examples-commands-pkglists"><span class="std std-ref">Packages Lists examples</span></a>.</p>
 </div>
 
 
@@ -320,7 +331,7 @@ $<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> <
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -727,7 +738,7 @@ $<span class="w"> </span>conan<span class="w"> </span>download<span class="w"> <
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

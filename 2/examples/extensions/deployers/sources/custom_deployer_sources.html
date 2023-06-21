@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Copy sources from all your dependencies &mdash; conan 2.0.6 documentation</title>
+  <title>Copy sources from all your dependencies &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../../../index.html"/>
         <link rel="up" title="Custom deployers" href="../custom_deployers.html"/>
         <link rel="next" title="Conan recipe tools examples" href="../../../tools.html"/>
         <link rel="prev" title="Custom deployers" href="../custom_deployers.html"/>
@@ -129,6 +129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../../config_files.html">Configuration files examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../graph.html">Graph examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../dev_flow.html">Developer tools and flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../commands.html">Conan commands examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
@@ -256,6 +257,7 @@ which will ensure that sources are available even if no build needs to be carrie
 <p>Inspecting the command output we can see that it copied the sources of our direct dependencies <code class="docutils literal notranslate"><span class="pre">zlib</span></code> and <code class="docutils literal notranslate"><span class="pre">mcap</span></code>,
 <strong>plus</strong> the sources of our transitive dependencies, <code class="docutils literal notranslate"><span class="pre">zstd</span></code> and <code class="docutils literal notranslate"><span class="pre">lz4</span></code> to a <code class="docutils literal notranslate"><span class="pre">dependencies_sources</span></code> folder.
 After this is done, extra preprocessing could be done to accomplish more specific needs.</p>
+<p>Note that you can pass the <code class="docutils literal notranslate"><span class="pre">--deployer-folder</span></code> argument to change the base folder output path for the deployer.</p>
 </div>
 <div class="section" id="code-tour">
 <h2>Code tour<a class="headerlink" href="#code-tour" title="Permalink to this headline">¶</a></h2>
@@ -316,7 +318,7 @@ nor in those commands that do not require building, such as <strong class="comma
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -723,7 +725,7 @@ nor in those commands that do not require building, such as <strong class="comma
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MesonToolchain &mdash; conan 2.0.6 documentation</title>
+  <title>MesonToolchain &mdash; conan 2.0.7 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.6 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.meson" href="../meson.html"/>
         <link rel="next" title="Meson" href="meson.html"/>
         <link rel="prev" title="conan.tools.meson" href="../meson.html"/>
@@ -136,6 +136,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../layout.html">conan.tools.layout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html">conan.tools.CppInfo</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
@@ -337,12 +338,12 @@ in <code class="docutils literal notranslate"><span class="pre">[project</span> 
 <h2>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="attributes">
 <h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="definitions">
-<h4>definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="project-options">
+<h4>project_options<a class="headerlink" href="#project-options" title="Permalink to this headline">¶</a></h4>
 <p>This attribute allows defining Meson project options:</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">tc</span> <span class="o">=</span> <span class="n">MesonToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="n">tc</span><span class="o">.</span><span class="n">definitions</span><span class="p">[</span><span class="s2">&quot;MYVAR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MyValue&quot;</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">project_options</span><span class="p">[</span><span class="s2">&quot;MYVAR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MyValue&quot;</span>
     <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -350,6 +351,14 @@ in <code class="docutils literal notranslate"><span class="pre">[project</span> 
 <ul class="simple">
 <li>One project options definition for <code class="docutils literal notranslate"><span class="pre">MYVAR</span></code> in <code class="docutils literal notranslate"><span class="pre">conan_meson_native.ini</span></code> or <code class="docutils literal notranslate"><span class="pre">conan_meson_cross.ini</span></code> file.</li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">wrap_mode:</span> <span class="pre">nofallback</span></code> is defined by default as a project option, to make sure that dependencies are found in Conan packages. It is possible to change or remove it with:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">tc</span> <span class="o">=</span> <span class="n">MesonToolchain</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">project_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;wrap_mode&quot;</span><span class="p">)</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that in this case, Meson might be able to find dependencies in “wraps”, it is the responsibility of the user to check the behavior and make sure about the dependencies origin.</p>
 </div>
 <div class="section" id="preprocessor-definitions">
 <h4>preprocessor_definitions<a class="headerlink" href="#preprocessor-definitions" title="Permalink to this headline">¶</a></h4>
@@ -669,7 +678,7 @@ If Windows OS, it will be created a <code class="docutils literal notranslate"><
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 20, 2023.
+      Last updated on Jun 21, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1076,7 +1085,7 @@ If Windows OS, it will be created a <code class="docutils literal notranslate"><
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.6',
+            VERSION:'2.0.7',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
