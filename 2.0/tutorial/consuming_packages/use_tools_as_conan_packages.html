@@ -401,6 +401,12 @@ cmake<span class="w"> </span>version<span class="w"> </span><span class="m">3</s
 ...
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Best practice</strong></p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> and tool packages are intended for executable applications, like <code class="docutils literal notranslate"><span class="pre">cmake</span></code> or <code class="docutils literal notranslate"><span class="pre">ninja</span></code>. Do not
+use <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> to depend on library or library-like dependencies.</p>
+</div>
 <div class="section" id="read-more">
 <h2>Read more<a class="headerlink" href="#read-more" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -437,7 +443,7 @@ cmake<span class="w"> </span>version<span class="w"> </span><span class="m">3</s
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 26, 2023.
+      Last updated on Jul 06, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

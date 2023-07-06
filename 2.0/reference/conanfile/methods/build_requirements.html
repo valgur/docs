@@ -261,6 +261,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><code class="docutils literal notranslate"><span class="pre">headers=False</span></code> A tool requirement does not have headers.</li>
 <li><code class="docutils literal notranslate"><span class="pre">libs=False</span></code>: A tool requirement does not have libraries to be linked by the consumer (if it had libraries they would be in the “build” context and could be incompatible with the “host” context of the consumer package).</li>
 </ul>
+<p>Recall that <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> are intended exclusively for depending on tools like <code class="docutils literal notranslate"><span class="pre">cmake</span></code> or <code class="docutils literal notranslate"><span class="pre">ninja</span></code>, which run in the “build” context, but not for library-like dependencies that would be linked into binaries. For libraries or library-like dependencies, use <code class="docutils literal notranslate"><span class="pre">requires</span></code> or <code class="docutils literal notranslate"><span class="pre">test_requires</span></code>.</p>
 <div class="section" id="host-version">
 <h3>&lt;host_version&gt;<a class="headerlink" href="#host-version" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
@@ -359,7 +360,7 @@ always matches the one for the host requirement.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 26, 2023.
+      Last updated on Jul 06, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

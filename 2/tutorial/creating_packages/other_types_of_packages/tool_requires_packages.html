@@ -231,6 +231,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>In the “<a class="reference internal" href="../../consuming_packages/use_tools_as_conan_packages.html#consuming-packages-tool-requires"><span class="std std-ref">Using build tools as Conan packages</span></a>” section we learned how to use
 a tool require to build (or help building) our project or Conan package.
 In this section we are going to learn how to create a recipe for a tool require.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Best practice</strong></p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> and tool packages are intended for executable applications, like <code class="docutils literal notranslate"><span class="pre">cmake</span></code> or <code class="docutils literal notranslate"><span class="pre">ninja</span></code> that
+can be used as <code class="docutils literal notranslate"><span class="pre">tool_requires(&quot;cmake/[&gt;=3.25]&quot;)</span></code> by other packages to put those executables in their path. They
+are not intended for library-like dependencies (use <code class="docutils literal notranslate"><span class="pre">requires</span></code> for them), for test frameworks (use <code class="docutils literal notranslate"><span class="pre">test_requires</span></code>)
+or in general for anything that belongs to the “host” context of the final application. Do not abuse <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code>
+for other purposes.</p>
+</div>
 <p>Please, first clone the sources to recreate this project. You can find them in the
 <a class="reference external" href="https://github.com/conan-io/examples2">examples2.0 repository</a> on GitHub:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/conan-io/examples2.git
@@ -449,7 +458,7 @@ Package<span class="w"> </span><span class="s1">&#39;82339cc4d6db7990c1830d274cd
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jun 26, 2023.
+      Last updated on Jul 06, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
