@@ -822,7 +822,28 @@ a valid <code class="docutils literal notranslate"><span class="pre">reference_p
 </div>
 <div class="section" id="options-description">
 <h3><a class="toc-backref" href="#id30">options_description</a><a class="headerlink" href="#options-description" title="Permalink to this headline">¶</a></h3>
-<p>TODO: Complete, <a class="reference external" href="https://github.com/conan-io/conan/pull/11295">https://github.com/conan-io/conan/pull/11295</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">options_description</span></code> attribute is an optional attribute that can be defined in the
+form of a dictionary where the key is the option name and the value is a description of
+the option in text format. This attribute is useful for providing additional information
+about the functionality and purpose of each option, particularly when the option is not
+self-explanatory or has complex or special behavior.</p>
+<p>The format for each dictionary entry should be:</p>
+<ul class="simple">
+<li>Key: Option name. Must be a string and must match one of the keys in the <code class="docutils literal notranslate"><span class="pre">options</span></code> dictionary.</li>
+<li>Value: Description of the option. Must be a string and can be as long as necessary.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyPkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+               <span class="s2">&quot;option2&quot;</span><span class="p">:</span> <span class="s2">&quot;ANY&quot;</span><span class="p">}</span>
+
+    <span class="n">options_description</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;option1&quot;</span><span class="p">:</span> <span class="s2">&quot;Describe the purpose and functionality of &#39;option1&#39;. &quot;</span><span class="p">,</span>
+        <span class="s2">&quot;option2&quot;</span><span class="p">:</span> <span class="s2">&quot;Describe the purpose and functionality of &#39;option2&#39;. &quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="info">
 <h3><a class="toc-backref" href="#id31">info</a><a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h3>
@@ -1360,7 +1381,7 @@ to maintain teams of developers and CI machines to use the desired range of vers
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 06, 2023.
+      Last updated on Jul 07, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
