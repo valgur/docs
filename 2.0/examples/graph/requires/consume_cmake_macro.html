@@ -47,7 +47,7 @@
         <link rel="search" title="Search" href="../../../search.html"/>
     <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
         <link rel="up" title="Graph examples" href="../../graph.html"/>
-        <link rel="next" title="Depending on different versions of the same tool-require" href="../tool_requires/different_versions.html"/>
+        <link rel="next" title="Use cmake modules inside a tool_requires transparently" href="../tool_requires/use_cmake_modules.html"/>
         <link rel="prev" title="Graph examples" href="../../graph.html"/>
 
  <!-- Google Tag Manager -->
@@ -121,6 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files examples</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../graph.html">Graph examples</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Use a CMake macro packaged in a dependency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tool_requires/use_cmake_modules.html">Use cmake modules inside a <code class="docutils literal notranslate"><span class="pre">tool_requires</span></code> transparently</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tool_requires/different_versions.html">Depending on different versions of the same tool-require</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tool_requires/different_options.html">Depending on same version of a tool-require with different options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tool_requires/using_protobuf.html">Using the same requirement as a requires and as a tool_requires</a></li>
@@ -216,7 +217,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
            <div itemprop="articleBody">
             
   <div class="section" id="use-a-cmake-macro-packaged-in-a-dependency">
-<h1>Use a CMake macro packaged in a dependency<a class="headerlink" href="#use-a-cmake-macro-packaged-in-a-dependency" title="Permalink to this headline">¶</a></h1>
+<span id="consume-cmake-macro"></span><h1>Use a CMake macro packaged in a dependency<a class="headerlink" href="#use-a-cmake-macro-packaged-in-a-dependency" title="Permalink to this headline">¶</a></h1>
 <p>When a package recipe wants to provide a CMake functionality via a macro, it can be done as follows.
 Let’s say that we have a <code class="docutils literal notranslate"><span class="pre">pkg</span></code> recipe, that will “export” and “package” a <code class="docutils literal notranslate"><span class="pre">Macros.cmake</span></code> file
 that contains a <code class="docutils literal notranslate"><span class="pre">pkg_macro()</span></code> CMake macro:</p>
@@ -300,7 +301,7 @@ PKG<span class="w"> </span>MACRO<span class="w"> </span>WORKING!!!
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../tool_requires/different_versions.html" class="btn btn-neutral float-right" title="Depending on different versions of the same tool-require" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../tool_requires/use_cmake_modules.html" class="btn btn-neutral float-right" title="Use cmake modules inside a tool_requires transparently" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../../graph.html" class="btn btn-neutral" title="Graph examples" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -313,7 +314,7 @@ PKG<span class="w"> </span>MACRO<span class="w"> </span>WORKING!!!
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 07, 2023.
+      Last updated on Jul 12, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
