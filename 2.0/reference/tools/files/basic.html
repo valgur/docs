@@ -588,24 +588,6 @@ in the same place.</p>
 to capture in the <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> the scm coordinates (like Git remote url and commit), to be able to
 recover it later in the <code class="docutils literal notranslate"><span class="pre">source()</span></code> method and have reproducible recipes that can build from sources
 without actually storing the sources in the recipe.</p>
-<p>Usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
-<span class="kn">from</span> <span class="nn">conan.tools.files</span> <span class="kn">import</span> <span class="n">update_conandata</span>
-
-<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pkg&quot;</span>
-    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
-
-    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># This is an example, doesn&#39;t make sense to have static data, instead you</span>
-        <span class="c1"># could put the data directly in a conandata.yml file.</span>
-        <span class="c1"># This would be useful for storing dynamic data, obtained at export() time from elsewhere</span>
-        <span class="n">update_conandata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;mydata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested1&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s2">&quot;nested2&quot;</span><span class="p">:</span> <span class="s2">&quot;some-string&quot;</span><span class="p">}}})</span>
-
-    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conan_data</span><span class="p">[</span><span class="s2">&quot;sources&quot;</span><span class="p">][</span><span class="s2">&quot;mydata&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
 <dl class="function">
 <dt id="conan.tools.files.conandata.update_conandata">
 <code class="descname">update_conandata</code><span class="sig-paren">(</span><em>conanfile</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.files.conandata.update_conandata" title="Permalink to this definition">¶</a></dt>
@@ -632,6 +614,43 @@ belong to the current version.</li>
 </table>
 </dd></dl>
 
+</div>
+<div class="section" id="conan-tools-files-trim-conandata">
+<h2>conan.tools.files.trim_conandata()<a class="headerlink" href="#conan-tools-files-trim-conandata" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="conan.tools.files.conandata.trim_conandata">
+<code class="descname">trim_conandata</code><span class="sig-paren">(</span><em>conanfile</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.files.conandata.trim_conandata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tool to modify the <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> once it is exported, to limit it to the current version
+only</p>
+</dd></dl>
+
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">conan.tools.files.trim_conandata()</span></code> function is in <strong>preview</strong>.
+See <a class="reference internal" href="../../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
+</div>
+<p>This function modifies the <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> inside the exported folder in the conan cache, if it exists,
+and keeps only the information related to the currently built version.</p>
+<p>This helper can only be used within the <code class="docutils literal notranslate"><span class="pre">export()</span></code> method, it can raise otherwise. One application is
+to ensure changes in the <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code> file related to some versions do not affect the generated recipe revisions of the rest.</p>
+<p>Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+<span class="kn">from</span> <span class="nn">conan.tools.files</span> <span class="kn">import</span> <span class="n">update_conandata</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pkg&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+
+    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This is an example, doesn&#39;t make sense to have static data, instead you</span>
+        <span class="c1"># could put the data directly in a conandata.yml file.</span>
+        <span class="c1"># This would be useful for storing dynamic data, obtained at export() time from elsewhere</span>
+        <span class="n">update_conandata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;mydata&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;nested1&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s2">&quot;nested2&quot;</span><span class="p">:</span> <span class="s2">&quot;some-string&quot;</span><span class="p">}}})</span>
+
+    <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conan_data</span><span class="p">[</span><span class="s2">&quot;sources&quot;</span><span class="p">][</span><span class="s2">&quot;mydata&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="conan-tools-files-collect-libs">
 <span id="id4"></span><h2>conan.tools.files.collect_libs()<a class="headerlink" href="#conan-tools-files-collect-libs" title="Permalink to this headline">¶</a></h2>
