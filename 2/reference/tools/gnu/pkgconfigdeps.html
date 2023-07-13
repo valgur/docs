@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PkgConfigDeps &mdash; conan 2.0.7 documentation</title>
+  <title>PkgConfigDeps &mdash; conan 2.0.8 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.8 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.gnu" href="../gnu.html"/>
         <link rel="next" title="PkgConfig" href="pkgconfig.html"/>
         <link rel="prev" title="Autotools" href="autotools.html"/>
@@ -140,6 +140,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cpp_info.html">conan.tools.CppInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html#conan-tools-default-config-options">conan.tools.default_config_options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html#conan-tools-default-configure">conan.tools.default_configure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html#conan-tools-default-package-id">conan.tools.default_package_id</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
@@ -367,13 +370,15 @@ renamed:</p>
 <ul class="simple">
 <li><strong>pkg_config_name</strong> property will define the name of the generated <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file (<code class="docutils literal notranslate"><span class="pre">xxxxx.pc</span></code>)</li>
 <li><strong>pkg_config_aliases</strong> property sets some aliases of any package/component name for <em>pkg_config</em> generator. This property only accepts list-like Python objects.</li>
-<li><strong>pkg_config_custom_content</strong> property will add user defined content to the <em>.pc</em> files created by this generator.</li>
+<li><strong>pkg_config_custom_content</strong> property will add user defined content to the <em>.pc</em> files created by this generator as freeform variables.
+That content can be a string or a dict-like Python object. Notice that the variables declared here will overwrite those ones already defined by Conan.
+Click <a class="reference external" href="https://people.freedesktop.org/~dbn/pkg-config-guide.html#concepts">here</a> for more information about the type of variables in a <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file.</li>
 <li><strong>component_version</strong> property sets a custom version to be used in the <code class="docutils literal notranslate"><span class="pre">Version</span></code> field belonging to the created <code class="docutils literal notranslate"><span class="pre">*.pc</span></code> file for that component.</li>
 </ul>
 <p>These properties can be defined at global <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> level or at component level.</p>
 <p>Example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">custom_content</span> <span class="o">=</span> <span class="s2">&quot;datadir=$</span><span class="si">{prefix}</span><span class="s2">/share&quot;</span>
+    <span class="n">custom_content</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;datadir&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{prefix}</span><span class="s2">/share&quot;</span><span class="p">}</span>  <span class="c1"># or &quot;datadir=${prefix}/share&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_custom_content&quot;</span><span class="p">,</span> <span class="n">custom_content</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;myname&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cpp_info</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;mycomponent&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;pkg_config_name&quot;</span><span class="p">,</span> <span class="s2">&quot;componentname&quot;</span><span class="p">)</span>
@@ -408,7 +413,7 @@ renamed:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 12, 2023.
+      Last updated on Jul 13, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -815,7 +820,7 @@ renamed:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.7',
+            VERSION:'2.0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

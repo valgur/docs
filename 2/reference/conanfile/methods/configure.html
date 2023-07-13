@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>configure() &mdash; conan 2.0.7 documentation</title>
+  <title>configure() &mdash; conan 2.0.8 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.8 documentation" href="../../../index.html"/>
         <link rel="up" title="Methods" href="../methods.html"/>
         <link rel="next" title="config_options()" href="config_options.html"/>
         <link rel="prev" title="compatibility()" href="compatibility.html"/>
@@ -278,6 +278,35 @@ so it should be removed:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;fPIC&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="section" id="default-behavior">
+<h2>Default behavior<a class="headerlink" href="#default-behavior" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature is experimental and subject to breaking changes.
+See <a class="reference internal" href="../../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method is not defined, Conan automatically manages some conventional options calling the
+<a class="reference internal" href="../../tools/cpp_info.html#conan-tools-default-configure"><span class="std std-ref">conan.tools.default_configure()</span></a> tool.</p>
+<p>Options automatically managed:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">fPIC</span></code> (True, False).</li>
+<li><code class="docutils literal notranslate"><span class="pre">shared</span></code> (True, False).</li>
+<li><code class="docutils literal notranslate"><span class="pre">header_only</span></code> (True, False).</li>
+</ul>
+<p>To opt-out from this behavior, the method can be empty-defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>To manage extra options apart from the ones automatically handled, the tool has to be explicitly called:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan.tools</span> <span class="kn">import</span> <span class="n">default_configure</span>
+
+<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">default_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;compiler.libcxx&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;compiler.cppstd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>Recipes can suggest values for their dependencies options as <code class="docutils literal notranslate"><span class="pre">default_options</span> <span class="pre">=</span> <span class="pre">{&quot;*:shared&quot;:</span> <span class="pre">True}</span></code>, but
 it is not possible to do that conditionally. For this purpose, it is also possible to use the
 <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method:</p>
@@ -299,6 +328,7 @@ it is not possible to do that conditionally. For this purpose, it is also possib
 <ul class="last simple">
 <li>Follow the <a class="reference internal" href="../../../tutorial/creating_packages/configure_options_settings.html#tutorial-creating-configure"><span class="std std-ref">tutorial about recipe configuration methods</span></a>.</li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -325,7 +355,7 @@ it is not possible to do that conditionally. For this purpose, it is also possib
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 12, 2023.
+      Last updated on Jul 13, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -732,7 +762,7 @@ it is not possible to do that conditionally. For this purpose, it is also possib
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.7',
+            VERSION:'2.0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

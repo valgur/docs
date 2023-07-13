@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Recipe tools &mdash; conan 2.0.7 documentation</title>
+  <title>Recipe tools &mdash; conan 2.0.8 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 2.0.7 documentation" href="../index.html"/>
+    <link rel="top" title="conan 2.0.8 documentation" href="../index.html"/>
         <link rel="up" title="Reference" href="../reference.html"/>
         <link rel="next" title="conan.tools.cmake" href="tools/cmake.html"/>
         <link rel="prev" title="conanfile.txt" href="conanfile_txt.html"/>
@@ -133,6 +133,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="tools/intel.html">conan.tools.intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tools/android.html">conan.tools.android</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tools/cpp_info.html">conan.tools.CppInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/cpp_info.html#conan-tools-default-config-options">conan.tools.default_config_options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/cpp_info.html#conan-tools-default-configure">conan.tools.default_configure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools/cpp_info.html#conan-tools-default-package-id">conan.tools.default_package_id</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="config_files.html">Configuration files</a></li>
@@ -330,6 +333,9 @@ and shouldn’t be used in recipes.</li>
 <li class="toctree-l2"><a class="reference internal" href="tools/cpp_info.html#aggregating-information-in-custom-generators">Aggregating information in custom generators</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tools/cpp_info.html#conan-tools-default-config-options">conan.tools.default_config_options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/cpp_info.html#conan-tools-default-configure">conan.tools.default_configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/cpp_info.html#conan-tools-default-package-id">conan.tools.default_package_id</a></li>
 </ul>
 </div>
 </div>
@@ -357,7 +363,7 @@ and shouldn’t be used in recipes.</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 12, 2023.
+      Last updated on Jul 13, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -764,7 +770,7 @@ and shouldn’t be used in recipes.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.0.7',
+            VERSION:'2.0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

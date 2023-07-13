@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>package_id() &mdash; conan 2.0.7 documentation</title>
+  <title>package_id() &mdash; conan 2.0.8 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.8 documentation" href="../../../index.html"/>
         <link rel="up" title="Methods" href="../methods.html"/>
         <link rel="next" title="package_info()" href="package_info.html"/>
         <link rel="prev" title="package()" href="package.html"/>
@@ -251,8 +251,32 @@ This <code class="docutils literal notranslate"><span class="pre">package_id()</
 <li>A given package recipe can implement some partial erasure of information, for example to obtain the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code> for a range of compiler versions. This type of binary compatibility is in general better addressed with the global <code class="docutils literal notranslate"><span class="pre">compatibility</span></code> plugin, or with the <code class="docutils literal notranslate"><span class="pre">compatibility()</span></code> method if the global plugin is not enough.</li>
 <li>A package recipe can decide to inject extra variability in its computed <code class="docutils literal notranslate"><span class="pre">package_id</span></code>, adding <code class="docutils literal notranslate"><span class="pre">conf</span></code> items or “target” settings.</li>
 </ul>
+<div class="section" id="default-behavior">
+<h2>Default behavior<a class="headerlink" href="#default-behavior" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature is experimental and subject to breaking changes.
+See <a class="reference internal" href="../../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method is not defined, Conan automatically manages the package ID clearing settings and options when the recipe
+declares an option <code class="docutils literal notranslate"><span class="pre">header_only=True</span></code> or when <code class="docutils literal notranslate"><span class="pre">package_type</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;header-library&quot;</span></code>.
+This is achived by calling the <a class="reference internal" href="../../tools/cpp_info.html#conan-tools-default-package-id"><span class="std std-ref">conan.tools.default_package_id()</span></a> tool.</p>
+<p>To opt-out from this behavior, the method can be empty-defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>To manage the package ID info further, the tool has to be explicitly called:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan.tools</span> <span class="kn">import</span> <span class="n">default_package_id</span>
+
+<span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">default_package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;compiler.libcxx&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;compiler.cppstd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="section" id="information-erasure">
-<h2>Information erasure<a class="headerlink" href="#information-erasure" title="Permalink to this headline">¶</a></h2>
+<h3>Information erasure<a class="headerlink" href="#information-erasure" title="Permalink to this headline">¶</a></h3>
 <p>This is a <code class="docutils literal notranslate"><span class="pre">package_id</span></code> relaxing strategy. Let’s check the first case: a header-only library, that has input <code class="docutils literal notranslate"><span class="pre">settings</span></code>, because it still wants to use them for some unit-tests in its <code class="docutils literal notranslate"><span class="pre">build()</span></code> method. In order to have exactly one final binary for all configurations, because the final artifact should be identical in all cases (just the header files), it would be necessary to do:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="s2">&quot;compiler&quot;</span><span class="p">,</span> <span class="s2">&quot;arch&quot;</span><span class="p">,</span> <span class="s2">&quot;build_type&quot;</span>
 
@@ -297,7 +321,7 @@ This <code class="docutils literal notranslate"><span class="pre">package_id()</
 It also means that we are erasing some information. We will not have the information of the compiler and build type that was used for the binary that we are using (it will not be in the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span></code> output, and it will not be in the server metadata either). If we compile a new binary with a different compiler or build type, it will create a new package revision under the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code>.</p>
 </div>
 <div class="section" id="partial-information-erasure">
-<h2>Partial information erasure<a class="headerlink" href="#partial-information-erasure" title="Permalink to this headline">¶</a></h2>
+<h3>Partial information erasure<a class="headerlink" href="#partial-information-erasure" title="Permalink to this headline">¶</a></h3>
 <p>It is also possible to partially erase information for given subsets of values. For example, if we want to have the same <code class="docutils literal notranslate"><span class="pre">package_id</span></code> for all the binaries compiled with <code class="docutils literal notranslate"><span class="pre">gcc</span></code> between versions 4.5 and 5.0, we can do:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
@@ -310,7 +334,7 @@ It also means that we are erasing some information. We will not have the informa
 <p>This approach is not recommended in the general case, and it would be better approached with the global <code class="docutils literal notranslate"><span class="pre">compatibility</span></code> plugin or the recipe <code class="docutils literal notranslate"><span class="pre">compatibility()</span></code> method.</p>
 </div>
 <div class="section" id="adding-information">
-<h2>Adding information<a class="headerlink" href="#adding-information" title="Permalink to this headline">¶</a></h2>
+<h3>Adding information<a class="headerlink" href="#adding-information" title="Permalink to this headline">¶</a></h3>
 <p>There is some information not added by default to the <code class="docutils literal notranslate"><span class="pre">package_id</span></code>.
 If we are creating a package for a tool, to be used as a <code class="docutils literal notranslate"><span class="pre">tool_require</span></code>, and it happens that such package binary will be different for each “target” configuration, like it is the case for some cross-compilers, if the compiler itself might be different for the different architectures that it is targeting, it will be necessary to add the <code class="docutils literal notranslate"><span class="pre">settings_target</span></code> to the <code class="docutils literal notranslate"><span class="pre">package_id</span></code> with:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -326,6 +350,7 @@ If we are creating a package for a tool, to be used as a <code class="docutils l
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">See <a class="reference internal" href="../../../tutorial/creating_packages/other_types_of_packages/header_only_packages.html#creating-packages-other-header-only"><span class="std std-ref">the tutorial about header-only packages</span></a> for explanations about the <code class="docutils literal notranslate"><span class="pre">package_id()</span></code> method.</p>
+</div>
 </div>
 </div>
 </div>
@@ -353,7 +378,7 @@ If we are creating a package for a tool, to be used as a <code class="docutils l
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 12, 2023.
+      Last updated on Jul 13, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -760,7 +785,7 @@ If we are creating a package for a tool, to be used as a <code class="docutils l
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.7',
+            VERSION:'2.0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

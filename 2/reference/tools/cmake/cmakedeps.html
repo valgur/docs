@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMakeDeps &mdash; conan 2.0.7 documentation</title>
+  <title>CMakeDeps &mdash; conan 2.0.8 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.7 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.8 documentation" href="../../../index.html"/>
         <link rel="up" title="conan.tools.cmake" href="../cmake.html"/>
         <link rel="next" title="CMakeToolchain" href="cmaketoolchain.html"/>
         <link rel="prev" title="conan.tools.cmake" href="../cmake.html"/>
@@ -139,6 +139,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l3"><a class="reference internal" href="../intel.html">conan.tools.intel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../android.html">conan.tools.android</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cpp_info.html">conan.tools.CppInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html#conan-tools-default-config-options">conan.tools.default_config_options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html#conan-tools-default-configure">conan.tools.default_configure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cpp_info.html#conan-tools-default-package-id">conan.tools.default_package_id</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../config_files.html">Configuration files</a></li>
@@ -481,6 +484,7 @@ included when the consumer run the <code class="docutils literal notranslate"><s
 <li><strong>cmake_set_interface_link_directories</strong>: boolean value that should be only used by dependencies that don’t declare <cite>self.cpp_info.libs</cite> but have <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">comment(lib,</span> <span class="pre">&quot;foo&quot;)</span></code> (automatic link) declared at the public headers. Those dependencies should
 add this property to their <em>conanfile.py</em> files at root <code class="docutils literal notranslate"><span class="pre">cpp_info</span></code> level (components not supported for now).</li>
 <li><strong>nosoname</strong>: boolean value that should be used only by dependencies that are defined as <code class="docutils literal notranslate"><span class="pre">SHARED</span></code> and represent a library built without the <code class="docutils literal notranslate"><span class="pre">soname</span></code> flag option.</li>
+<li><strong>cmake_config_version_compat</strong>: (preview) By default <code class="docutils literal notranslate"><span class="pre">SameMajorVersion</span></code>, it can take the values <code class="docutils literal notranslate"><span class="pre">&quot;AnyNewerVersion&quot;,</span> <span class="pre">&quot;SameMajorVersion&quot;,</span> <span class="pre">&quot;SameMinorVersion&quot;,</span> <span class="pre">&quot;ExactVersion&quot;</span></code>. It will use that policy in the generated <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;ConfigVersion.cmake</span></code> file</li>
 </ul>
 <p>Example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -642,7 +646,7 @@ cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span c
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 12, 2023.
+      Last updated on Jul 13, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -1049,7 +1053,7 @@ cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_BUILD_TYPE<span c
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.7',
+            VERSION:'2.0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
