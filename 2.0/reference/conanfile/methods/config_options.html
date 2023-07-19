@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>config_options() &mdash; conan 2.0.8 documentation</title>
+  <title>config_options() &mdash; conan 2.0.9 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="conan 2.0.8 documentation" href="../../../index.html"/>
+    <link rel="top" title="conan 2.0.9 documentation" href="../../../index.html"/>
         <link rel="up" title="Methods" href="../methods.html"/>
         <link rel="next" title="export()" href="export.html"/>
         <link rel="prev" title="configure()" href="configure.html"/>
@@ -255,29 +255,43 @@ For example, the <code class="docutils literal notranslate"><span class="pre">SS
 * Before calling the <code class="docutils literal notranslate"><span class="pre">configure()</span></code> method.
 * Before assigning the <code class="docutils literal notranslate"><span class="pre">options</span></code> values.
 * After <code class="docutils literal notranslate"><span class="pre">settings</span></code> are already defined.</p>
-<div class="section" id="default-behavior">
-<h2>Default behavior<a class="headerlink" href="#default-behavior" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="available-automatic-implementations">
+<span id="reference-conanfile-methods-config-options-implementations"></span><h2>Available automatic implementations<a class="headerlink" href="#available-automatic-implementations" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This feature is experimental and subject to breaking changes.
 See <a class="reference internal" href="../../../introduction.html#stability"><span class="std std-ref">the Conan stability</span></a> section for more information.</p>
 </div>
-<p>When the <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> method is not defined, Conan automatically manages some conventional options using
-the <a class="reference internal" href="../../tools/cpp_info.html#conan-tools-default-config-options"><span class="std std-ref">conan.tools.default_config_options()</span></a> tool.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> method is not defined, Conan can automatically manage some
+conventional options if specified in the
+<a class="reference internal" href="../attributes.html#conan-conanfile-attributes-implements"><span class="std std-ref">implements</span></a> ConanFile attribute:</p>
+<div class="section" id="auto-shared-fpic">
+<h3>auto_shared_fpic<a class="headerlink" href="#auto-shared-fpic" title="Permalink to this headline">¶</a></h3>
 <p>Options automatically managed:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">fPIC</span></code> (True, False).</li>
 </ul>
-<p>To opt-out from this behavior, the method can be empty-defined:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">pass</span>
+<p>It can be added to the recipe like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;auto_shared_fpic&quot;</span><span class="p">]</span>
+    <span class="o">...</span>
 </pre></div>
 </div>
-<p>To manage extra options apart from the ones automatically handled, the tool has to be explicitly called:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan.tools</span> <span class="kn">import</span> <span class="n">default_config_options</span>
-
-<span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">default_config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<p>Then, if no <code class="docutils literal notranslate"><span class="pre">config_options()</span></code> method is specified in the recipe, Conan will
+automatically manage the fPIC setting in the <code class="docutils literal notranslate"><span class="pre">config_options</span></code> step like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;os&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+    <span class="n">conanfile</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;fPIC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Be aware that adding this implementation to the recipe may also affect the
+<a class="reference internal" href="configure.html#reference-conanfile-methods-configure-implementations"><span class="std std-ref">configure</span></a> step.</p>
+<p>If you need to implement custom behaviors in your recipes but also need this logic, it
+must be explicitly declared:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">config_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">conanfile</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_safe</span><span class="p">(</span><span class="s2">&quot;os&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+        <span class="n">conanfile</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">rm_safe</span><span class="p">(</span><span class="s2">&quot;fPIC&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arch</span> <span class="o">!=</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">:</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">with_sse2</span>
 </pre></div>
@@ -287,6 +301,7 @@ the <a class="reference internal" href="../../tools/cpp_info.html#conan-tools-de
 <ul class="last simple">
 <li>Follow the <a class="reference internal" href="../../../tutorial/creating_packages/configure_options_settings.html#tutorial-creating-configure"><span class="std std-ref">tutorial about recipe configuration methods</span></a>.</li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -721,7 +736,7 @@ the <a class="reference internal" href="../../tools/cpp_info.html#conan-tools-de
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0.8',
+            VERSION:'2.0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

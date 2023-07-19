@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Attributes &mdash; conan 2.0.8 documentation</title>
+  <title>Attributes &mdash; conan 2.0.9 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.8 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.9 documentation" href="../../index.html"/>
         <link rel="up" title="conanfile.py" href="../conanfile.html"/>
         <link rel="next" title="Methods" href="methods.html"/>
         <link rel="prev" title="conanfile.py" href="../conanfile.html"/>
@@ -295,6 +295,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a class="reference internal" href="#revision-mode" id="id59">revision_mode</a></li>
 <li><a class="reference internal" href="#upload-policy" id="id60">upload_policy</a></li>
 <li><a class="reference internal" href="#required-conan-version" id="id61">required_conan_version</a></li>
+<li><a class="reference internal" href="#implements" id="id62">implements</a></li>
 </ul>
 </li>
 </ul>
@@ -1355,6 +1356,34 @@ Also there is a <code class="docutils literal notranslate"><span class="pre">glo
 define a global minimum, maximum or exact Conan version to run, which can be very convenient
 to maintain teams of developers and CI machines to use the desired range of versions.</p>
 </div>
+<div class="section" id="implements">
+<span id="conan-conanfile-attributes-implements"></span><h3><a class="toc-backref" href="#id62">implements</a><a class="headerlink" href="#implements" title="Permalink to this headline">¶</a></h3>
+<p>A list is used to define a series of option configurations that Conan will handle
+automatically. This is especially handy for avoiding boilerplate code that tends to repeat
+in most of the recipes. The syntax is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conan</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">Pkg</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">implements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;auto_shared_fpic&quot;</span><span class="p">,</span> <span class="s2">&quot;auto_header_only&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Currently these are the automatic implementations provided by Conan:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">&quot;auto_shared_fpic&quot;</span></code>: automatically manages <code class="docutils literal notranslate"><span class="pre">fPIC</span></code> and <code class="docutils literal notranslate"><span class="pre">shared</span></code> options. Adding this
+implementation will have both effect in the
+<a class="reference internal" href="methods/configure.html#reference-conanfile-methods-configure-implementations"><span class="std std-ref">configure</span></a> and
+<a class="reference internal" href="methods/config_options.html#reference-conanfile-methods-config-options-implementations"><span class="std std-ref">config_options</span></a> steps
+when those methods are not explicitly defined in the recipe.</li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;auto_header_only&quot;</span></code>: automatically manages the package ID clearing settings. Adding this
+implementation will have effect in the
+<a class="reference internal" href="methods/package_id.html#reference-conanfile-methods-package-id-implementations"><span class="std std-ref">package_id</span></a> step
+when the method is not explicitly defined in the recipe.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is a 2.0-only feature, and it will not work in 1.X</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -1788,7 +1817,7 @@ to maintain teams of developers and CI machines to use the desired range of vers
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.8',
+            VERSION:'2.0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

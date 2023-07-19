@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Package signing &mdash; conan 2.0.8 documentation</title>
+  <title>Package signing &mdash; conan 2.0.9 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="conan 2.0.8 documentation" href="../../index.html"/>
+    <link rel="top" title="conan 2.0.9 documentation" href="../../index.html"/>
         <link rel="up" title="Extensions" href="../extensions.html"/>
         <link rel="next" title="Environment variables" href="../environment.html"/>
         <link rel="prev" title="Command wrapper" href="command_wrapper.html"/>
@@ -230,20 +230,24 @@ See <a class="reference internal" href="../../introduction.html#stability"><span
 </div>
 <p>This plugin, which must be located in the cache <code class="docutils literal notranslate"><span class="pre">extensions/plugins/sign/sign.py</span></code> file contains 2 methods:</p>
 <ul class="simple">
-<li>The <code class="docutils literal notranslate"><span class="pre">sign(ref,</span> <span class="pre">artifacts_folder,</span> <span class="pre">signature_folder)</span></code> executes for every recipe and package that is to
+<li>The <code class="docutils literal notranslate"><span class="pre">sign(ref,</span> <span class="pre">artifacts_folder,</span> <span class="pre">signature_folder,</span> <span class="pre">**kwargs)</span></code> executes for every recipe and package that is to
 be uploaded to a server. The <code class="docutils literal notranslate"><span class="pre">ref</span></code> is the full reference to the artifact, it can be either a recipe
 reference or a package reference. The <code class="docutils literal notranslate"><span class="pre">artifacts_folder</span></code> is the folder containing the files to be
 uploaded, typically the <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>, <code class="docutils literal notranslate"><span class="pre">conan_package.tgz</span></code>, <code class="docutils literal notranslate"><span class="pre">conanmanifest.txt</span></code>, etc. The
 <code class="docutils literal notranslate"><span class="pre">signature_folder</span></code> contains the folder in which the generated files should be written.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">verify(ref,</span> <span class="pre">artifacts_folder,</span> <span class="pre">signature_folder)</span></code> executes when a package is installed from a
+<li>The <code class="docutils literal notranslate"><span class="pre">verify(ref,</span> <span class="pre">artifacts_folder,</span> <span class="pre">signature_folder,</span> <span class="pre">files,</span> <span class="pre">**kwargs)</span></code> executes when a package is installed from a
 server, receives the same arguments as above and should be used to verify the integrity or correctness
-of the signatures</li>
+of the signatures. The <code class="docutils literal notranslate"><span class="pre">files</span></code> is an iterable of downloaded files, because this function can be called twice
+when a package is being installed: first, the recipe is installed, and <code class="docutils literal notranslate"><span class="pre">verify()</span></code> will be called with the recipe
+files, that is <code class="docutils literal notranslate"><span class="pre">conanfile.py</span></code>, <code class="docutils literal notranslate"><span class="pre">conandata.yml</span></code>, etc. But also, when a package is being built from sources,
+it is possible that the recipe exported <code class="docutils literal notranslate"><span class="pre">conan_sources.tgz</span></code> file is also downloaded, and the <code class="docutils literal notranslate"><span class="pre">verify()</span></code> function will be called
+again, now this time with the <code class="docutils literal notranslate"><span class="pre">files</span></code> argument containing <code class="docutils literal notranslate"><span class="pre">conan_sources.tgz</span></code> only.</li>
 </ul>
 <p>Example of a package signer that puts the artifact filenames in a file called <code class="docutils literal notranslate"><span class="pre">signature.asc</span></code> when the
 package is uploaded and assert that the downloaded artifacts are in the downloaded <code class="docutils literal notranslate"><span class="pre">signature.asc</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">signature_folder</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">signature_folder</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Signing ref: &quot;</span><span class="p">,</span> <span class="n">ref</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Signing folder: &quot;</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">)</span>
     <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
@@ -253,18 +257,20 @@ package is uploaded and assert that the downloaded artifacts are in the download
     <span class="n">signature</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">signature_folder</span><span class="p">,</span> <span class="s2">&quot;signature.asc&quot;</span><span class="p">)</span>
     <span class="nb">open</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="nf">verify</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">signature_folder</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">verify</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">signature_folder</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Verifying ref: &quot;</span><span class="p">,</span> <span class="n">ref</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Verifying folder: &quot;</span><span class="p">,</span> <span class="n">artifacts_folder</span><span class="p">)</span>
     <span class="n">signature</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">signature_folder</span><span class="p">,</span> <span class="s2">&quot;signature.asc&quot;</span><span class="p">)</span>
     <span class="n">contents</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;verifying contents&quot;</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">artifacts_folder</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VERIFYING &quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifacts_folder</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
             <span class="k">assert</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">contents</span>
 </pre></div>
 </div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> argument is important to avoid future changes adding new arguments that would otherwise break the plugin,
+please make sure to add it to your methods.</p>
 </div>
 
 
@@ -697,7 +703,7 @@ package is uploaded and assert that the downloaded artifacts are in the download
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0.8',
+            VERSION:'2.0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
