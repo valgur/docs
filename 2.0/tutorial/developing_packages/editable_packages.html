@@ -258,7 +258,7 @@ headers and binaries in its local working directory.</p>
 <p>To avoid creating the package <code class="docutils literal notranslate"><span class="pre">say/1.0</span></code> in the cache for every change, we are going to
 put that package in editable mode, creating <strong>a link from the reference in the cache to
 the local working directory</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>editable<span class="w"> </span>add<span class="w"> </span>say<span class="w"> </span>--name<span class="o">=</span>say<span class="w"> </span>--version<span class="o">=</span><span class="m">1</span>.0
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>editable<span class="w"> </span>add<span class="w"> </span>say
 $<span class="w"> </span>conan<span class="w"> </span>editable<span class="w"> </span>list
 say/1.0
 <span class="w">    </span>Path:<span class="w"> </span>/Users/.../examples2/tutorial/developing_packages/editable_packages/say/conanfile.py
@@ -371,6 +371,36 @@ say/1.0:<span class="w"> </span>Bye<span class="w"> </span>World<span class="w">
 simultaneously without executing any Conan command in between. If you have both open in
 your IDE, you can simply build one after the other.</p>
 </div>
+<div class="section" id="building-editable-dependencies">
+<h2>Building editable dependencies<a class="headerlink" href="#building-editable-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>If there are many editable dependencies, it might be inconvenient to go one by one, building them in the right order.
+It is possible to do an ordered build of the editable dependencies with the <code class="docutils literal notranslate"><span class="pre">--build</span></code> argument.</p>
+<p>Let’s clean the previous local executables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clean<span class="w"> </span>-xdf
+</pre></div>
+</div>
+<p>And using the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method in the <code class="docutils literal notranslate"><span class="pre">hello/conanfile.py</span></code> recipe that we haven’t really used so far (because
+we have been building directly calling <code class="docutils literal notranslate"><span class="pre">cmake</span></code>, not by calling <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">build</span></code> command), we can do such build with
+just:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>build<span class="w"> </span>hello
+</pre></div>
+</div>
+<p>Note that all we had to do to do a full build of this project is these two commands. Starting from scratch in a different folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/conan-io/examples2.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>examples2/tutorial/developing_packages/editable_packages
+$<span class="w"> </span>conan<span class="w"> </span>editable<span class="w"> </span>add<span class="w"> </span>say
+$<span class="w"> </span>conan<span class="w"> </span>build<span class="w"> </span>hello<span class="w"> </span>--build<span class="o">=</span>editable
+</pre></div>
+</div>
+<p>Note that if we don’t pass the <code class="docutils literal notranslate"><span class="pre">--build=editable</span></code> to <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">build</span> <span class="pre">hello</span></code>, the binaries for <code class="docutils literal notranslate"><span class="pre">say/0.1</span></code> that is in editable mode
+won’t be available and it will fail. With the <code class="docutils literal notranslate"><span class="pre">--build=editable</span></code>, first a build of the <code class="docutils literal notranslate"><span class="pre">say</span></code> binaries is done locally and
+incrementally, and then another incremental build of <code class="docutils literal notranslate"><span class="pre">hello</span></code> will be done. Everything will still happen locally, with no packages
+built in the cache. If there are multiple <code class="docutils literal notranslate"><span class="pre">editable</span></code> dependencies, with nested transitive dependencies, Conan will build them
+in the right order.</p>
+<p>Note that it is possible to build and test a package in editable with with its own <code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder.
+If a package is put in <code class="docutils literal notranslate"><span class="pre">editable</span></code> mode, and if it contains a <code class="docutils literal notranslate"><span class="pre">test_package</span></code> folder, the <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">create</span></code> command
+will still do a local build of the current package.</p>
+</div>
 <div class="section" id="revert-the-editable-mode">
 <h2>Revert the editable mode<a class="headerlink" href="#revert-the-editable-mode" title="Permalink to this headline">¶</a></h2>
 <p>In order to revert the editable mode just remove the link using:</p>
@@ -412,7 +442,7 @@ in-cache version of all the libraries.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 19, 2023.
+      Last updated on Jul 25, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
