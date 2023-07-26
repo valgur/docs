@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CMake &mdash; conan 1.60.1 documentation</title>
+  <title>CMake &mdash; conan 1.60.2 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="conan 1.60.1 documentation" href="../../../../index.html"/>
+    <link rel="top" title="conan 1.60.2 documentation" href="../../../../index.html"/>
         <link rel="up" title="conan.tools.cmake" href="../cmake.html"/>
         <link rel="next" title="cmake_layout" href="cmake_layout.html"/>
         <link rel="prev" title="CMakeToolchain" href="cmaketoolchain.html"/>
@@ -358,7 +358,7 @@ indicator: <code class="docutils literal notranslate"><span class="pre">cmake</s
 <li><code class="docutils literal notranslate"><span class="pre">build_type</span></code>: Use it only to override the value defined in the <code class="docutils literal notranslate"><span class="pre">settings.build_type</span></code>. It
 can fail if the build is single configuration (e.g. Unix Makefiles), as in that case the build
 type must be specified at configure time, not build type.</li>
-<li><code class="docutils literal notranslate"><span class="pre">component</span></code>: Passes the <code class="docutils literal notranslate"><span class="pre">--component=&lt;component&gt;</span></code> argument  to the CMake install command.</li>
+<li><code class="docutils literal notranslate"><span class="pre">component</span></code>: Passes the <code class="docutils literal notranslate"><span class="pre">--component=&lt;component&gt;</span></code> argument to the CMake install command.</li>
 </ul>
 </div>
 <div class="section" id="test">
@@ -385,6 +385,8 @@ an argument to the underlying build system via the call <code class="docutils li
 <li><code class="docutils literal notranslate"><span class="pre">tools.build:jobs</span></code> argument for the <code class="docutils literal notranslate"><span class="pre">--jobs</span></code> parameter when running Ninja generator.</li>
 <li><code class="docutils literal notranslate"><span class="pre">tools.microsoft.msbuild:max_cpu_count</span></code> argument for the <code class="docutils literal notranslate"><span class="pre">/m</span></code> (<code class="docutils literal notranslate"><span class="pre">/maxCpuCount</span></code>) when running
 <code class="docutils literal notranslate"><span class="pre">MSBuild</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">tools.cmake:install_strip</span></code> is a boolean parameter used to specify whether the <code class="docutils literal notranslate"><span class="pre">--strip</span></code> option should be
+enabled or disabled during the execution of the <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--install</span></code> command. (Defaulted to <code class="docutils literal notranslate"><span class="pre">False</span></code>)</li>
 </ul>
 </div>
 </div>
@@ -412,7 +414,7 @@ an argument to the underlying build system via the call <code class="docutils li
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2022, JFrog.
-      Last updated on Jun 15, 2023.
+      Last updated on Jul 26, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -819,7 +821,7 @@ an argument to the underlying build system via the call <code class="docutils li
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.60.1',
+            VERSION:'1.60.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

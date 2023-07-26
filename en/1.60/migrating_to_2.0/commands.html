@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Commands &mdash; conan 1.60.1 documentation</title>
+  <title>Commands &mdash; conan 1.60.2 documentation</title>
   
 
   
@@ -45,7 +45,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="conan 1.60.1 documentation" href="../index.html"/>
+    <link rel="top" title="conan 1.60.2 documentation" href="../index.html"/>
         <link rel="up" title="Conan migration guide to 2.0" href="../conan_v2.html"/>
         <link rel="next" title="General changes" href="general.html"/>
         <link rel="prev" title="Migrating legacy cpp_info attributes to set_property()" href="properties.html"/>
@@ -114,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l2"><a class="reference internal" href="properties.html">Migrating legacy cpp_info attributes to set_property()</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#changes-to-expect">Changes to expect</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#json-output-in-2-x-commands">JSON output in 2.X commands</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conan-install">conan install</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1">conan install</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conan-create">conan create</a></li>
@@ -246,9 +247,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="section" id="commands">
 <h1>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h1>
 <p>There is no “compatible with 2.X” commands introduced in Conan 1.X.
-You will need to adapt to the new commands once you migrate to Conan 2.0</p>
+You will need to adapt to the new commands once you migrate to Conan 2.0.</p>
+<p>For a comparison of some 1.x versus 2.0 commands, see the
+<a class="reference external" href="https://blog.conan.io/2023/06/07/New-Cheat-Sheet-For-Conan-2.html">Conan 2.0 Cheat Sheet Blog Post</a>.</p>
 <div class="section" id="changes-to-expect">
 <h2>Changes to expect<a class="headerlink" href="#changes-to-expect" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="json-output-in-2-x-commands">
+<h3>JSON output in 2.X commands<a class="headerlink" href="#json-output-in-2-x-commands" title="Permalink to this headline">¶</a></h3>
+<p>In Conan version 1.X, you can use the <code class="docutils literal notranslate"><span class="pre">--json</span></code> flag followed by the path to the output
+file when executing commands. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>create<span class="w"> </span>...<span class="w"> </span>--json<span class="o">=</span>path/to/file.json
+</pre></div>
+</div>
+<p>Starting with Conan version 2.0, you are expected to use the <code class="docutils literal notranslate"><span class="pre">--format</span></code> flag followed by
+the output format type, and redirect standard output to a file. The same command in
+version 2.0 would be:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conan<span class="w"> </span>create<span class="w"> </span>...<span class="w"> </span>--format<span class="o">=</span>json<span class="w"> </span>&gt;<span class="w"> </span>path/to/file.json
+</pre></div>
+</div>
+<p>For more information, please check the <a class="reference external" href="https://docs.conan.io/2/reference/commands.html">Conan 2 commands reference</a></p>
+</div>
 <div class="section" id="conan-install">
 <h3>conan install<a class="headerlink" href="#conan-install" title="Permalink to this headline">¶</a></h3>
 <p>Almost the same command, the major change is the way to specify (or complete if not defined) the fields of the reference.
@@ -278,7 +296,9 @@ Remember that in Conan 1.X you have to specify the build profile or activate the
 </div>
 <div class="section" id="conan-search">
 <h3>conan search<a class="headerlink" href="#conan-search" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">search</span></code> will search, by default, in all the remotes (not in the local cache):</p>
+<p>The <cite>conan search</cite> in 2.X is meant to provide the basic functionality of searching for
+<strong>recipes</strong> in Conan remotes. Please be aware that it will search in all the remotes by
+default but <strong>not in the Conan local cache</strong>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>search<span class="w"> </span><span class="s2">&quot;zlib*&quot;</span>
 
 myremote:
@@ -294,10 +314,38 @@ conancenter:
 <span class="w">    </span>zlib/1.2.8
 </pre></div>
 </div>
-<p>If you want to explore the local cache there is a command <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span> <span class="pre">recipes</span> <span class="pre">&lt;pattern&gt;</span></code>.</p>
+<p>If you want more advanced functionality, to inspect available packages in the local cache
+or in remotes, please use the <a class="reference external" href="https://docs.conan.io/2/reference/commands/list.html">conan list</a> command.</p>
+<p><strong>Listing available packages</strong></p>
+<p>The equivalent of doing a <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">search</span> <span class="pre">zlib/1.2.13&#64;</span></code> to see details about the Conan
+packages can be done in 2.X using <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">list</span> <span class="pre">&lt;pattern&gt;</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>list<span class="w"> </span><span class="s2">&quot;zlib/1.2.13:*&quot;</span><span class="w"> </span>-r<span class="w"> </span>conancenter
+
+conancenter
+zlib
+<span class="w">    </span>zlib/1.2.13
+<span class="w">    </span>revisions
+<span class="w">        </span>e377bee636333ae348d51ca90874e353<span class="w"> </span><span class="o">(</span><span class="m">2023</span>-04-27<span class="w"> </span><span class="m">12</span>:11:24<span class="w"> </span>UTC<span class="o">)</span>
+<span class="w">        </span>packages
+<span class="w">            </span>17b26a16efb893750e4481f98a154db2934ead88
+<span class="w">            </span>info
+<span class="w">                </span>settings
+<span class="w">                </span>arch:<span class="w"> </span>x86_64
+<span class="w">                </span>build_type:<span class="w"> </span>Debug
+<span class="w">                </span>compiler:<span class="w"> </span>msvc
+<span class="w">                </span>compiler.runtime:<span class="w"> </span>dynamic
+<span class="w">                </span>compiler.runtime_type:<span class="w"> </span>Debug
+<span class="w">                </span>compiler.version:<span class="w"> </span><span class="m">193</span>
+<span class="w">                </span>os:<span class="w"> </span>Windows
+<span class="w">                </span>options
+<span class="w">                </span>shared:<span class="w"> </span>True
+<span class="w">            </span>d62dff20d86436b9c58ddc0162499d197be9de1e
+<span class="w">            </span>...
+</pre></div>
+</div>
 </div>
 <div class="section" id="conan-remote-login">
-<span id="conan-v2-remote-login"></span><h3>conan remote login<a class="headerlink" href="#conan-remote-login" title="Permalink to this headline">¶</a></h3>
+<h3>conan remote login<a class="headerlink" href="#conan-remote-login" title="Permalink to this headline">¶</a></h3>
 <p>This is the substitute of the old “conan user”.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>conan<span class="w"> </span>remote<span class="w"> </span>login<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-f<span class="w"> </span>FORMAT<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="w"> </span><span class="o">[</span>V<span class="o">]]</span><span class="w"> </span><span class="o">[</span>--logger<span class="o">]</span><span class="w"> </span><span class="o">[</span>-p<span class="w"> </span><span class="o">[</span>PASSWORD<span class="o">]]</span><span class="w"> </span>remote<span class="w"> </span>username
 </pre></div>
@@ -369,7 +417,7 @@ server-side, copying packages from one server repository to another repository.<
 </div>
 <div class="section" id="removed-conan-user">
 <h3>Removed “conan user”<a class="headerlink" href="#removed-conan-user" title="Permalink to this headline">¶</a></h3>
-<p>This has been replaced with :ref:&lt;conan_v2_remote_login&gt;</p>
+<p>This has been replaced with the <a class="reference external" href="https://docs.conan.io/2/reference/commands/remote.html#conan-remote-login">remote login command</a> in 2.0.</p>
 </div>
 <div class="section" id="removed-conan-config-set">
 <h3>Removed “conan config set”<a class="headerlink" href="#removed-conan-config-set" title="Permalink to this headline">¶</a></h3>
@@ -380,7 +428,7 @@ the file is updated with <cite>conan config install</cite>. Alternatively, you c
 <div class="section" id="custom-commands">
 <h2>Custom commands<a class="headerlink" href="#custom-commands" title="Permalink to this headline">¶</a></h2>
 <p>You can build custom commands on top of the Conan Python API.
-WIP documentation.</p>
+Refer to the <a class="reference external" href="https://docs.conan.io/2/reference/extensions/custom_commands.html">Conan 2.0 documentation for custom commands</a>.</p>
 </div>
 </div>
 
@@ -407,7 +455,7 @@ WIP documentation.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2022, JFrog.
-      Last updated on Jun 15, 2023.
+      Last updated on Jul 26, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
@@ -814,7 +862,7 @@ WIP documentation.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.60.1',
+            VERSION:'1.60.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
