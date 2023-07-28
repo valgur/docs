@@ -306,7 +306,7 @@ revisions for already existing recipes in the Conan cache</li>
 
 <dl class="method">
 <dt id="conan.api.subapi.graph.GraphAPI.analyze_binaries">
-<code class="descname">analyze_binaries</code><span class="sig-paren">(</span><em>graph</em>, <em>build_mode=None</em>, <em>remotes=None</em>, <em>update=None</em>, <em>lockfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.api.subapi.graph.GraphAPI.analyze_binaries" title="Permalink to this definition">¶</a></dt>
+<code class="descname">analyze_binaries</code><span class="sig-paren">(</span><em>graph</em>, <em>build_mode=None</em>, <em>remotes=None</em>, <em>update=None</em>, <em>lockfile=None</em>, <em>build_modes_test=None</em>, <em>tested_graph=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.api.subapi.graph.GraphAPI.analyze_binaries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a dependency graph, will compute the package_ids of all recipes in the graph, and
 evaluate if they should be built from sources, downloaded from a remote server, of if the
 packages are already in the local Conan cache</p>
@@ -321,6 +321,8 @@ packages are already in the local Conan cache</p>
 <li><strong>remotes</strong> – list of remotes</li>
 <li><strong>update</strong> – (False by default), if Conan should look for newer versions or
 revisions for already existing recipes in the Conan cache</li>
+<li><strong>build_modes_test</strong> – the –build-test argument</li>
+<li><strong>tested_graph</strong> – In case of a “test_package”, the graph being tested</li>
 </ul>
 </td>
 </tr>
@@ -355,7 +357,7 @@ revisions for already existing recipes in the Conan cache</li>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 26, 2023.
+      Last updated on Jul 28, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
