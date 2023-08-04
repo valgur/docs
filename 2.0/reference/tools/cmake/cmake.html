@@ -339,7 +339,7 @@ line after the <code class="docutils literal notranslate"><span class="pre">--</
 
 <dl class="method">
 <dt id="conan.tools.cmake.cmake.CMake.install">
-<code class="descname">install</code><span class="sig-paren">(</span><em>build_type=None</em>, <em>component=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.cmake.cmake.CMake.install" title="Permalink to this definition">¶</a></dt>
+<code class="descname">install</code><span class="sig-paren">(</span><em>build_type=None</em>, <em>component=None</em>, <em>cli_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#conan.tools.cmake.cmake.CMake.install" title="Permalink to this definition">¶</a></dt>
 <dd><p>Equivalent to run <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--build</span> <span class="pre">.</span> <span class="pre">--target=install</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -351,6 +351,9 @@ line after the <code class="docutils literal notranslate"><span class="pre">--</
 It can fail if the build is single configuration (e.g. Unix Makefiles),
 as in that case the build type must be specified at configure time,
 not build type.</li>
+<li><strong>cli_args</strong> – A list of arguments <code class="docutils literal notranslate"><span class="pre">[arg1,</span> <span class="pre">arg2,</span> <span class="pre">...]</span></code> for the underlying
+build system that will be passed to the command line:
+<code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">--install</span> <span class="pre">...</span> <span class="pre">arg1</span> <span class="pre">arg2</span></code></li>
 </ul>
 </td>
 </tr>
@@ -424,7 +427,7 @@ which sets <code class="docutils literal notranslate"><span class="pre">-DCMAKE_
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 28, 2023.
+      Last updated on Aug 04, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

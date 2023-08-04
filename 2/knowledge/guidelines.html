@@ -274,6 +274,7 @@ like <code class="docutils literal notranslate"><span class="pre">self.build_fol
 like <code class="docutils literal notranslate"><span class="pre">conan</span> <span class="pre">cache</span> <span class="pre">path</span></code> to get information of the current folders. The Conan cache might
 be checked while debugging, as read-only, but it is not allowed to edit, modify or delete
 artifacts or files from the Conan cache by any other means that Conan command line or public API.</li>
+<li><strong>Sources used in recipes must be immutable</strong>. Once a recipe is exported to the Conan cache, it is expected that the sources are immutable, that is, that retrieving the sources in the future will always retrieve the exact same sources. It is not allowed to use moving targets like a <code class="docutils literal notranslate"><span class="pre">git</span></code> branch or a download of a file that is continuously rewritten in the server. <code class="docutils literal notranslate"><span class="pre">git</span></code> checkouts must be of an immutable tag or a commit, and <code class="docutils literal notranslate"><span class="pre">download()/get()</span></code> must use checksums to verify the server files doesn’t change. Not using immutable sources will be undefined behavior.</li>
 </ul>
 </div>
 </div>
@@ -301,7 +302,7 @@ artifacts or files from the Conan cache by any other means that Conan command li
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 28, 2023.
+      Last updated on Aug 04, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 

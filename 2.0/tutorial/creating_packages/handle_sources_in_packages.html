@@ -271,6 +271,8 @@ the library sources:</p>
     <span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;fPIC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Please, be aware that using the head of the branch instead of an immutable tag</span>
+        <span class="c1"># or commit is not a bad practice and not allowed by Conan</span>
         <span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;https://github.com/conan-io/libhello/archive/refs/heads/main.zip&quot;</span><span class="p">,</span>
                   <span class="n">strip_root</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -305,6 +307,8 @@ attribute as we did previously:</p>
 </div>
 <p>We declare a <code class="docutils literal notranslate"><span class="pre">source()</span></code> method with this information:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Please, be aware that using the head of the branch instead of an immutable tag</span>
+    <span class="c1"># or commit is strongly discouraged, unsupported by Conan and likely to cause issues</span>
     <span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;https://github.com/conan-io/libhello/archive/refs/heads/main.zip&quot;</span><span class="p">,</span>
               <span class="n">strip_root</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -314,6 +318,10 @@ attribute as we did previously:</p>
 it. Note that we pass the <code class="docutils literal notranslate"><span class="pre">strip_root=True</span></code> argument so that if all the unzipped
 contents are in a single folder, all the contents are moved to the parent folder (check
 the <a class="reference internal" href="../../reference/tools/files/basic.html#conan-tools-files-unzip"><span class="std std-ref">conan.tools.files.unzip()</span></a> reference for more details).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is expected that retrieving the sources in the future produces the same results. Using mutable source origins, like a moving reference in git (e.g HEAD branch), or the URL to a file where the contents may change over time, is strongly discouraged and not supported. Not following this practice will result in undefined behavior likely to cause breakages</p>
+</div>
 <p>The contents of the zip file are the same as the sources we previously had beside the
 Conan recipe, so if you do a <strong class="command">conan create</strong> the results will be the
 same as before.</p>
@@ -376,12 +384,16 @@ implements several methods to work with <em>git</em> repositories. In this case,
 method to clone the <a class="reference external" href="https://github.com/conan-io/libhello.git">https://github.com/conan-io/libhello.git</a> repository in the
 default branch using the same folder for cloning the sources instead of a subfolder
 (passing the <code class="docutils literal notranslate"><span class="pre">target=&quot;.&quot;</span></code> argument).</p>
-<p>If we wanted to checkout a commit or tag in the repository we could use the <code class="docutils literal notranslate"><span class="pre">checkout()</span></code>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As above, this is only a simple example. The source origine for <code class="docutils literal notranslate"><span class="pre">Git()</span></code> also has to be immutable, it is necessary to checkout out an immutable tag or a specific commit to guarantee the correct behavior. Using the HEAD of the repository is not allowed and can cause undefined behavior and breakages.</p>
+</div>
+<p>To checkout a commit or tag in the repository we use the <code class="docutils literal notranslate"><span class="pre">checkout()</span></code>
 method of the Git tool:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">git</span> <span class="o">=</span> <span class="n">Git</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="n">git</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://github.com/conan-io/libhello.git&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
-    <span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="s2">&quot;&lt;branch name&gt;, &lt;tag&gt; or &lt;commit hash&gt;&quot;</span><span class="p">)</span>
+    <span class="n">git</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="s2">&quot;&lt;tag&gt; or &lt;commit hash&gt;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For more information about the <code class="docutils literal notranslate"><span class="pre">Git</span></code> class methods, please check the
@@ -454,7 +466,7 @@ zip file has the correct <code class="docutils literal notranslate"><span class=
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016-2023, JFrog.
-      Last updated on Jul 28, 2023.
+      Last updated on Aug 04, 2023.
       <span><a href="#" class="ot-sdk-show-settings">Cookies Settings</a></span>
     </p>
   </div> 
